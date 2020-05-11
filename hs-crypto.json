@@ -1,0 +1,1802 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IBM Cloud Hyper Protect Crypto Services API",
+    "description": "This document is the REST API specification for the IBM Cloud Hyper Protect Crypto Services. This service is part of the IBM Cloud Platform and is used to allow cryptographic operatons.",
+    "version": "2.0.0",
+    "contact": {
+      "name": "IBM Cloud Hyper Protect Crypto Services",
+      "url": "https://cloud.ibm.com/docs/services/hs-crypto"
+    },
+    "license": {
+      "name": "IBM-License",
+      "url": "http://ibm.com/LICENSE-IBM"
+    },
+    "x-ibm-name": "crypto",
+    "x-try-it-out-enabled": {
+      "enabled": true,
+      "credentials": false,
+      "corsPolicy": true
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.<region>.hs-crypto.cloud.ibm.com/",
+      "description": "The server for IBM Hyper Protect Crypto service.",
+      "variables": {
+        "region": {
+          "description": "The region prefix that represents the geographic area where your Hyper Protect service instance resides.",
+          "default": "us-south",
+          "enum": [
+            "au-syd",
+            "eu-de",
+            "us-south"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/instances/{id}": {
+      "get": {
+        "summary": "Retrieve the API endpoint URL",
+        "tags": [
+          "API endpoint"
+        ],
+        "description": "Retrieves the URL for the dedicated API endpoint for key management operations on a Hyper Protect Crypto Services instance. The endpoint URL varies depending on which regional service endpoint you are using. Dallas: `https://zcryptobroker.mybluemix.net/crypto_v2/`; Sydney: `https://zcryptobroker-syd.au-syd.mybluemix.net/crypto_v2/`; Frankfurt: `https://zcryptobroker-de.eu-de.mybluemix.net/crypto_v2/`. Depending on whether you are using public or private endpoint, choose the proper endpoint URL in the **kms** section returned for all API methods in this API reference doc.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The IBM Cloud UUID that uniquely identifies the instance. For how to retrieve your instance ID, see [Retrieving your instance ID](/docs/services/hs-crypto?topic=hs-crypto-retrieve-instance-ID) for instructions.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://zcryptobroker.mybluemix.net/crypto_v2/instances/{id} \\\n  -H 'Authorization: Bearer {access_token}'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n \"url\": \"https://zcryptobroker.mybluemix.net/crypto_v2/instances/{id}\",\n  \"method\": \"GET\",\n  \"headers\": {\n   'Authorization': 'Bearer {access_token}'\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\n\nurl = 'https://zcryptobroker.mybluemix.net/crypto_v2/instances/{id}'\n\nheaders = {\n'Authorization': 'Bearer {access_token}',\n}\n\nresponse = requests.request('GET', url, headers=headers)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "path",
+            "name": "id",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The instance connection info was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstanceConnectionRead"
+                },
+                "example": {
+                  "instance_id": "4ec51d44-d94d-4200-bc2c-fcfb04b1287c",
+                  "kms": {
+                    "public": "api.us-south.hs-crypto.cloud.ibm.com:9371",
+                    "private": "api.private.us-south.hs-crypto.cloud.ibm.com:9372"
+                  },
+                  "ep11": {
+                    "public": "ep11.us-south.hs-crypto.cloud.ibm.com:9371",
+                    "private": "ep11.private.us-south.hs-crypto.cloud.ibm.com:9372"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "The instance could not be found. Verify that the instance ID specified is valid."
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/api/v2/keys": {
+      "post": {
+        "summary": "Create a new key",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Creates a new key with specified key material.\nHyper Protect Crypto designates the resource as either a root key or a standard key based on the `extractable` value that you specify. A successful `POST /keys` operation adds the key to the service and returns the details of the request in the response entity-body, if the Prefer header is set to `return=representation`.",
+        "operationId": "createKey",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "$ref": "#/components/parameters/InstanceParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorrelationId"
+          },
+          {
+            "$ref": "#/components/parameters/Prefer"
+          }
+        ],
+        "requestBody": {
+          "description": "The base request for creating a new key.",
+          "required": true,
+          "content": {
+            "application/vnd.ibm.kms.key+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateKeyCollection"
+              },
+              "example": {
+                "metadata": {
+                  "collectionType": "application/vnd.ibm.kms.key+json",
+                  "collectionTotal": 1
+                },
+                "resources": [
+                  {
+                    "type": "application/vnd.ibm.kms.key+json",
+                    "name": "Root-key",
+                    "description": "...",
+                    "extractable": false
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'content-type: application/vnd.ibm.kms.key+json' \\\n  -H 'prefer: return=representation' \\\n  -d '{\n    \"metadata\": {\n      \"collectionType\": \"application/vnd.ibm.kms.key+json\",\n      \"collectionTotal\": 1\n    },\n    \"resources\": [\n    {\n      \"type\": \"application/vnd.ibm.kms.key+json\",\n      \"name\": \"Root-key\",\n      \"description\": \"Test key\",\n      \"extractable\": false\n      }\n    ]\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n  \"async\": true,\n  \"crossDomain\": true,\n  \"url\": \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys\",\n  \"method\": \"POST\",\n  \"headers\": {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\",\n    \"prefer\": \"return=representation\",\n    \"content-type\": \"application/vnd.ibm.kms.key+json\"\n  },\n  \"processData\": false,\n  \"data\": {\n    \"metadata\": {\n      \"collectionType\": \"application/vnd.ibm.kms.key+json\",\n      \"collectionTotal\": 1\n    },\n    \"resources\": [\n      {\n      \"type\": \"application/vnd.ibm.kms.key+json\",\n      \"name\": \"Root-key\",\n      \"description\": \"Test key\",\n      \"extractable\": false\n      }\n    ]\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\nimport json\n\nurl = \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys\"\n\npayload = {\n  \"metadata\": {\n    \"collectionType\": \"application/vnd.ibm.kms.key+json\",\n    \"collectionTotal\": 1\n  },\n  \"resources\": [\n    {\n    \"type\": \"application/vnd.ibm.kms.key+json\",\n    \"name\": \"Root-key\",\n    \"description\": \"Test key\",\n    \"extractable\": False\n    }\n  ]\n}\n\nheaders = {\n  \"authorization\": \"Bearer <IAM_token>\",\n  \"bluemix-instance\": \"<instance_ID>\",\n  \"prefer\": \"return=representation\",\n  \"content-type\": \"application/vnd.ibm.kms.key+json\"\n}\n\nresponse = requests.request(\"POST\", url, data=json.dumps(payload), headers=headers)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Bluemix-Instance",
+            "value": ""
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "value": [
+              "{\n  \"metadata\": {\n    \"collectionType\": \"application/vnd.ibm.kms.key+json\",\n    \"collectionTotal\": 1\n  },\n  \"resources\": [\n  {\n    \"type\": \"application/vnd.ibm.kms.key+json\",\n    \"name\": \"Root-key\",\n    \"description\": \"Test key\",\n    \"extractable\": false\n    }\n  ]\n}"
+            ]
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The key was successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateKeyCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.key+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "type": "application/vnd.ibm.kms.key+json",
+                      "name": "Root-key",
+                      "description": "...",
+                      "state": 1,
+                      "extractable": false,
+                      "crn": "..."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The key is missing a required field.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "errorMsg": "Bad Request: The key is missing a required field."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieve a list of keys",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Retrieves a list of keys that are stored in your Hyper Protect Crypto service instance.\n**Note:** `GET /keys` will not return the key material in the response body. You can retrieve the key material for a standard key with a subsequent `GET /keys/{id}` request.",
+        "operationId": "getKeys",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "$ref": "#/components/parameters/InstanceParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorrelationId"
+          },
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/OffsetParam"
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key+json'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n  \"async\": true,\n  \"crossDomain\": true,\n  \"url\": \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys\",\n  \"method\": \"GET\",\n  \"headers\": {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\",\n    \"content-type\": \"application/vnd.ibm.kms.key+json\"\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\n\nurl = \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys\"\n\nheaders = {\n  \"authorization\": \"Bearer <IAM_token>\",\n  \"bluemix-instance\": \"<instance_ID>\",\n  \"accept\": \"application/vnd.ibm.kms.key+json\",\n}\n\nresponse = requests.request('GET', url, headers=headers)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Bluemix-Instance",
+            "value": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of keys was successfully retrieved.",
+            "headers": {
+              "Key-Total": {
+                "description": "The number of keys in your service instance.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListKeyCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.key+json",
+                    "collectionTotal": 2
+                  },
+                  "resources": [
+                    {
+                      "type": "application/vnd.ibm.kms.key+json",
+                      "name": "Root-key",
+                      "id": "...",
+                      "description": "...",
+                      "state": 1,
+                      "extractable": false,
+                      "createdBy": "...",
+                      "creationDate": "YYYY-MM-DDTHH:MM:SSZ",
+                      "crn": "..."
+                    },
+                    {
+                      "type": "application/vnd.ibm.kms.key+json",
+                      "name": "Standard-key",
+                      "id": "...",
+                      "description": "...",
+                      "state": 1,
+                      "extractable": true,
+                      "createdBy": "...",
+                      "creationDate": "YYYY-MM-DDTHH:MM:SSZ",
+                      "crn": "..."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "head": {
+        "summary": "Retrieve the number of keys",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Returns the same HTTP headers as a GET request without returning the entity-body. This operation returns the number of keys in your instance in a header called `Key-Total`.",
+        "operationId": "getKeyCollectionMetadata",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "$ref": "#/components/parameters/InstanceParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorrelationId"
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -I HEAD \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key+json'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n  \"async\": true,\n  \"crossDomain\": true,\n  \"url\": \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys\",\n  \"method\": \"HEAD\",\n  \"headers\": {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\"\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\n\nurl = \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys\"\n\nheaders = {\n  \"authorization\": \"Bearer <IAM_token>\",\n  \"bluemix-instance\": \"<instance_ID>\",\n  \"accept\": \"application/vnd.ibm.kms.key+json\",\n}\n\nresponse = requests.request('HEAD', url, headers=headers)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Bluemix-Instance",
+            "value": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata was successfully retrieved.",
+            "headers": {
+              "Key-Total": {
+                "description": "The number of keys in your service instance.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/api/v2/keys/{id}": {
+      "get": {
+        "summary": "Retrieve a key by ID",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Retrieves the details of a key by specifying the ID of the key.",
+        "operationId": "getKey",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "$ref": "#/components/parameters/InstanceParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorrelationId"
+          },
+          {
+            "$ref": "#/components/parameters/KeyId"
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID> \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key+json'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n  \"async\": true,\n  \"crossDomain\": true,\n  \"url\": \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>\",\n  \"method\": \"GET\",\n  \"headers\": {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\"\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\n\nurl = 'https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>'\n\nheaders = {\n    'authorization': 'Bearer <IAM_token>',\n    'bluemix-instance': '<instance_ID>',\n    'accept': 'application/vnd.ibm.kms.key+json',\n}\n\nresponse = requests.request('GET', url, headers=headers)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "path",
+            "name": "id",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Bluemix-Instance",
+            "value": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The key was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetKeyCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.key+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "type": "application/vnd.ibm.kms.key+json",
+                      "name": "Standard-key",
+                      "id": "...",
+                      "description": "...",
+                      "state": 1,
+                      "extractable": true,
+                      "createdBy": "...",
+                      "creationDate": "YYYY-MM-DDTHH:MM:SSZ",
+                      "crn": "...",
+                      "payload": "..."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The key could not be retrieved due to a malformed, invalid, or missing ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "errorMsg": "Bad Request: The key could not be retrieved due to a malformed, invalid, or missing ID."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "The key could not be found. Verify that the key ID specified is valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "errorMsg": "Not Found: The key could not be found. Verify that the key ID specified is valid."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "summary": "Invoke an action on a key",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Invokes an action on a specified key. This method supports the following actions:\n\n- `wrap`: Use a root key to [wrap or encrypt a data encryption key](/docs/hs-crypto?topic=hs-crypto-wrap-keys).\n- `unwrap`: Use a root key to [unwrap or decrypt a data encryption key](/docs/hs-crypto?topic=hs-crypto-unwrap-keys).\n- `rewrap`: Use a root key to [rewrap or reencrypt a data encryption key](/docs/hs-crypto?topic=hs-crypto-rewrap-keys).\n- `rotate`: [Rotate a root key](/docs/hs-crypto?topic=hs-crypto-rotate-keys).\n\n**Notes:**\n- When you unwrap a wrapped data encryption key (WDEK) by using a rotated root key, the service returns a new\nciphertext in the response entity-body. Each ciphertext remains available for `unwrap` actions. If you unwrap a\nDEK with a previous ciphertext, the service also returns the latest ciphertext in the response. Use the latest\nciphertext for future unwrap operations.\n- Checking the integrity of the key contents using Additional authentication data (AAD) is not supported.",
+        "operationId": "actionOnKey",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "$ref": "#/components/parameters/InstanceParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorrelationId"
+          },
+          {
+            "$ref": "#/components/parameters/Prefer"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The root key that is used as the wrapping key. It must be a v4 UUID for an active key.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "required": true
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "description": "The action to perform on the specified key.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "wrap",
+                "unwrap",
+                "rotate",
+                "rewrap"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "The request to perform a key wrap operation.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KeyAction"
+              },
+              "example": {
+                "plaintext": "<data_key>"
+              }
+            }
+          }
+        },
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request (wrap)",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>?action=wrap \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key_action+json' \\\n  -H 'content-type: application/vnd.ibm.kms.key_action+json' \\\n  -d '{\n    \"plaintext\": \"<data_key>\"\n  }'"
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Example request (unwrap)",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>?action=unwrap \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key_action+json' \\\n  -H 'content-type: application/vnd.ibm.kms.key_action+json' \\\n  -d '{\n    \"ciphertext\": \"<encrypted_data_key>\",\n  }'"
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Example request for (rewrap)",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>?action=unwrap \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key_action+json' \\\n  -H 'content-type: application/vnd.ibm.kms.key_action+json' \\\n  -d '{\n    \"ciphertext\": \"<encrypted_data_key>\",\n  }'"
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Example request (rotate)",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>?action=rotate \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'accept: application/vnd.ibm.kms.key_action+json' \\\n  -H 'content-type: application/vnd.ibm.kms.key_action+json' \\\n  -d '{\n    \"payload\": \"<new_key_material>\"\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n  \"async\": true,\n  \"crossDomain\": true,\n  \"url\": \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>?action=wrap\",\n  \"method\": \"POST\",\n  \"headers\": {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\",\n    \"prefer\": \"return=representation\",\n    \"accept\": \"application/vnd.ibm.kms.key_action+json\",\n    \"content-type\": \"application/vnd.ibm.kms.key_action+json\"\n  },\n  \"processData\": false,\n  \"data\": {\n    \"plaintext\": \"<data_key>\"\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\nimport json\n\nurl = \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>\"\n\nquerystring = {\n  \"action\": \"wrap\"\n  }\n\npayload = {\n  \"plaintext\": \"string\"\n  }\n\nheaders = {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\",\n    \"prefer\": \"return=representation\",\n    \"accept\": \"application/vnd.ibm.kms.key_action+json\",\n    \"content-type\": \"application/vnd.ibm.kms.key_action+json\"\n    }\n\nresponse = requests.request(\"POST\", url, data=json.dumps(payload), headers=headers, params=querystring)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "path",
+            "name": "id",
+            "value": ""
+          },
+          {
+            "in": "query",
+            "name": "action",
+            "value": "wrap"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Bluemix-Instance",
+            "value": ""
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "value": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful key operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeyAction"
+                },
+                "example": {
+                  "plaintext": "...",
+                  "ciphertext": "..."
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Successful key operation. Your key was successfully rotated."
+          },
+          "400": {
+            "description": "Your authentication data or key is invalid, or the entity-body is missing a required field.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    "errorMsg: 'Bad Request: Your authentication data or key is invalid, or the entity-body is missing a required field.'"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "description": "The key is not in an active state, so any KeyAction will fail. Check the key's `nonactiveStateReason` to understand how to proceed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    "errorMsg: 'Conflict: The key is not in an active state, so any KeyAction will fail. Check the key's nonactiveStateReason to understand how to proceed.'"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "$ref": "#/components/responses/Gone"
+          },
+          "422": {
+            "description": "The ciphertext provided for the unwrap operation was not wrapped by this key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    "errorMsg: 'Unprocessable Entity: The ciphertext provided for the unwrap operation was not wrapped by this key.'"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a key by ID",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Deletes a key by specifying the ID of the key.\n**Important:** When you delete a key, you permanently shred its contents and associated data. The action cannot be reversed.",
+        "operationId": "deleteKey",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthParam"
+          },
+          {
+            "$ref": "#/components/parameters/InstanceParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorrelationId"
+          },
+          {
+            "$ref": "#/components/parameters/Prefer"
+          },
+          {
+            "$ref": "#/components/parameters/KeyId"
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X DELETE \\\n  https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID> \\\n  -H 'authorization: Bearer <IAM_token>' \\\n  -H 'bluemix-instance: <instance_ID>' \\\n  -H 'prefer: return=representation' \\\n  -H 'accept: application/vnd.ibm.kms.key+json'"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "javascript": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "javascript",
+                    "source": [
+                      "var settings = {\n  \"async\": true,\n  \"crossDomain\": true,\n  \"url\": \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>\",\n  \"method\": \"DELETE\",\n  \"headers\": {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\",\n    \"prefer\": \"return=representation\"\n  }\n}\n\n$.ajax(settings).done(function (response) {\n  console.log(response);\n});"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "python": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "python",
+                    "source": [
+                      "import requests\n\nurl = \"https://api.<region>.hs-crypto.cloud.ibm.com:<port>/api/v2/keys/<key_ID>\"\n\nheaders = {\n    \"authorization\": \"Bearer <IAM_token>\",\n    \"bluemix-instance\": \"<instance_ID>\",\n    \"prefer\": \"return=representation\",\n    \"accept\": \"application/vnd.ibm.kms.key+json\"\n}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "x-try-it-out-example": [
+          {
+            "in": "path",
+            "name": "id",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "value": ""
+          },
+          {
+            "in": "header",
+            "name": "Bluemix-Instance",
+            "value": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The key was successfully deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteKeyCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.key+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "type": "application/vnd.ibm.kms.key+json",
+                      "name": "Root-key",
+                      "description": "...",
+                      "state": 5,
+                      "extractable": false,
+                      "crn": "...",
+                      "deleted": true,
+                      "deletionDate": "YYYY-MM-DDTHH:MM:SSZ",
+                      "deletedBy": "..."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "The key was deleted."
+          },
+          "400": {
+            "description": "The key cannot be deleted due to a malformed, invalid, or missing ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCollection"
+                },
+                "example": {
+                  "metadata": {
+                    "collectionType": "application/vnd.ibm.kms.error+json",
+                    "collectionTotal": 1
+                  },
+                  "resources": [
+                    {
+                      "errorMsg": "Bad Request: The key cannot be deleted due to a malformed, invalid, or missing ID."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "$ref": "#/components/responses/Gone"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "KeyId": {
+        "name": "id",
+        "in": "path",
+        "schema": {
+          "type": "string",
+          "format": "byte"
+        },
+        "required": true,
+        "description": "The v4 UUID that uniquely identifies the key."
+      },
+      "LimitParam": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5000,
+          "default": 200
+        },
+        "required": false,
+        "description": "The number of keys to retrieve. By default, `GET /keys` returns the first 200 keys. To retrieve a different set of keys, use `limit` with `offset` to page through your available resources. The maximum value for `limit` is 5000.\n**Usage:** If you have 20 keys in your instance, and you want to retrieve only the first 5 keys, use `../keys?limit=5`."
+      },
+      "OffsetParam": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "required": false,
+        "description": "The number of keys to skip. By specifying `offset`, you retrieve a subset of keys that starts with the `offset` value. Use `offset` with `limit` to page through your available resources.\n**Usage:** If you have 100 keys in your instance, and you want to retrieve keys 26 through 50, use `../keys?offset=25&limit=50`."
+      },
+      "AuthParam": {
+        "name": "Authorization",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Your IBM Cloud access token.",
+        "required": true
+      },
+      "InstanceParam": {
+        "name": "Bluemix-Instance",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "format": "byte"
+        },
+        "description": "The IBM Cloud instance ID that identifies your Crypto service instance. For how to retrieve your instance ID, see [Retrieving your instance ID](/docs/services/hs-crypto?topic=hs-crypto-retrieve-instance-ID) for instructions.",
+        "required": true
+      },
+      "CorrelationId": {
+        "name": "Correlation-Id",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "format": "byte"
+        },
+        "description": "The v4 UUID used to correlate and track transactions.",
+        "required": false
+      },
+      "Prefer": {
+        "name": "Prefer",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "return=representation",
+            "return=minimal"
+          ]
+        },
+        "description": "Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to return only the key identifier, or metadata. A header containing `return=representation` returns both the key material and metadata in the response entity-body. If the key has been designated as a root key, the system cannot return the key material.\n**Note:** During POST operations, Hyper Protect Crypto may not immediately return the key material due to key generation time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.",
+        "required": false
+      }
+    },
+    "schemas": {
+      "object1": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KeyMetadata"
+          },
+          {
+            "$ref": "#/components/schemas/WriteKeyMaterial"
+          }
+        ]
+      },
+      "object2": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KeyMetadata"
+          },
+          {
+            "$ref": "#/components/schemas/ReadKeyMaterial"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "deleted": {
+                "description": "The boolean value that determines whether the key has been deleted.",
+                "type": "boolean",
+                "readOnly": true
+              },
+              "deletionDate": {
+                "description": "The date the key material was destroyed. The date format follows RFC 3339.",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true,
+                "example": "2010-01-12T05:23:19+0000"
+              },
+              "deletedBy": {
+                "description": "The unique identifier for the resource that deleted the key.",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        ]
+      },
+      "InstanceConnectionRead": {
+        "properties": {
+          "instance_id": {
+            "description": "The v4 UUID used to uniquely identify the instance in IBM Cloud.",
+            "type": "string",
+            "format": "byte"
+          },
+          "apiConnectionInfo": {
+            "description": "Specifies the URI (url:port) where the API can be used.",
+            "type": "string"
+          }
+        }
+      },
+      "CollectionMetadata": {
+        "description": "The metadata that describes the resource array.",
+        "type": "object",
+        "required": [
+          "collectionType",
+          "collectionTotal"
+        ],
+        "properties": {
+          "collectionType": {
+            "description": "The type of resources in the resource array.",
+            "type": "string",
+            "default": "application/vnd.ibm.kms.key+json"
+          },
+          "collectionTotal": {
+            "description": "The number of elements in the resource array.",
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CreateKeyCollection": {
+        "required": [
+          "metadata",
+          "resources"
+        ],
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/CollectionMetadata"
+          },
+          "resources": {
+            "description": "An array of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/object1"
+            }
+          }
+        }
+      },
+      "ListKeyCollection": {
+        "required": [
+          "metadata",
+          "resources"
+        ],
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/CollectionMetadata"
+          },
+          "resources": {
+            "description": "An array of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyMetadata"
+            },
+            "example": {
+              "resources": [
+                {
+                  "type": "application/vnd.ibm.kms.key+json",
+                  "name": "Root-key",
+                  "id": "...",
+                  "description": "...",
+                  "state": 1,
+                  "extractable": false,
+                  "createdBy": "...",
+                  "creationDate": "YYYY-MM-DDTHH:MM:SSZ",
+                  "crn": "..."
+                },
+                {
+                  "type": "application/vnd.ibm.kms.key+json",
+                  "name": "Standard-key",
+                  "id": "...",
+                  "description": "...",
+                  "state": 1,
+                  "extractable": true,
+                  "createdBy": "...",
+                  "creationDate": "YYYY-MM-DDTHH:MM:SSZ",
+                  "crn": "..."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "GetKeyCollection": {
+        "required": [
+          "metadata",
+          "resources"
+        ],
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/CollectionMetadata"
+          },
+          "resources": {
+            "description": "An array of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/object1"
+            },
+            "example": {
+              "resources": [
+                {
+                  "type": "application/vnd.ibm.kms.key+json",
+                  "name": "Standard-key",
+                  "id": "...",
+                  "description": "...",
+                  "state": 1,
+                  "extractable": true,
+                  "createdBy": "...",
+                  "creationDate": "YYYY-MM-DDTHH:MM:SSZ",
+                  "crn": "...",
+                  "payload": "..."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "KeyAction": {
+        "description": "The base request for key actions.",
+        "type": "object",
+        "properties": {
+          "plaintext": {
+            "type": "string",
+            "description": "The data encryption key (DEK) used in wrap actions when the query parameter is set to `wrap`. The system returns a base64 encoded plaintext in the response entity-body when you perform an `unwrap` action on a key.\nTo wrap an existing DEK, provide a base64 encoded plaintext during a `wrap` action. To generate a new DEK, omit the `plaintext` property. Hyper Protect Crypto generates a random plaintext (32 bytes) that is rooted in an HSM and then wraps that value.",
+            "maxLength": 4096
+          },
+          "ciphertext": {
+            "type": "string",
+            "description": "The wrapped data encryption key (DEK) used in wrap actions when the query parameter is set to `unwrap`. The system requires a base64 encoded ciphertext and returns a base64 encoded plaintext in the response entity-body when you perform an `unwrap` action on a key.\n**Note:** When you unwrap a wrapped data encryption key (WDEK) by using a rotated root key, the service returns a new ciphertext in the response entity-body. Each ciphertext remains available for `unwrap` actions. If you unwrap a DEK with a previous ciphertext, the service also returns the latest ciphertext in the response. Use the latest ciphertext for future unwrap operations."
+          },
+          "payload": {
+            "description": "The key material that you want to import into the service for rotating an existing root key. This value is required for a `rotate` action if you initially imported the key material when you created the key.\nTo rotate an imported root key, provide a base64 encoded payload in the request entity-body. To rotate a root key that was initially generated by Hyper Protect Crypto, omit the `payload` property and pass in an empty request entity-body.",
+            "type": "string",
+            "writeOnly": true
+          }
+        }
+      },
+      "DeleteKeyCollection": {
+        "required": [
+          "metadata",
+          "resources"
+        ],
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/CollectionMetadata"
+          },
+          "resources": {
+            "description": "An array of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/object2"
+            }
+          }
+        }
+      },
+      "ErrorCollection": {
+        "required": [
+          "metadata",
+          "resources"
+        ],
+        "properties": {
+          "collectionType": {
+            "description": "The type of resources in the resource array.",
+            "type": "string",
+            "default": "application/vnd.ibm.kms.error+json"
+          },
+          "collectionTotal": {
+            "description": "The number of elements in the resource array.",
+            "type": "integer",
+            "format": "int64"
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "errorMsg"
+        ],
+        "type": "object",
+        "properties": {
+          "errorMsg": {
+            "type": "string"
+          }
+        }
+      },
+      "ReadKeyMaterial": {
+        "properties": {
+          "payload": {
+            "description": "The retrieved key material that you can export to external apps or services.\n**Note:** If the key has been designated as a root key, the system cannot return the key material.",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "WriteKeyMaterial": {
+        "properties": {
+          "payload": {
+            "description": "The key material that you want to store and manage in the service.\nTo import a key, provide a base64 encoded payload in the request entity-body. If you're importing a root key, ensure that it is one of 128, 192, or 256 bits in length. To generate a new 256-bit key, omit the `payload` property.",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "KeyMetadata": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "description": "Specifies the MIME type that represents the key resource. Currently, only the default is supported.",
+            "type": "string",
+            "default": "application/vnd.ibm.kms.key+json"
+          },
+          "id": {
+            "description": "The v4 UUID used to uniquely identify the resource, as specified by RFC 4122.",
+            "type": "string",
+            "format": "byte",
+            "readOnly": true
+          },
+          "name": {
+            "description": "A unique, human-readable alias to assign to your key.\nTo protect your privacy, do not use personal data, such as your name or location, as an alias for your key.",
+            "type": "string",
+            "pattern": "[a-zA-Z0-9 ]{2,50}",
+            "minLength": 2,
+            "maxLength": 50
+          },
+          "description": {
+            "description": "A text field used to provide a more detailed description of the key. The maximum length is 240 characters.\nTo protect your privacy, do not use personal data, such as your name or location, as a description for your key.",
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 240
+          },
+          "creationDate": {
+            "description": "The date the key material was created. The date format follows RFC 3339.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2018-04-12T23:20:50.52Z"
+          },
+          "createdBy": {
+            "description": "The unique identifier for the resource that created the key.",
+            "type": "string",
+            "readOnly": true
+          },
+          "expirationDate": {
+            "description": "The date the key material expires. The date format follows RFC 3339. You can set an expiration date on any key on its creation. If you create a key without specifying an expiration date, the key does not expire.",
+            "type": "string",
+            "format": "date-time",
+            "example": "2018-12-01T23:20:50.52Z"
+          },
+          "algorithmType": {
+            "description": "The algorithm type used to generate the key. Currently, AES is supported.",
+            "type": "string",
+            "enum": [
+              "AES"
+            ],
+            "default": "AES",
+            "readOnly": true
+          },
+          "algorithmMetadata": {
+            "description": "The metadata for the key algorithm.",
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "bitLength": {
+                "description": "The algorithm bit size used for key encryption.",
+                "type": "string",
+                "enum": [
+                  "128, 192, 256"
+                ],
+                "default": "256"
+              },
+              "mode": {
+                "description": "The encryption scheme used to generate the key. Currently, CBC_PAD is supported.",
+                "type": "string",
+                "enum": [
+                  "CBC_PAD"
+                ],
+                "default": "CBC_PAD"
+              }
+            }
+          },
+          "state": {
+            "type": "integer",
+            "description": "The key state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1, Deactivated = 3, and Destroyed = 5 values.",
+            "readOnly": true,
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "nonactiveStateReason": {
+            "description": "A code indicating the reason the key is not in the activation state.",
+            "type": "integer",
+            "readOnly": true
+          },
+          "tags": {
+            "description": "Up to 30 tags can be created. Tags can be between 2-30 characters, including spaces. Special characters not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).\nTo protect your privacy, do not use personal data, such as your name or location, as a tag for your key.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extractable": {
+            "description": "A boolean value that determines whether the key material can leave the service.\nIf set to `false`, Hyper Protect Crypto designates the key as a nonextractable root key used for `wrap` and `unwrap` actions. If set to `true`, Hyper Protect Crypto designates the key as a standard key that you can store in your apps and services. Once set to `false` it cannot be changed to `true`.",
+            "type": "boolean",
+            "default": true
+          },
+          "crn": {
+            "description": "The Cloud Resource Name (CRN) that uniquely identifies your cloud network resources.",
+            "type": "string",
+            "readOnly": true,
+            "example": "crn:v1:bluemix:public:kms:<region>:a/<accountId>:<instanceId>:key:<keyId>"
+          },
+          "lastUpdateDate": {
+            "description": "Updates when any part of the key metadata is modified. The date format follows RFC 3339.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2018-04-12T23:20:50.52Z"
+          },
+          "lastRotateDate": {
+            "description": "Updates to show when the key was last rotated. The date format follows RFC 3339.",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "example": "2018-04-12T23:20:50.52Z"
+          },
+          "imported": {
+            "description": "A boolean value that shows whether your key was originally imported or generated in Hyper Protect Crypto. The value is set by Hyper Protect Crypto based on how the key material is initially added to the service.\nA value of `true` indicates that you must provide new key material when it's time to rotate the key. A value of `false` indicates that Hyper Protect Crypto will generate the new key material on a `rotate` operation, as it did in key creation.",
+            "type": "boolean",
+            "readOnly": true,
+            "default": false
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "CreateKeyBody": {
+        "description": "The base request for creating a new key.",
+        "content": {
+          "application/vnd.ibm.kms.key+json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateKeyCollection"
+            }
+          }
+        },
+        "required": true
+      },
+      "KeyActionBody": {
+        "description": "The base request for key actions.",
+        "required": true,
+        "content": {
+          "application/vnd.ibm.kms.key_action+json": {
+            "schema": {
+              "$ref": "#/components/schemas/KeyAction"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Your access token is invalid or does not have the necessary permissions to access this resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorCollection"
+            },
+            "example": {
+              "metadata": {
+                "collectionType": "application/vnd.ibm.kms.error+json",
+                "collectionTotal": 1
+              },
+              "resources": [
+                "errorMsg: 'Unauthorized: Your access token is invalid or does not have the necessary permissions to access this resource.'"
+              ]
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "The instance ID is malformed or invalid.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorCollection"
+            },
+            "example": {
+              "metadata": {
+                "collectionType": "application/vnd.ibm.kms.error+json",
+                "collectionTotal": 1
+              },
+              "resources": [
+                {
+                  "errorMsg": "Forbidden: The instance ID is malformed or invalid."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The key could not be found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorCollection"
+            },
+            "example": {
+              "metadata": {
+                "collectionType": "application/vnd.ibm.kms.error+json",
+                "collectionTotal": 1
+              },
+              "resources": [
+                {
+                  "errorMsg": "Not Found: The key could not be found."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Gone": {
+        "description": "The requested key was previously deleted and is no longer available. Please delete references to this key.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorCollection"
+            },
+            "example": {
+              "metadata": {
+                "collectionType": "application/vnd.ibm.kms.error+json",
+                "collectionTotal": 1
+              },
+              "resources": [
+                "errorMsg: 'Gone: The requested key was previously deleted and is no longer available. Please delete references to this key.'"
+              ]
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Too many requests. Please wait a few minutes and try again.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorCollection"
+            },
+            "example": {
+              "metadata": {
+                "collectionType": "application/vnd.ibm.kms.error+json",
+                "collectionTotal": 1
+              },
+              "resources": [
+                {
+                  "errorMsg": "Too Many Requests: Please wait a few minutes and try again."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "IBM Hyper Protect Crypto is currently unavailable. Your request could not be processed. Please try again later.\nIf the problem persists, note the `correlation-ID` in the response header and contact [IBM Cloud support](https://watson.service-now.com/wcp).",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorCollection"
+            },
+            "example": {
+              "metadata": {
+                "collectionType": "application/vnd.ibm.kms.error+json",
+                "collectionTotal": 1
+              },
+              "resources": [
+                "errorMsg: 'Internal Server Error: IBM Hyper Protect Crypto is currently unavailable. Your request could not be processed. Please try again later.'"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

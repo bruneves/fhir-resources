@@ -1,0 +1,263 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IBM Event Streams REST Producer",
+    "description": "REST API for producing messages to IBM Event Streams.</br></br>**Authentication details**</br>If using Bearer authentication, the token required is obtained using the IBM Cloud CLI: ibmcloud iam oauth-token . If using Basic Authentication, use the `user` and `api_key` fields from your service credential json.",
+    "version": "1.0.0"
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    },
+    {
+      "BasicAuth": []
+    }
+  ],
+  "paths": {
+    "/topics/{topic_name}/records": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The name of the topic you want to produce the messages to."
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The record key to use when producing a Kafka message. If omitted the default round robin partitioner is used."
+          },
+          {
+            "in": "query",
+            "name": "keyType",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "text",
+                "binary"
+              ]
+            },
+            "description": "The type of the key, either text or binary."
+          },
+          {
+            "in": "query",
+            "name": "headers",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma separated list of key:value pairs to be set as message properties. The value must be expressed in base16 encoding, for example: `/records?headers=colour:726463,size:666f726d696461626c65`"
+          }
+        ],
+        "summary": "Produce a message.",
+        "description": "Produce the body of the request as a message in IBM Event Streams.",
+        "operationId": "produceMessage",
+        "requestBody": {
+          "description": "The message to be produced to the topic.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            },
+            "vnd.ibm-event-streams.json.v1": {
+              "schema": {
+                "type": "object"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "vnd.ibm-event-streams.text.v1": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "vnd.ibm-event-streams.binary.v1": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message successfully sent to IBM Event Streams.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/successresponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Not a valid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorresponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized to produce to this topic.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorresponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The topic does not exist. If Kafka setting `auto.create.topics.enable` is set to `true` (default), Kafka automatically creates the topic with the default replication factor and number of partitions. If Kafka setting `auto.create.topics.enable` is set to `false`, this error message is displayed when attempting to produce to a topic that does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorresponse"
+                }
+              }
+            }
+          },
+          "408": {
+            "description": "The request timed out producing to IBM Event Streams.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorresponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The request failed due to an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorresponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The request failed due to IBM Event Streams brokers being unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorresponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "BasicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "successresponse": {
+        "required": [
+          "metadata"
+        ],
+        "type": "object",
+        "description": "Object returned on successful request.",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/metadata"
+          }
+        }
+      },
+      "metadata": {
+        "required": [
+          "topic",
+          "timestamp",
+          "partition",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "The name of the topic the message was produced to."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The timestamp of the message."
+          },
+          "partition": {
+            "type": "integer",
+            "description": "The partition the message was sent to."
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset the message was sent to."
+          }
+        },
+        "description": "The RecordMetadata object returned from IBM Event Streams."
+      },
+      "errorresponse": {
+        "required": [
+          "error"
+        ],
+        "type": "object",
+        "description": "Error object representing the error that occured while producing the message.",
+        "properties": {
+          "error": {
+            "required": [
+              "error_code",
+              "message"
+            ],
+            "properties": {
+              "error_code": {
+                "type": "integer",
+                "description": "HTTP Status code of the response."
+              },
+              "message": {
+                "type": "string",
+                "description": "Error message."
+              },
+              "kafka_error_code": {
+                "type": "integer",
+                "description": "The error code returned by Apache Kafka if available."
+              },
+              "topic": {
+                "type": "string",
+                "description": "The name of the topic that the request was performed against (if any)."
+              },
+              "incident": {
+                "type": "string",
+                "description": "Optional incident ID."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

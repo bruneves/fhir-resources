@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "Practitioner API",
+        "description": "A simplified version of the HL7 FHIR API for Practitioner resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "Practitioner"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/Practitioner": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a Practitioner resource",
+                "operationId": "createPractitioner",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,33 +85,26 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Practitioner"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create Practitioner operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for Practitioner resources",
+                "operationId": "searchPractitioner",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
-                    {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
                     {
                         "name": "address",
                         "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
@@ -155,27 +148,6 @@
                         "required": false
                     },
                     {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
                         "name": "email",
                         "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
                         "in": "query",
@@ -197,50 +169,8 @@
                         "required": false
                     },
                     {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
                         "name": "given",
                         "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "identifier",
-                        "description": "A patient identifier",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -267,6 +197,34 @@
                         "required": false
                     },
                     {
+                        "name": "active",
+                        "description": "Whether the practitioner record is active",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "communication",
+                        "description": "One of the languages that the practitioner can communicate with",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "identifier",
+                        "description": "A practitioner's Identifier",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "name",
+                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
                         "$ref": "#/parameters/_idParam"
                     },
                     {
@@ -287,7 +245,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search Practitioner operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +253,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/Practitioner/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a Practitioner resource",
+                "operationId": "vreadPractitioner",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +273,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read Practitioner operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Practitioner"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/Practitioner/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a Practitioner resource",
+                "operationId": "readPractitioner",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +298,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read Practitioner operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Practitioner"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing Practitioner resource",
+                "operationId": "updatePractitioner",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +323,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Practitioner"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update Practitioner operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create Practitioner operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a Practitioner resource",
+                "operationId": "deletePractitioner",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +349,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete Practitioner operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/Practitioner/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Practitioner"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a Practitioner resource",
+                "operationId": "historyPractitioner",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +371,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History Practitioner operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +657,7 @@
                 }
             ]
         },
-        "Patient": {
+        "Practitioner": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -711,25 +669,32 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "description": "An identifier that applies to this person in this role."
                             }
                         },
                         "active": {
                             "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+                            "description": "Whether this practitioner's record is in active use."
                         },
                         "name": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
+                                "description": "The name(s) associated with the practitioner."
                             }
                         },
                         "telecom": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
+                                "description": "A contact detail for the practitioner, e.g. a telephone number or an email address."
+                            }
+                        },
+                        "address": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Address",
+                                "description": "Address(es) of the practitioner that are not role specific (typically home address). \rWork addresses are not typically entered in this property as they are usually role dependent."
                             }
                         },
                         "gender": {
@@ -740,108 +705,61 @@
                                 "other",
                                 "unknown"
                             ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+                            "description": "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes."
                         },
                         "birthDate": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
+                            "description": "The date of birth for the practitioner."
                         },
                         "photo": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
+                                "description": "Image of the person."
                             }
                         },
-                        "contact": {
+                        "qualification": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
+                                "$ref": "#/definitions/Practitioner_Qualification",
+                                "description": "The official certifications, training, and licenses that authorize or otherwise pertain to the provision of care by the practitioner.  For example, a medical license issued by a medical board authorizing the practitioner to practice medicine within a certian locality."
                             }
                         },
                         "communication": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
-                            }
-                        },
-                        "generalPractitioner": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
-                            }
-                        },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
-                        },
-                        "link": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A language the practitioner can use in patient communication."
                             }
                         }
                     }
                 }
             ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "Practitioner",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "BZXVWgf5c-",
+                    "lastUpdated": "2020-03-12T00:11:57.019-04:00",
+                    "source": "WGjREpJEM8",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "R1_rmDTTN5"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "43bFKxrMch",
+                            "version": "X0RN_ZqG9f",
+                            "code": "ddIIND7Vx6",
+                            "display": "EKlE3AzctM",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "LPCd86PEVz",
+                            "version": "kMKCOEfiL5",
+                            "code": "tIjGD6tEPn",
+                            "display": "G1Xki5Oco_",
                             "userSelected": true
                         },
                         {
@@ -849,311 +767,182 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "xCDi6i7Gu3",
+                "language": "g1jjbWQMVu",
                 "text": {
-                    "status": "generated",
+                    "status": "extensions",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
                 "identifier": [
                     {
-                        "use": "official",
+                        "use": "usual",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
+                                    "system": "LjlWrp60_E",
+                                    "version": "HqqPd792Mk",
+                                    "code": "R8oi8SuKSM",
+                                    "display": "g_vBOkETHi",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "RwELMTpc3R"
+                            "text": "x03d5fJbEo"
                         },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
+                        "system": "aR7xIUeQHw",
+                        "value": "uKPw8Kwr1f",
                         "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
+                            "start": "2020-03-12T00:11:57.02-04:00",
+                            "end": "2020-03-12T00:11:57.021-04:00"
                         }
                     }
                 ],
                 "active": true,
                 "name": [
                     {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
+                        "use": "official",
+                        "text": "dRw9AC2EDW",
+                        "family": "oNAgnG3ixx",
                         "given": [
-                            "U6DXN1KMqh"
+                            "FPu4f0dvsw"
                         ],
                         "prefix": [
-                            "BgsAxapmul"
+                            "yfIDrI3GuQ"
                         ],
                         "suffix": [
-                            "FwPf1wAghj"
+                            "Bv5speBHAJ"
                         ],
                         "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
+                            "start": "2020-03-12T00:11:57.015-04:00",
+                            "end": "2020-03-12T00:11:57.015-04:00"
                         }
                     }
                 ],
                 "telecom": [
                     {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
+                        "system": "phone",
+                        "value": "IlmYnwErl3",
+                        "use": "mobile",
+                        "rank": 6921378,
                         "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
+                            "start": "2020-03-12T00:11:57.019-04:00",
+                            "end": "2020-03-12T00:11:57.019-04:00"
+                        }
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "temp",
+                        "type": "postal",
+                        "text": "ZKQcLpJDCU",
+                        "line": [
+                            "_Q693SVUG6"
+                        ],
+                        "city": "wCvIi3pJH_",
+                        "district": "0AcR_RcnrL",
+                        "state": "UxEEnImQE7",
+                        "postalCode": "Gr76y9inZG",
+                        "country": "0VmZVLHjqI",
+                        "period": {
+                            "start": "2020-03-12T00:11:57.015-04:00",
+                            "end": "2020-03-12T00:11:57.015-04:00"
                         }
                     }
                 ],
                 "gender": "other",
                 "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
                 "photo": [
                     {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
+                        "contentType": "ZSQb4Czn_D",
+                        "language": "R6O5xj5Rha",
+                        "data": "aEsYbW4=",
+                        "url": "SPyXklYius",
+                        "size": 62713494,
+                        "hash": "V3FUEGM=",
+                        "title": "9qPzlEayWq",
+                        "creation": "2020-03-12T00:11:57.021-04:00"
                     }
                 ],
-                "contact": [
+                "qualification": [
                     {
-                        "relationship": [
+                        "identifier": [
                             {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
-                        "telecom": [
-                            {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
-                            }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
-                            "identifier": {
-                                "use": "usual",
+                                "use": "secondary",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
+                                            "system": "5T9uLyiNmj",
+                                            "version": "NOqsxT1qJe",
+                                            "code": "M7dS3oWybQ",
+                                            "display": "dw8o1LNNlP",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "lr5rIPHEgi"
+                                    "text": "894nfytQbX"
                                 },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
+                                "system": "cCLBGoBHQ0",
+                                "value": "Ku7zD2RMid",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
+                                    "start": "2020-03-12T00:11:57.018-04:00",
+                                    "end": "2020-03-12T00:11:57.018-04:00"
                                 }
-                            },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
-                    }
-                ],
-                "communication": [
-                    {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
                             }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
-                        "use": "temp",
-                        "type": {
+                        ],
+                        "code": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "KNWDBEnseH",
+                                    "version": "vWLlQaQNHE",
+                                    "code": "9Cj25RU0WO",
+                                    "display": "xIBuZKuUFP",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "EP7JaXTr22"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
                         "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
-                        }
-                    },
-                    "display": "HHvTPP_6wS"
-                },
-                "link": [
-                    {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
+                            "start": "2020-03-12T00:11:57.017-04:00",
+                            "end": "2020-03-12T00:11:57.017-04:00"
+                        },
+                        "issuer": {
+                            "reference": "Organization/u3FDN8Op2A",
+                            "type": "Organization",
                             "identifier": {
                                 "use": "temp",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
+                                            "system": "kQad_IZhVn",
+                                            "version": "WiQ4GCNwBs",
+                                            "code": "cCAFsx4MyQ",
+                                            "display": "uK4C8iEMjE",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "text": "Q05wdNNR5A"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
+                                "system": "BFMLhJhzV8",
+                                "value": "lRdoCFUqi3",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                                    "start": "2020-03-12T00:11:57.017-04:00",
+                                    "end": "2020-03-12T00:11:57.017-04:00"
                                 }
                             },
-                            "display": "BNnVKMbPmJ"
-                        },
-                        "type": "refer"
+                            "display": "rRdA1gxW4t"
+                        }
+                    }
+                ],
+                "communication": [
+                    {
+                        "coding": [
+                            {
+                                "system": "rthH2o9s8H",
+                                "version": "TQmkqmPN1H",
+                                "code": "k0fLXIESOQ",
+                                "display": "RpK7AwCFeo",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "PmD5bXevmo"
                     }
                 ]
             }
@@ -1736,7 +1525,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "Practitioner_Qualification": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,101 +1533,30 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
+                        "identifier": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Identifier",
+                                "description": "An identifier that applies to this person's qualification in this role."
+                            }
                         },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
-                            ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
+                        "code": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-                        },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
-                            }
-                        },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
-                            }
-                        },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
-                        },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
-                        },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
+                            "description": "Coded representation of the qualification."
                         },
                         "period": {
                             "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                            "description": "Period during which the qualification is valid."
+                        },
+                        "issuer": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Organization that regulates and issues the qualification."
                         }
                     }
                 }
+            ],
+            "required": [
+                "code"
             ]
         },
         "Element": {

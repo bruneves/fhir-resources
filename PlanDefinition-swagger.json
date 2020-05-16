@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "PlanDefinition API",
+        "description": "A simplified version of the HL7 FHIR API for PlanDefinition resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "PlanDefinition"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/PlanDefinition": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a PlanDefinition resource",
+                "operationId": "createPlanDefinition",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,190 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PlanDefinition"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create PlanDefinition operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for PlanDefinition resources",
+                "operationId": "searchPlanDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
+                        "name": "composed-of",
+                        "description": "What resource is being referenced",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
+                        "name": "context",
+                        "description": "A use context assigned to the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
+                        "name": "context-quantity",
+                        "description": "A quantity- or range-valued use context assigned to the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
+                        "name": "context-type",
+                        "description": "A type of use context assigned to the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
+                        "name": "date",
+                        "description": "The plan definition publication date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
+                        "name": "definition",
+                        "description": "Activity or plan definitions used by plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
+                        "name": "depends-on",
+                        "description": "What resource is being referenced",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
+                        "name": "derived-from",
+                        "description": "What resource is being referenced",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
+                        "name": "description",
+                        "description": "The description of the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "effective",
+                        "description": "The time during which the plan definition is intended to be in use",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "External identifier for the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
+                        "name": "jurisdiction",
+                        "description": "Intended jurisdiction for the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "description": "Computationally friendly name of the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
+                        "name": "predecessor",
+                        "description": "What resource is being referenced",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
+                        "name": "publisher",
+                        "description": "Name of the publisher of the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
+                        "name": "status",
+                        "description": "The current status of the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "successor",
+                        "description": "What resource is being referenced",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "title",
+                        "description": "The human-friendly name of the plan definition",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "topic",
+                        "description": "Topics associated with the module",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "type",
+                        "description": "The type of artifact the plan (e.g. order-set, eca-rule, protocol)",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "url",
+                        "description": "The uri that identifies the plan definition",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "version",
+                        "description": "The business version of the plan definition",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-quantity",
+                        "description": "A use context type and quantity- or range-based value assigned to the plan definition",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-value",
+                        "description": "A use context type and value assigned to the plan definition",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +294,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search PlanDefinition operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +302,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/PlanDefinition/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a PlanDefinition resource",
+                "operationId": "vreadPlanDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +322,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read PlanDefinition operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PlanDefinition"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/PlanDefinition/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a PlanDefinition resource",
+                "operationId": "readPlanDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +347,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read PlanDefinition operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PlanDefinition"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing PlanDefinition resource",
+                "operationId": "updatePlanDefinition",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +372,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PlanDefinition"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update PlanDefinition operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create PlanDefinition operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a PlanDefinition resource",
+                "operationId": "deletePlanDefinition",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +398,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete PlanDefinition operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/PlanDefinition/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "PlanDefinition"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a PlanDefinition resource",
+                "operationId": "historyPlanDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +420,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History PlanDefinition operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +706,7 @@
                 }
             ]
         },
-        "Patient": {
+        "PlanDefinition": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -707,141 +714,223 @@
                 {
                     "type": "object",
                     "properties": {
+                        "url": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "An absolute URI that is used to identify this plan definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this plan definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the plan definition is stored on different servers."
+                        },
                         "identifier": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "description": "A formal identifier that is used to identify this plan definition when it is represented in other formats, or referenced in a specification, model, design or an instance."
                             }
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+                        "version": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The identifier that is used to identify this version of the plan definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the plan definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts."
                         },
                         "name": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
-                            }
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A natural language name identifying the plan definition. This name should be usable as an identifier for the module by machine processing applications such as code generation."
                         },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
+                        "title": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A short, descriptive, user-friendly title for the plan definition."
                         },
-                        "gender": {
+                        "subtitle": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "An explanatory or alternate title for the plan definition giving additional information about its content."
+                        },
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A high-level category for the plan definition that distinguishes the kinds of systems that would be interested in the plan definition."
+                        },
+                        "status": {
                             "type": "string",
                             "enum": [
-                                "male",
-                                "female",
-                                "other",
+                                "draft",
+                                "active",
+                                "retired",
                                 "unknown"
                             ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+                            "description": "The status of this plan definition. Enables tracking the life-cycle of the content."
                         },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
+                        "experimental": {
                             "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "A Boolean value to indicate that this plan definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
                         },
-                        "deceasedDateTime": {
+                        "subjectCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A code or group definition that describes the intended subject of the plan definition."
+                        },
+                        "subjectReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A code or group definition that describes the intended subject of the plan definition."
+                        },
+                        "date": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "The date  (and optionally time) when the plan definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the plan definition changes."
                         },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
+                        "publisher": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The name of the organization or individual that published the plan definition."
                         },
                         "contact": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "Contact details to assist a user in finding and communicating with the publisher."
                             }
                         },
-                        "communication": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A free text natural language description of the plan definition from a consumer's perspective."
+                        },
+                        "useContext": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
+                                "$ref": "#/definitions/UsageContext",
+                                "description": "The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate plan definition instances."
                             }
                         },
-                        "generalPractitioner": {
+                        "jurisdiction": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A legal or geographic region in which the plan definition is intended to be used."
                             }
                         },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
+                        "purpose": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Explanation of why this plan definition is needed and why it has been designed as it has."
                         },
-                        "link": {
+                        "usage": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A detailed description of how the plan definition is used from a clinical perspective."
+                        },
+                        "copyright": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A copyright statement relating to the plan definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the plan definition."
+                        },
+                        "approvalDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage."
+                        },
+                        "lastReviewDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date."
+                        },
+                        "effectivePeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "The period during which the plan definition content was or is planned to be in active use."
+                        },
+                        "topic": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Descriptive topics related to the content of the plan definition. Topics provide a high-level categorization of the definition that can be useful for filtering and searching."
+                            }
+                        },
+                        "author": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individiual or organization primarily involved in the creation and maintenance of the content."
+                            }
+                        },
+                        "editor": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individual or organization primarily responsible for internal coherence of the content."
+                            }
+                        },
+                        "reviewer": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individual or organization primarily responsible for review of some aspect of the content."
+                            }
+                        },
+                        "endorser": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individual or organization responsible for officially endorsing the content for use in some setting."
+                            }
+                        },
+                        "relatedArtifact": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RelatedArtifact",
+                                "description": "Related artifacts such as additional documentation, justification, or bibliographic references."
+                            }
+                        },
+                        "library": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "\\S*",
+                                "description": "A reference to a Library resource containing any formal logic used by the plan definition."
+                            }
+                        },
+                        "goal": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Goal",
+                                "description": "Goals that describe what the activities within the plan are intended to achieve. For example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc."
+                            }
+                        },
+                        "action": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Action",
+                                "description": "An action or group of actions to be taken as part of the plan."
                             }
                         }
                     }
                 }
             ],
+            "required": [
+                "status"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "PlanDefinition",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "twPQfSKljd",
+                    "lastUpdated": "2020-03-12T00:11:56.907-04:00",
+                    "source": "VwF1Xl3tYZ",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "OVeftHqeoD"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "zKLaa82XEB",
+                            "version": "VSQLotjkGD",
+                            "code": "Xm7vThNw09",
+                            "display": "lDz3VQjTx2",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "HUeptGU3Dg",
+                            "version": "iiSkP0XWuu",
+                            "code": "lywFMPup2e",
+                            "display": "eJsYvQweNq",
                             "userSelected": true
                         },
                         {
@@ -849,311 +938,351 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "QljDMFOde0",
+                "language": "OOKo5wemvn",
                 "text": {
                     "status": "generated",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
+                "url": "FskGP2PxCE",
                 "identifier": [
                     {
-                        "use": "official",
+                        "use": "usual",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
+                                    "system": "gJYwyw3wVT",
+                                    "version": "5YLjKgUzuZ",
+                                    "code": "Pc0ph2zYPj",
+                                    "display": "qFV2zQz63P",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "RwELMTpc3R"
+                            "text": "85Jkb6UBx1"
                         },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
+                        "system": "VdX7kqI613",
+                        "value": "pxfFDAJwor",
                         "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
+                            "start": "2020-03-12T00:11:56.915-04:00",
+                            "end": "2020-03-12T00:11:56.916-04:00"
                         }
                     }
                 ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
+                "version": "iYFh7Q5dlM",
+                "name": "BXNvn89zQV",
+                "title": "3SMVWn3dxB",
+                "subtitle": "udzy77oiPC",
+                "type": {
                     "coding": [
                         {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
+                            "system": "uJOtkthMQN",
+                            "version": "VlQNMi1WAc",
+                            "code": "jladfmy0XI",
+                            "display": "v6bgewzT6Y",
                             "userSelected": true
                         }
                     ],
-                    "text": "_XU7GZGDCJ"
+                    "text": "IhyCsPjIHN"
                 },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
+                "status": "unknown",
+                "experimental": true,
+                "subjectCodeableConcept": {
+                    "coding": [
+                        {
+                            "system": "6GXqyWFQVW",
+                            "version": "cKLH3n76w3",
+                            "code": "HNPPTUtwWH",
+                            "display": "zsnPb43bc4",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "jNsEKX8ifR"
+                },
+                "date": "2020-03-12T00:11:56.917-04:00",
+                "publisher": "EBRVPCjKx7",
                 "contact": [
                     {
-                        "relationship": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
+                        "name": "rtC9mIg7SQ",
                         "telecom": [
                             {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
+                                "system": "pager",
+                                "value": "qEdZ7nRAoW",
+                                "use": "temp",
+                                "rank": 1017666659,
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
+                                    "start": "2020-03-12T00:11:56.908-04:00",
+                                    "end": "2020-03-12T00:11:56.908-04:00"
                                 }
                             }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
-                            "identifier": {
-                                "use": "usual",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "lr5rIPHEgi"
-                                },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
-                                }
-                            },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
+                        ]
                     }
                 ],
-                "communication": [
+                "description": "6qpRlfORzJ",
+                "useContext": [
                     {
-                        "language": {
+                        "code": {
+                            "system": "KqeomgHsMf",
+                            "version": "pQ7U8_bK0V",
+                            "code": "HWGo1LAPIa",
+                            "display": "9eLbSmyyHj",
+                            "userSelected": true
+                        },
+                        "valueCodeableConcept": {
                             "coding": [
                                 {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
+                                    "system": "Ir5_t93e3I",
+                                    "version": "kE02BMoIOy",
+                                    "code": "jCW6qKcBiY",
+                                    "display": "43iM7XWeoE",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
+                            "text": "agCfmZH3ax"
+                        }
                     }
                 ],
-                "generalPractitioner": [
+                "jurisdiction": [
                     {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
+                        "coding": [
+                            {
+                                "system": "f9wEIm4CVj",
+                                "version": "U2VbQIZuhV",
+                                "code": "Dp6bESd33l",
+                                "display": "iyTOY6Ehp6",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "YgVd1uwLAJ"
+                    }
+                ],
+                "purpose": "uCGlqkgszP",
+                "usage": "i0oCPlQdXu",
+                "copyright": "kJsJM3QvDQ",
+                "approvalDate": "2020-03-12",
+                "lastReviewDate": "2020-03-12",
+                "effectivePeriod": {
+                    "start": "2020-03-12T00:11:56.909-04:00",
+                    "end": "2020-03-12T00:11:56.909-04:00"
+                },
+                "topic": [
+                    {
+                        "coding": [
+                            {
+                                "system": "9rb0ibOKoH",
+                                "version": "YRTZjOiDP8",
+                                "code": "1RMeBPGy52",
+                                "display": "uaI5m8JHP_",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "6lXUfhSDGx"
+                    }
+                ],
+                "author": [
+                    {
+                        "name": "3qI2QLg4ya",
+                        "telecom": [
+                            {
+                                "system": "other",
+                                "value": "1FTrTDYHg1",
+                                "use": "temp",
+                                "rank": 1491739573,
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.91-04:00",
+                                    "end": "2020-03-12T00:11:56.91-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "editor": [
+                    {
+                        "name": "C8bn4kjfrq",
+                        "telecom": [
+                            {
+                                "system": "url",
+                                "value": "JjuNF8PjcX",
+                                "use": "mobile",
+                                "rank": 130419827,
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.906-04:00",
+                                    "end": "2020-03-12T00:11:56.906-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "reviewer": [
+                    {
+                        "name": "ZqQ3khTBni",
+                        "telecom": [
+                            {
+                                "system": "pager",
+                                "value": "VzN60Yz8Y9",
+                                "use": "mobile",
+                                "rank": 1371361162,
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.91-04:00",
+                                    "end": "2020-03-12T00:11:56.91-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "endorser": [
+                    {
+                        "name": "4rgnK8iYzu",
+                        "telecom": [
+                            {
+                                "system": "other",
+                                "value": "twQhVai6WL",
+                                "use": "temp",
+                                "rank": 1999253738,
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.91-04:00",
+                                    "end": "2020-03-12T00:11:56.911-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "relatedArtifact": [
+                    {
+                        "type": "documentation",
+                        "label": "rJZUSSGnFm",
+                        "display": "GSmxtX7RLU",
+                        "citation": "RoXbbqAOki",
+                        "url": "7RlDJk_qsL",
+                        "document": {
+                            "contentType": "IQLKC4ZQqc",
+                            "language": "WfEdIwzHPd",
+                            "data": "AXpCCFs=",
+                            "url": "EwcOimY7wn",
+                            "size": 885159426,
+                            "hash": "cicDDjQ=",
+                            "title": "2qaodE1_FX",
+                            "creation": "2020-03-12T00:11:56.916-04:00"
+                        },
+                        "resource": "HUu0BJLUDh"
+                    }
+                ],
+                "library": [
+                    "pkZYSyQG5z"
+                ],
+                "goal": [
+                    {
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "D0TtP74MHd",
+                                    "version": "__zvFVrRlg",
+                                    "code": "fSz8xthyth",
+                                    "display": "6k38U70L5U",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "PLiZx4rw_O"
+                        },
+                        "description": {
+                            "coding": [
+                                {
+                                    "system": "lfJvxK0IZB",
+                                    "version": "SrTBozoBuk",
+                                    "code": "QtsCWICfE_",
+                                    "display": "np3jkHz4S3",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "56KyzixqB6"
+                        },
+                        "priority": {
+                            "coding": [
+                                {
+                                    "system": "wpcNkb7bYp",
+                                    "version": "VPD8YEEqKq",
+                                    "code": "RgiwetFcHQ",
+                                    "display": "od8y4neBml",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "A9QN8rYdRr"
+                        },
+                        "start": {
+                            "coding": [
+                                {
+                                    "system": "OfzqyMYY2P",
+                                    "version": "5fdFEACLzz",
+                                    "code": "EfJl80FlEW",
+                                    "display": "M1cz7ZssvO",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "ruNVj4UC8U"
+                        },
+                        "addresses": [
+                            {
                                 "coding": [
                                     {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
+                                        "system": "0NXNiWkVou",
+                                        "version": "oEAlwn2aFx",
+                                        "code": "FDTaNELnPy",
+                                        "display": "MT4eq8XzZi",
                                         "userSelected": true
                                     }
                                 ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
+                                "text": "7DfWLyZmm9"
                             }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
-                        "use": "temp",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "gbUHUfQGKD"
-                        },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
-                        }
-                    },
-                    "display": "HHvTPP_6wS"
-                },
-                "link": [
-                    {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
+                        ],
+                        "documentation": [
+                            {
+                                "type": "predecessor",
+                                "label": "Y82pLWai1S",
+                                "display": "osROszcmTu",
+                                "citation": "r_BncWXsdG",
+                                "url": "Nh2BD2irsJ",
+                                "document": {
+                                    "contentType": "UqACFnEmPn",
+                                    "language": "B5zS9dgsqN",
+                                    "data": "cUdqTlA=",
+                                    "url": "9qVZyWq5Yc",
+                                    "size": 1225797180,
+                                    "hash": "Jj8aGUk=",
+                                    "title": "MxNLYt9SJ6",
+                                    "creation": "2020-03-12T00:11:56.914-04:00"
+                                },
+                                "resource": "W6QJjAwZPZ"
+                            }
+                        ],
+                        "target": [
+                            {
+                                "measure": {
                                     "coding": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
+                                            "system": "i2y7ySoZ4U",
+                                            "version": "OtRNkIHtQM",
+                                            "code": "HeOSCc9VB9",
+                                            "display": "hAazGZNEsN",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "text": "5Q8R4WS1l5"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                                "detailQuantity": {
+                                    "value": 520145355833,
+                                    "comparator": "<",
+                                    "unit": "FpJtgmk_TE",
+                                    "system": "I7VkfhU4MM",
+                                    "code": "FUmidAx8hA"
+                                },
+                                "due": {
+                                    "value": 4515447311,
+                                    "comparator": "<=",
+                                    "unit": "YGT_rygLfx",
+                                    "system": "http://unitsofmeasure.org",
+                                    "code": "h"
                                 }
-                            },
-                            "display": "BNnVKMbPmJ"
-                        },
-                        "type": "refer"
+                            }
+                        ]
                     }
                 ]
             }
@@ -1736,7 +1865,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "PlanDefinition_Action": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,98 +1873,424 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
+                        "prefix": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A user-visible prefix for the action."
                         },
-                        "type": {
+                        "title": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The title of the action displayed to a user."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A brief description of the action used to provide a summary to display to the user."
+                        },
+                        "textEquivalent": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A text equivalent of the action to be performed. This provides a human-interpretable description of the action when the definition is consumed by a system that might not be capable of interpreting it dynamically."
+                        },
+                        "priority": {
                             "type": "string",
                             "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
+                                "routine",
+                                "urgent",
+                                "asap",
+                                "stat"
                             ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
+                            "description": "Indicates how quickly the action should be addressed with respect to other actions."
                         },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
+                        "code": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
+                                "description": "A code that provides meaning for the action or action group. For example, a section may have a LOINC code for the section of a documentation template."
                             }
                         },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
+                        "reason": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A description of why this action is necessary or appropriate."
                             }
                         },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
+                        "documentation": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RelatedArtifact",
+                                "description": "Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources."
+                            }
                         },
-                        "gender": {
+                        "goalId": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                                "description": "Identifies goals that this action supports. The reference must be to a goal element defined within this plan definition."
+                            }
+                        },
+                        "subjectCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A code or group definition that describes the intended subject of the action and its children, if any."
+                        },
+                        "subjectReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A code or group definition that describes the intended subject of the action and its children, if any."
+                        },
+                        "trigger": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TriggerDefinition",
+                                "description": "A description of when the action should be triggered."
+                            }
+                        },
+                        "condition": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Action_Condition",
+                                "description": "An expression that describes applicability criteria or start/stop conditions for the action."
+                            }
+                        },
+                        "input": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRequirement",
+                                "description": "Defines input data requirements for the action."
+                            }
+                        },
+                        "output": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRequirement",
+                                "description": "Defines the outputs of the action, if any."
+                            }
+                        },
+                        "relatedAction": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Action_RelatedAction",
+                                "description": "A relationship to another action such as \"before\" or \"30-60 minutes after start of\"."
+                            }
+                        },
+                        "timingDateTime": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "An optional value describing when the action should be performed."
+                        },
+                        "timingAge": {
+                            "$ref": "#/definitions/Age",
+                            "description": "An optional value describing when the action should be performed."
+                        },
+                        "timingPeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "An optional value describing when the action should be performed."
+                        },
+                        "timingDuration": {
+                            "$ref": "#/definitions/Duration",
+                            "description": "An optional value describing when the action should be performed."
+                        },
+                        "timingRange": {
+                            "$ref": "#/definitions/Range",
+                            "description": "An optional value describing when the action should be performed."
+                        },
+                        "timingTiming": {
+                            "$ref": "#/definitions/Timing",
+                            "description": "An optional value describing when the action should be performed."
+                        },
+                        "participant": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Action_Participant",
+                                "description": "Indicates who should participate in performing the action described."
+                            }
+                        },
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The type of action to perform (create, update, remove)."
+                        },
+                        "groupingBehavior": {
                             "type": "string",
                             "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
+                                "visual-group",
+                                "logical-group",
+                                "sentence-group"
                             ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
+                            "description": "Defines the grouping behavior for the action and its children."
                         },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
+                        "selectionBehavior": {
+                            "type": "string",
+                            "enum": [
+                                "any",
+                                "all",
+                                "all-or-none",
+                                "exactly-one",
+                                "at-most-one",
+                                "one-or-more"
+                            ],
+                            "description": "Defines the selection behavior for the action and its children."
                         },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                        "requiredBehavior": {
+                            "type": "string",
+                            "enum": [
+                                "must",
+                                "could",
+                                "must-unless-documented"
+                            ],
+                            "description": "Defines the required behavior for the action."
+                        },
+                        "precheckBehavior": {
+                            "type": "string",
+                            "enum": [
+                                "yes",
+                                "no"
+                            ],
+                            "description": "Defines whether the action should usually be preselected."
+                        },
+                        "cardinalityBehavior": {
+                            "type": "string",
+                            "enum": [
+                                "single",
+                                "multiple"
+                            ],
+                            "description": "Defines whether the action can be selected multiple times."
+                        },
+                        "definitionCanonical": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "A reference to an ActivityDefinition that describes the action to be taken in detail, or a PlanDefinition that describes a series of actions to be taken."
+                        },
+                        "definitionUri": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "A reference to an ActivityDefinition that describes the action to be taken in detail, or a PlanDefinition that describes a series of actions to be taken."
+                        },
+                        "transform": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input."
+                        },
+                        "dynamicValue": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Action_DynamicValue",
+                                "description": "Customizations that should be applied to the statically defined resource. For example, if the dosage of a medication must be computed based on the patient's weight, a customization would be used to specify an expression that calculated the weight, and the path on the resource that would contain the result."
+                            }
+                        },
+                        "action": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Action",
+                                "description": "Sub actions that are contained within the action. The behavior of this action determines the functionality of the sub-actions. For example, a selection behavior of at-most-one indicates that of the sub-actions, at most one may be chosen as part of realizing the action definition."
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "PlanDefinition_Action_DynamicValue": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression. The specified path SHALL be a FHIRPath resolveable on the specified target type of the ActivityDefinition, and SHALL consist only of identifiers, constant indexers, and a restricted subset of functions. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details)."
+                        },
+                        "expression": {
+                            "$ref": "#/definitions/Expression",
+                            "description": "An expression specifying the value of the customized element."
+                        }
+                    }
+                }
+            ]
+        },
+        "PlanDefinition_Action_Participant": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "patient",
+                                "practitioner",
+                                "related-person",
+                                "device"
+                            ],
+                            "description": "The type of participant in the action."
+                        },
+                        "role": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The role the participant should play in performing the described action."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
+            ]
+        },
+        "PlanDefinition_Action_RelatedAction": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "actionId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "The element id of the related action."
+                        },
+                        "relationship": {
+                            "type": "string",
+                            "enum": [
+                                "before-start",
+                                "before",
+                                "before-end",
+                                "concurrent-with-start",
+                                "concurrent",
+                                "concurrent-with-end",
+                                "after-start",
+                                "after",
+                                "after-end"
+                            ],
+                            "description": "The relationship of this action to the related action."
+                        },
+                        "offsetDuration": {
+                            "$ref": "#/definitions/Duration",
+                            "description": "A duration or range of durations to apply to the relationship. For example, 30-60 minutes before."
+                        },
+                        "offsetRange": {
+                            "$ref": "#/definitions/Range",
+                            "description": "A duration or range of durations to apply to the relationship. For example, 30-60 minutes before."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "actionId",
+                "relationship"
+            ]
+        },
+        "PlanDefinition_Action_Condition": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [
+                                "applicability",
+                                "start",
+                                "stop"
+                            ],
+                            "description": "The kind of condition."
+                        },
+                        "expression": {
+                            "$ref": "#/definitions/Expression",
+                            "description": "An expression that returns true or false, indicating whether the condition is satisfied."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "kind"
+            ]
+        },
+        "PlanDefinition_Goal": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "category": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Indicates a category the goal falls within."
+                        },
+                        "description": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Human-readable and/or coded description of a specific desired objective of care, such as \"control blood pressure\" or \"negotiate an obstacle course\" or \"dance with child at wedding\"."
+                        },
+                        "priority": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Identifies the expected level of importance associated with reaching/sustaining the defined goal."
+                        },
+                        "start": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The event after which the goal should begin being pursued."
+                        },
+                        "addresses": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Identifies problems, conditions, issues, or concerns the goal is intended to address."
+                            }
+                        },
+                        "documentation": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RelatedArtifact",
+                                "description": "Didactic or other informational resources associated with the goal that provide further supporting information about the goal. Information resources can include inline text commentary and links to web resources."
+                            }
+                        },
+                        "target": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PlanDefinition_Goal_Target",
+                                "description": "Indicates what should be done and within what timeframe."
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "description"
+            ]
+        },
+        "PlanDefinition_Goal_Target": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "measure": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The parameter whose value is to be tracked, e.g. body weight, blood pressure, or hemoglobin A1c level."
+                        },
+                        "detailQuantity": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value."
+                        },
+                        "detailRange": {
+                            "$ref": "#/definitions/Range",
+                            "description": "The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value."
+                        },
+                        "detailCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value."
+                        },
+                        "due": {
+                            "$ref": "#/definitions/Duration",
+                            "description": "Indicates the timeframe after the start of the goal in which the goal should be met."
                         }
                     }
                 }
@@ -2794,6 +3249,428 @@
                 }
             ]
         },
+        "DataRequirement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Element"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "Address",
+                                "Age",
+                                "Annotation",
+                                "Attachment",
+                                "BackboneElement",
+                                "CodeableConcept",
+                                "Coding",
+                                "ContactDetail",
+                                "ContactPoint",
+                                "Contributor",
+                                "Count",
+                                "DataRequirement",
+                                "Distance",
+                                "Dosage",
+                                "Duration",
+                                "Element",
+                                "ElementDefinition",
+                                "Expression",
+                                "Extension",
+                                "HumanName",
+                                "Identifier",
+                                "MarketingStatus",
+                                "Meta",
+                                "Money",
+                                "MoneyQuantity",
+                                "Narrative",
+                                "ParameterDefinition",
+                                "Period",
+                                "Population",
+                                "ProdCharacteristic",
+                                "ProductShelfLife",
+                                "Quantity",
+                                "Range",
+                                "Ratio",
+                                "Reference",
+                                "RelatedArtifact",
+                                "SampledData",
+                                "Signature",
+                                "SimpleQuantity",
+                                "SubstanceAmount",
+                                "Timing",
+                                "TriggerDefinition",
+                                "UsageContext",
+                                "base64Binary",
+                                "boolean",
+                                "canonical",
+                                "code",
+                                "date",
+                                "dateTime",
+                                "decimal",
+                                "id",
+                                "instant",
+                                "integer",
+                                "markdown",
+                                "oid",
+                                "positiveInt",
+                                "string",
+                                "time",
+                                "unsignedInt",
+                                "uri",
+                                "url",
+                                "uuid",
+                                "xhtml",
+                                "Account",
+                                "ActivityDefinition",
+                                "AdverseEvent",
+                                "AllergyIntolerance",
+                                "Appointment",
+                                "AppointmentResponse",
+                                "AuditEvent",
+                                "Basic",
+                                "Binary",
+                                "BiologicallyDerivedProduct",
+                                "BodyStructure",
+                                "Bundle",
+                                "CapabilityStatement",
+                                "CarePlan",
+                                "CareTeam",
+                                "CatalogEntry",
+                                "ChargeItem",
+                                "ChargeItemDefinition",
+                                "Claim",
+                                "ClaimResponse",
+                                "ClinicalImpression",
+                                "CodeSystem",
+                                "Communication",
+                                "CommunicationRequest",
+                                "CompartmentDefinition",
+                                "Composition",
+                                "ConceptMap",
+                                "Condition",
+                                "Consent",
+                                "Contract",
+                                "Coverage",
+                                "CoverageEligibilityRequest",
+                                "CoverageEligibilityResponse",
+                                "DetectedIssue",
+                                "Device",
+                                "DeviceDefinition",
+                                "DeviceMetric",
+                                "DeviceRequest",
+                                "DeviceUseStatement",
+                                "DiagnosticReport",
+                                "DocumentManifest",
+                                "DocumentReference",
+                                "DomainResource",
+                                "EffectEvidenceSynthesis",
+                                "Encounter",
+                                "Endpoint",
+                                "EnrollmentRequest",
+                                "EnrollmentResponse",
+                                "EpisodeOfCare",
+                                "EventDefinition",
+                                "Evidence",
+                                "EvidenceVariable",
+                                "ExampleScenario",
+                                "ExplanationOfBenefit",
+                                "FamilyMemberHistory",
+                                "Flag",
+                                "Goal",
+                                "GraphDefinition",
+                                "Group",
+                                "GuidanceResponse",
+                                "HealthcareService",
+                                "ImagingStudy",
+                                "Immunization",
+                                "ImmunizationEvaluation",
+                                "ImmunizationRecommendation",
+                                "ImplementationGuide",
+                                "InsurancePlan",
+                                "Invoice",
+                                "Library",
+                                "Linkage",
+                                "List",
+                                "Location",
+                                "Measure",
+                                "MeasureReport",
+                                "Media",
+                                "Medication",
+                                "MedicationAdministration",
+                                "MedicationDispense",
+                                "MedicationKnowledge",
+                                "MedicationRequest",
+                                "MedicationStatement",
+                                "MedicinalProduct",
+                                "MedicinalProductAuthorization",
+                                "MedicinalProductContraindication",
+                                "MedicinalProductIndication",
+                                "MedicinalProductIngredient",
+                                "MedicinalProductInteraction",
+                                "MedicinalProductManufactured",
+                                "MedicinalProductPackaged",
+                                "MedicinalProductPharmaceutical",
+                                "MedicinalProductUndesirableEffect",
+                                "MessageDefinition",
+                                "MessageHeader",
+                                "MolecularSequence",
+                                "NamingSystem",
+                                "NutritionOrder",
+                                "Observation",
+                                "ObservationDefinition",
+                                "OperationDefinition",
+                                "OperationOutcome",
+                                "Organization",
+                                "OrganizationAffiliation",
+                                "Parameters",
+                                "Patient",
+                                "PaymentNotice",
+                                "PaymentReconciliation",
+                                "Person",
+                                "PlanDefinition",
+                                "Practitioner",
+                                "PractitionerRole",
+                                "Procedure",
+                                "Provenance",
+                                "Questionnaire",
+                                "QuestionnaireResponse",
+                                "RelatedPerson",
+                                "RequestGroup",
+                                "ResearchDefinition",
+                                "ResearchElementDefinition",
+                                "ResearchStudy",
+                                "ResearchSubject",
+                                "Resource",
+                                "RiskAssessment",
+                                "RiskEvidenceSynthesis",
+                                "Schedule",
+                                "SearchParameter",
+                                "ServiceRequest",
+                                "Slot",
+                                "Specimen",
+                                "SpecimenDefinition",
+                                "StructureDefinition",
+                                "StructureMap",
+                                "Subscription",
+                                "Substance",
+                                "SubstanceNucleicAcid",
+                                "SubstancePolymer",
+                                "SubstanceProtein",
+                                "SubstanceReferenceInformation",
+                                "SubstanceSourceMaterial",
+                                "SubstanceSpecification",
+                                "SupplyDelivery",
+                                "SupplyRequest",
+                                "Task",
+                                "TerminologyCapabilities",
+                                "TestReport",
+                                "TestScript",
+                                "ValueSet",
+                                "VerificationResult",
+                                "VisionPrescription",
+                                "Type",
+                                "Any"
+                            ],
+                            "description": "The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile."
+                        },
+                        "profile": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "\\S*",
+                                "description": "The profile of the required data, specified as the uri of the profile definition."
+                            }
+                        },
+                        "subjectCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The intended subjects of the data requirement. If this element is not provided, a Patient subject is assumed."
+                        },
+                        "subjectReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The intended subjects of the data requirement. If this element is not provided, a Patient subject is assumed."
+                        },
+                        "mustSupport": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "[ \\r\\n\\t\\S]+",
+                                "description": "Indicates that specific elements of the type are referenced by the knowledge module and must be supported by the consumer in order to obtain an effective evaluation. This does not mean that a value is required for this element, only that the consuming system must understand the element and be able to provide values for it if they are available. \n\nThe value of mustSupport SHALL be a FHIRPath resolveable on the type of the DataRequirement. The path SHALL consist only of identifiers, constant indexers, and .resolve() (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details)."
+                            }
+                        },
+                        "codeFilter": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRequirement_CodeFilter",
+                                "description": "Code filters specify additional constraints on the data, specifying the value set of interest for a particular element of the data. Each code filter defines an additional constraint on the data, i.e. code filters are AND'ed, not OR'ed."
+                            }
+                        },
+                        "dateFilter": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRequirement_DateFilter",
+                                "description": "Date filters specify additional constraints on the data in terms of the applicable date range for specific elements. Each date filter specifies an additional constraint on the data, i.e. date filters are AND'ed, not OR'ed."
+                            }
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Specifies a maximum number of results that are required (uses the _count search parameter)."
+                        },
+                        "sort": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRequirement_Sort",
+                                "description": "Specifies the order of the results to be returned."
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
+            ]
+        },
+        "DataRequirement_Sort": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The attribute of the sort. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant."
+                        },
+                        "direction": {
+                            "type": "string",
+                            "enum": [
+                                "ascending",
+                                "descending"
+                            ],
+                            "description": "The direction of the sort, ascending or descending."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "path",
+                "direction"
+            ]
+        },
+        "DataRequirement_DateFilter": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The date-valued attribute of the filter. The specified path SHALL be a FHIRPath resolveable on the specified type of the DataRequirement, and SHALL consist only of identifiers, constant indexers, and .resolve(). The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details). Note that the index must be an integer constant. The path must resolve to an element of type date, dateTime, Period, Schedule, or Timing."
+                        },
+                        "searchParam": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A date parameter that refers to a search parameter defined on the specified type of the DataRequirement, and which searches on elements of type date, dateTime, Period, Schedule, or Timing."
+                        },
+                        "valueDateTime": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration before now."
+                        },
+                        "valuePeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration before now."
+                        },
+                        "valueDuration": {
+                            "$ref": "#/definitions/Duration",
+                            "description": "The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration before now."
+                        }
+                    }
+                }
+            ]
+        },
+        "DataRequirement_CodeFilter": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The code-valued attribute of the filter. The specified path SHALL be a FHIRPath resolveable on the specified type of the DataRequirement, and SHALL consist only of identifiers, constant indexers, and .resolve(). The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details). Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept."
+                        },
+                        "searchParam": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A token parameter that refers to a search parameter defined on the specified type of the DataRequirement, and which searches on elements of type code, Coding, or CodeableConcept."
+                        },
+                        "valueSet": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "The valueset for the code filter. The valueSet and code elements are additive. If valueSet is specified, the filter will return only those data items for which the value of the code-valued element specified in the path is a member of the specified valueset."
+                        },
+                        "code": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Coding",
+                                "description": "The codes for the code filter. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified codes. If codes are specified in addition to a value set, the filter returns items matching a code in the value set or one of the specified codes."
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "Expression": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Element"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A brief, natural language description of the condition that effectively communicates the intended semantics."
+                        },
+                        "name": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "A short name assigned to the expression to allow for multiple reuse of the expression in the context where it is defined."
+                        },
+                        "language": {
+                            "type": "string",
+                            "pattern": "[^\\s]+(\\s[^\\s]+)*",
+                            "description": "The media type of the language for the expression."
+                        },
+                        "expression": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "An expression in the specified language that returns a value."
+                        },
+                        "reference": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "A URI that defines where the expression is found."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "language"
+            ]
+        },
         "RelatedArtifact": {
             "allOf": [
                 {
@@ -2844,6 +3721,69 @@
                             "type": "string",
                             "pattern": "\\S*",
                             "description": "The related resource, such as a library, value set, profile, or other knowledge resource."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
+            ]
+        },
+        "TriggerDefinition": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Element"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "named-event",
+                                "periodic",
+                                "data-changed",
+                                "data-added",
+                                "data-modified",
+                                "data-removed",
+                                "data-accessed",
+                                "data-access-ended"
+                            ],
+                            "description": "The type of triggering event."
+                        },
+                        "name": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A formal name for the event. This may be an absolute URI that identifies the event formally (e.g. from a trigger registry), or a simple relative URI that identifies the event in a local context."
+                        },
+                        "timingTiming": {
+                            "$ref": "#/definitions/Timing",
+                            "description": "The timing of the event (if this is a periodic trigger)."
+                        },
+                        "timingReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The timing of the event (if this is a periodic trigger)."
+                        },
+                        "timingDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The timing of the event (if this is a periodic trigger)."
+                        },
+                        "timingDateTime": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "The timing of the event (if this is a periodic trigger)."
+                        },
+                        "data": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRequirement",
+                                "description": "The triggering data of the event (if this is a data trigger). If more than one data is requirement is specified, then all the data requirements must be true."
+                            }
+                        },
+                        "condition": {
+                            "$ref": "#/definitions/Expression",
+                            "description": "A boolean-valued expression that is evaluated in the context of the container of the trigger definition and returns whether or not the trigger fires."
                         }
                     }
                 }

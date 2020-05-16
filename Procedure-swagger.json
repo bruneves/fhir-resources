@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "Procedure API",
+        "description": "A simplified version of the HL7 FHIR API for Procedure resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "Procedure"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/Procedure": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a Procedure resource",
+                "operationId": "createProcedure",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,134 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Procedure"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create Procedure operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for Procedure resources",
+                "operationId": "searchProcedure",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
+                        "name": "code",
+                        "description": "Multiple Resources: \r\n\r\n* [AllergyIntolerance](allergyintolerance.html): Code that identifies the allergy or intolerance\r\n* [Condition](condition.html): Code for the condition\r\n* [DeviceRequest](devicerequest.html): Code for what is being requested/ordered\r\n* [DiagnosticReport](diagnosticreport.html): The code for the report, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result\r\n* [FamilyMemberHistory](familymemberhistory.html): A search by a condition code\r\n* [List](list.html): What the purpose of this list is\r\n* [Medication](medication.html): Returns medications for a specific code\r\n* [MedicationAdministration](medicationadministration.html): Return administrations of this medication code\r\n* [MedicationDispense](medicationdispense.html): Returns dispenses of this medicine code\r\n* [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code\r\n* [MedicationStatement](medicationstatement.html): Return statements of this medication code\r\n* [Observation](observation.html): The code of the observation type\r\n* [Procedure](procedure.html): A code to identify a  procedure\r\n* [ServiceRequest](servicerequest.html): What is being requested/ordered\r\n",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "date",
+                        "description": "Multiple Resources: \r\n\r\n* [AllergyIntolerance](allergyintolerance.html): Date first version of the resource instance was recorded\r\n* [CarePlan](careplan.html): Time period plan covers\r\n* [CareTeam](careteam.html): Time period team covers\r\n* [ClinicalImpression](clinicalimpression.html): When the assessment was documented\r\n* [Composition](composition.html): Composition editing time\r\n* [Consent](consent.html): When this Consent was created or indexed\r\n* [DiagnosticReport](diagnosticreport.html): The clinically relevant time of the report\r\n* [Encounter](encounter.html): A date within the period the Encounter lasted\r\n* [EpisodeOfCare](episodeofcare.html): The provided date search value falls within the episode of care's period\r\n* [FamilyMemberHistory](familymemberhistory.html): When history was recorded or last updated\r\n* [Flag](flag.html): Time period when flag is active\r\n* [Immunization](immunization.html): Vaccination  (non)-Administration Date\r\n* [List](list.html): When the list was prepared\r\n* [Observation](observation.html): Obtained date/time. If the obtained element is a period, a date that falls in the period\r\n* [Procedure](procedure.html): When the procedure was performed\r\n* [RiskAssessment](riskassessment.html): When was assessment made?\r\n* [SupplyRequest](supplyrequest.html): When the request was made\r\n",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "Multiple Resources: \r\n\r\n* [AllergyIntolerance](allergyintolerance.html): External ids for this item\r\n* [CarePlan](careplan.html): External Ids for this plan\r\n* [CareTeam](careteam.html): External Ids for this team\r\n* [Composition](composition.html): Version-independent identifier for the Composition\r\n* [Condition](condition.html): A unique identifier of the condition record\r\n* [Consent](consent.html): Identifier for this record (external references)\r\n* [DetectedIssue](detectedissue.html): Unique id for the detected issue\r\n* [DeviceRequest](devicerequest.html): Business identifier for request/order\r\n* [DiagnosticReport](diagnosticreport.html): An identifier for the report\r\n* [DocumentManifest](documentmanifest.html): Unique Identifier for the set of documents\r\n* [DocumentReference](documentreference.html): Master Version Specific Identifier\r\n* [Encounter](encounter.html): Identifier(s) by which this encounter is known\r\n* [EpisodeOfCare](episodeofcare.html): Business Identifier(s) relevant for this EpisodeOfCare\r\n* [FamilyMemberHistory](familymemberhistory.html): A search by a record identifier\r\n* [Goal](goal.html): External Ids for this goal\r\n* [ImagingStudy](imagingstudy.html): Identifiers for the Study, such as DICOM Study Instance UID and Accession number\r\n* [Immunization](immunization.html): Business identifier\r\n* [List](list.html): Business identifier\r\n* [MedicationAdministration](medicationadministration.html): Return administrations with this external identifier\r\n* [MedicationDispense](medicationdispense.html): Returns dispenses with this external identifier\r\n* [MedicationRequest](medicationrequest.html): Return prescriptions with this external identifier\r\n* [MedicationStatement](medicationstatement.html): Return statements with this external identifier\r\n* [NutritionOrder](nutritionorder.html): Return nutrition orders with this external identifier\r\n* [Observation](observation.html): The unique id for a particular observation\r\n* [Procedure](procedure.html): A unique identifier for a procedure\r\n* [RiskAssessment](riskassessment.html): Unique identifier for the assessment\r\n* [ServiceRequest](servicerequest.html): Identifiers assigned to this order\r\n* [SupplyDelivery](supplydelivery.html): External identifier\r\n* [SupplyRequest](supplyrequest.html): Business Identifier for SupplyRequest\r\n* [VisionPrescription](visionprescription.html): Return prescriptions with this external identifier\r\n",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
+                        "name": "patient",
+                        "description": "Multiple Resources: \r\n\r\n* [AllergyIntolerance](allergyintolerance.html): Who the sensitivity is for\r\n* [CarePlan](careplan.html): Who the care plan is for\r\n* [CareTeam](careteam.html): Who care team is for\r\n* [ClinicalImpression](clinicalimpression.html): Patient or group assessed\r\n* [Composition](composition.html): Who and/or what the composition is about\r\n* [Condition](condition.html): Who has the condition?\r\n* [Consent](consent.html): Who the consent applies to\r\n* [DetectedIssue](detectedissue.html): Associated patient\r\n* [DeviceRequest](devicerequest.html): Individual the service is ordered for\r\n* [DeviceUseStatement](deviceusestatement.html): Search by subject - a patient\r\n* [DiagnosticReport](diagnosticreport.html): The subject of the report if a patient\r\n* [DocumentManifest](documentmanifest.html): The subject of the set of documents\r\n* [DocumentReference](documentreference.html): Who/what is the subject of the document\r\n* [Encounter](encounter.html): The patient or group present at the encounter\r\n* [EpisodeOfCare](episodeofcare.html): The patient who is the focus of this episode of care\r\n* [FamilyMemberHistory](familymemberhistory.html): The identity of a subject to list family member history items for\r\n* [Flag](flag.html): The identity of a subject to list flags for\r\n* [Goal](goal.html): Who this goal is intended for\r\n* [ImagingStudy](imagingstudy.html): Who the study is about\r\n* [Immunization](immunization.html): The patient for the vaccination record\r\n* [List](list.html): If all resources have the same subject\r\n* [MedicationAdministration](medicationadministration.html): The identity of a patient to list administrations  for\r\n* [MedicationDispense](medicationdispense.html): The identity of a patient to list dispenses  for\r\n* [MedicationRequest](medicationrequest.html): Returns prescriptions for a specific patient\r\n* [MedicationStatement](medicationstatement.html): Returns statements for a specific patient.\r\n* [NutritionOrder](nutritionorder.html): The identity of the person who requires the diet, formula or nutritional supplement\r\n* [Observation](observation.html): The subject that the observation is about (if patient)\r\n* [Procedure](procedure.html): Search by subject - a patient\r\n* [RiskAssessment](riskassessment.html): Who/what does assessment apply to?\r\n* [ServiceRequest](servicerequest.html): Search by subject - a patient\r\n* [SupplyDelivery](supplydelivery.html): Patient for whom the item is supplied\r\n* [VisionPrescription](visionprescription.html): The identity of a patient to list dispenses for\r\n",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
+                        "name": "encounter",
+                        "description": "Multiple Resources: \r\n\r\n* [Composition](composition.html): Context of the Composition\r\n* [DeviceRequest](devicerequest.html): Encounter during which request was created\r\n* [DiagnosticReport](diagnosticreport.html): The Encounter when the order was made\r\n* [DocumentReference](documentreference.html): Context of the document  content\r\n* [Flag](flag.html): Alert relevant during encounter\r\n* [List](list.html): Context in which list created\r\n* [NutritionOrder](nutritionorder.html): Return nutrition orders with this encounter identifier\r\n* [Observation](observation.html): Encounter related to the observation\r\n* [Procedure](procedure.html): Encounter created as part of\r\n* [RiskAssessment](riskassessment.html): Where was assessment performed?\r\n* [ServiceRequest](servicerequest.html): An encounter in which this request is made\r\n* [VisionPrescription](visionprescription.html): Return prescriptions with this encounter identifier\r\n",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "name": "based-on",
+                        "description": "A request for this procedure",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
+                        "name": "category",
+                        "description": "Classification of the procedure",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
+                        "name": "instantiates-canonical",
+                        "description": "Instantiates FHIR protocol or definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
+                        "name": "instantiates-uri",
+                        "description": "Instantiates external protocol or definition",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "location",
+                        "description": "Where the procedure happened",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "part-of",
+                        "description": "Part of referenced event",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "performer",
+                        "description": "The reference to the practitioner",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "reason-code",
+                        "description": "Coded reason procedure performed",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "reason-reference",
+                        "description": "The justification that the procedure was performed",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "status",
+                        "description": "preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "subject",
+                        "description": "Search by subject",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +238,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search Procedure operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +246,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/Procedure/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a Procedure resource",
+                "operationId": "vreadProcedure",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +266,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read Procedure operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Procedure"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/Procedure/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a Procedure resource",
+                "operationId": "readProcedure",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +291,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read Procedure operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Procedure"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing Procedure resource",
+                "operationId": "updateProcedure",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +316,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Procedure"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update Procedure operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create Procedure operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a Procedure resource",
+                "operationId": "deleteProcedure",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +342,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete Procedure operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/Procedure/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Procedure"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a Procedure resource",
+                "operationId": "historyProcedure",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +364,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History Procedure operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +650,7 @@
                 }
             ]
         },
-        "Patient": {
+        "Procedure": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -711,137 +662,226 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "description": "Business identifiers assigned to this procedure by the performer or other systems which remain constant as the resource is updated and is propagated from server to server."
                             }
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
-                        },
-                        "name": {
+                        "instantiatesCanonical": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
+                                "type": "string",
+                                "pattern": "\\S*",
+                                "description": "The URL pointing to a FHIR-defined protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure."
                             }
                         },
-                        "telecom": {
+                        "instantiatesUri": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
+                                "type": "string",
+                                "pattern": "\\S*",
+                                "description": "The URL pointing to an externally maintained protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure."
                             }
                         },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
-                        },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
-                        },
-                        "contact": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
-                            }
-                        },
-                        "communication": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
-                            }
-                        },
-                        "generalPractitioner": {
+                        "basedOn": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
+                                "description": "A reference to a resource that contains details of the request for this procedure."
                             }
                         },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
-                        },
-                        "link": {
+                        "partOf": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/Reference",
+                                "description": "A larger event of which this particular procedure is a component or step."
+                            }
+                        },
+                        "status": {
+                            "type": "string",
+                            "enum": [
+                                "preparation",
+                                "in-progress",
+                                "not-done",
+                                "on-hold",
+                                "stopped",
+                                "completed",
+                                "entered-in-error",
+                                "unknown"
+                            ],
+                            "description": "A code specifying the state of the procedure. Generally, this will be the in-progress or completed state."
+                        },
+                        "statusReason": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Captures the reason for the current state of the procedure."
+                        },
+                        "category": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A code that classifies the procedure for searching, sorting and display purposes (e.g. \"Surgical Procedure\")."
+                        },
+                        "code": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The specific procedure that is performed. Use text if the exact nature of the procedure cannot be coded (e.g. \"Laparoscopic Appendectomy\")."
+                        },
+                        "subject": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The person, animal or group on which the procedure was performed."
+                        },
+                        "encounter": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The Encounter during which this Procedure was created or performed or to which the creation of this record is tightly associated."
+                        },
+                        "performedDateTime": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
+                        },
+                        "performedPeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
+                        },
+                        "performedString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
+                        },
+                        "performedAge": {
+                            "$ref": "#/definitions/Age",
+                            "description": "Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
+                        },
+                        "performedRange": {
+                            "$ref": "#/definitions/Range",
+                            "description": "Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured."
+                        },
+                        "recorder": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Individual who recorded the record and takes responsibility for its content."
+                        },
+                        "asserter": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Individual who is making the procedure statement."
+                        },
+                        "performer": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Procedure_Performer",
+                                "description": "Limited to \"real\" people rather than equipment."
+                            }
+                        },
+                        "location": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The location where the procedure actually happened.  E.g. a newborn at home, a tracheostomy at a restaurant."
+                        },
+                        "reasonCode": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "The coded reason why the procedure was performed. This may be a coded entity of some type, or may simply be present as text."
+                            }
+                        },
+                        "reasonReference": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "The justification of why the procedure was performed."
+                            }
+                        },
+                        "bodySite": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion."
+                            }
+                        },
+                        "outcome": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The outcome of the procedure - did it resolve the reasons for the procedure being performed?"
+                        },
+                        "report": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "This could be a histology result, pathology report, surgical report, etc."
+                            }
+                        },
+                        "complication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any 'post procedure' issues."
+                            }
+                        },
+                        "complicationDetail": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "Any complications that occurred during the procedure, or in the immediate post-performance period."
+                            }
+                        },
+                        "followUp": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "If the procedure required specific follow up - e.g. removal of sutures. The follow up may be represented as a simple note or could potentially be more complex, in which case the CarePlan resource can be used."
+                            }
+                        },
+                        "note": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Annotation",
+                                "description": "Any other notes and comments about the procedure."
+                            }
+                        },
+                        "focalDevice": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Procedure_FocalDevice",
+                                "description": "A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure."
+                            }
+                        },
+                        "usedReference": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "Identifies medications, devices and any other substance used as part of the procedure."
+                            }
+                        },
+                        "usedCode": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Identifies coded items that were used as part of the procedure."
                             }
                         }
                     }
                 }
             ],
+            "required": [
+                "status",
+                "subject"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "Procedure",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "oSiMRRmFJ1",
+                    "lastUpdated": "2020-03-12T00:11:57.055-04:00",
+                    "source": "FUtlZmdtpW",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "wnODH733pn"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "5nUP0IYzb6",
+                            "version": "aU2MK1w5WH",
+                            "code": "UiYzQTxgdq",
+                            "display": "IaSHg_H8Iw",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "a4TzY1Q8XZ",
+                            "version": "7ygzSAPBbe",
+                            "code": "d4R2pYb87O",
+                            "display": "E1d4A2YJZk",
                             "userSelected": true
                         },
                         {
@@ -849,10 +889,10 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "Ls4e0KCA6X",
+                "language": "ZqYeXTmgGF",
                 "text": {
-                    "status": "generated",
+                    "status": "additional",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
                 "identifier": [
@@ -861,299 +901,587 @@
                         "type": {
                             "coding": [
                                 {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
+                                    "system": "2Vw5GE5Ro_",
+                                    "version": "xvOOUK48Sq",
+                                    "code": "CJNXugD5D8",
+                                    "display": "sl8agw51qY",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "RwELMTpc3R"
+                            "text": "hfvNiBAhEs"
                         },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
+                        "system": "3XpcK3NHKz",
+                        "value": "gKkzwcCeUg",
                         "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
+                            "start": "2020-03-12T00:11:57.141-04:00",
+                            "end": "2020-03-12T00:11:57.141-04:00"
                         }
                     }
                 ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
+                "instantiatesCanonical": [
+                    "gyCKgIRiBn"
                 ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
+                "instantiatesUri": [
+                    "Cz_Xm3SDAP"
                 ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
+                "basedOn": [
                     {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
-                "contact": [
-                    {
-                        "relationship": [
-                            {
+                        "reference": "vplPIiFJui",
+                        "type": "rVA2G06DXl",
+                        "identifier": {
+                            "use": "usual",
+                            "type": {
                                 "coding": [
                                     {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
+                                        "system": "rDVfWbfXec",
+                                        "version": "LYBJJuGiU6",
+                                        "code": "eWsSH7DNp8",
+                                        "display": "VVS6E0wK7U",
                                         "userSelected": true
                                     }
                                 ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
+                                "text": "1vDcFWxluK"
+                            },
+                            "system": "lidgBstXV0",
+                            "value": "iFeIUGSF4_",
                             "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
+                                "start": "2020-03-12T00:11:57.049-04:00",
+                                "end": "2020-03-12T00:11:57.049-04:00"
                             }
                         },
-                        "telecom": [
-                            {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
+                        "display": "pLw2mafq_0"
+                    }
+                ],
+                "partOf": [
+                    {
+                        "reference": "evh28tT_kq",
+                        "type": "9kHtefnEh4",
+                        "identifier": {
+                            "use": "usual",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "TyMPbfTTrV",
+                                        "version": "zjcLu0rIax",
+                                        "code": "Zx3NY2IKvl",
+                                        "display": "ZtWkquhfeY",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "xo677oUWQ4"
+                            },
+                            "system": "m7wNtB81Bj",
+                            "value": "_g4_VVzMnf",
+                            "period": {
+                                "start": "2020-03-12T00:11:57.055-04:00",
+                                "end": "2020-03-12T00:11:57.055-04:00"
+                            }
+                        },
+                        "display": "xRKvmAbbSv"
+                    }
+                ],
+                "status": "unknown",
+                "statusReason": {
+                    "coding": [
+                        {
+                            "system": "g29IP5FVl6",
+                            "version": "JM0vhJmvsc",
+                            "code": "8qmPqXpPAI",
+                            "display": "2L1MKBA7Gh",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "gyN1GdZWKT"
+                },
+                "category": {
+                    "coding": [
+                        {
+                            "system": "erD7vtyZ76",
+                            "version": "Jj8JKGOt8Y",
+                            "code": "58lRL8P5vq",
+                            "display": "u0HCD75MHr",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "u8yxOZqt5Z"
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "JFpz_JtSVI",
+                            "version": "Y4GpICl7gc",
+                            "code": "1M4U_cXLi7",
+                            "display": "D424e7TM4e",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "o5d2qJyqjz"
+                },
+                "subject": {
+                    "reference": "Patient/9pTzn4Jeaq",
+                    "type": "Patient",
+                    "identifier": {
+                        "use": "official",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "DgIALqYTVb",
+                                    "version": "qCSZb9Km6m",
+                                    "code": "PHwIoEXu44",
+                                    "display": "JWucZS8W0y",
+                                    "userSelected": true
                                 }
-                            }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
                             ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
+                            "text": "6dPCFkL3yh"
                         },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
+                        "system": "eWtdChCrm_",
+                        "value": "ntc7CzSoyq",
+                        "period": {
+                            "start": "2020-03-12T00:11:57.055-04:00",
+                            "end": "2020-03-12T00:11:57.055-04:00"
+                        }
+                    },
+                    "display": "qwv8jvLvg7"
+                },
+                "encounter": {
+                    "reference": "Encounter/7NgU8P8XAl",
+                    "type": "Encounter",
+                    "identifier": {
+                        "use": "temp",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "DoYDPj9QkO",
+                                    "version": "W0eSWZVv3n",
+                                    "code": "PhPGqj2Pi7",
+                                    "display": "tZppQ1kQi8",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "qZ4KN4QRo1"
+                        },
+                        "system": "1gAgybCk3n",
+                        "value": "fumKEurnwA",
+                        "period": {
+                            "start": "2020-03-12T00:11:57.14-04:00",
+                            "end": "2020-03-12T00:11:57.14-04:00"
+                        }
+                    },
+                    "display": "ywTHPwiVAC"
+                },
+                "performedDateTime": "2020-03-12T00:11:57.051-04:00",
+                "recorder": {
+                    "reference": "Patient/BI8hydT9uL",
+                    "type": "Patient",
+                    "identifier": {
+                        "use": "old",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "wpTAZx5gVO",
+                                    "version": "dMjdjzeXtc",
+                                    "code": "BWo7gS3BGC",
+                                    "display": "faH6nfAbEr",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "zeg0q1uvkl"
+                        },
+                        "system": "qylcbBxa23",
+                        "value": "ZQzwaEkrHU",
+                        "period": {
+                            "start": "2020-03-12T00:11:57.132-04:00",
+                            "end": "2020-03-12T00:11:57.136-04:00"
+                        }
+                    },
+                    "display": "42VA3oELlT"
+                },
+                "asserter": {
+                    "reference": "Patient/RPDXTN7dun",
+                    "type": "Patient",
+                    "identifier": {
+                        "use": "temp",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "fuKskbKvC7",
+                                    "version": "NNB2bG8g5R",
+                                    "code": "t6g3pz1z9_",
+                                    "display": "hWvgWnCoHY",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "EEU063RK3X"
+                        },
+                        "system": "aRpnU56B3M",
+                        "value": "H01ZuttbOj",
+                        "period": {
+                            "start": "2020-03-12T00:11:57.048-04:00",
+                            "end": "2020-03-12T00:11:57.048-04:00"
+                        }
+                    },
+                    "display": "ZbfAGWqjWD"
+                },
+                "performer": [
+                    {
+                        "function": {
+                            "coding": [
+                                {
+                                    "system": "bxHnN1TV2C",
+                                    "version": "bJgIpWoAx2",
+                                    "code": "Z7ePQHdUoi",
+                                    "display": "aLTMiQhJCw",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "Ms2bV0f0I8"
+                        },
+                        "actor": {
+                            "reference": "Practitioner/zioiuOpZ8G",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "usual",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "wlSUaMp28D",
+                                            "version": "gpBinb3fwX",
+                                            "code": "CSEnc1p4wO",
+                                            "display": "3lwBWy1bhv",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "gLF6o1oR6J"
+                                },
+                                "system": "dxbsXCgTdT",
+                                "value": "Ya_0kKbvtA",
+                                "period": {
+                                    "start": "2020-03-12T00:11:57.138-04:00",
+                                    "end": "2020-03-12T00:11:57.138-04:00"
+                                }
+                            },
+                            "display": "KX14BY2k0C"
+                        },
+                        "onBehalfOf": {
+                            "reference": "Organization/89tA8LqELn",
                             "type": "Organization",
                             "identifier": {
                                 "use": "usual",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
+                                            "system": "a6sbEllYDL",
+                                            "version": "je3__9HlB3",
+                                            "code": "myKftWKTwQ",
+                                            "display": "e740KH5DB2",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "lr5rIPHEgi"
+                                    "text": "bH_ANzq4D9"
                                 },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
+                                "system": "WK0Go5_pcw",
+                                "value": "28tsPxq20O",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
+                                    "start": "2020-03-12T00:11:57.139-04:00",
+                                    "end": "2020-03-12T00:11:57.139-04:00"
                                 }
                             },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
+                            "display": "WfvHDPU4z5"
                         }
                     }
                 ],
-                "communication": [
-                    {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
-                            }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
+                "location": {
+                    "reference": "Location/wF0y3glyw7",
+                    "type": "Location",
                     "identifier": {
                         "use": "temp",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "4TMH0yFW4L",
+                                    "version": "dR5dAH_fpT",
+                                    "code": "5YnJgTzW7X",
+                                    "display": "GlZW_vHe4R",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "U9515sTx0N"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
+                        "system": "a0HFvMn7Zn",
+                        "value": "GVGoBdVKVD",
                         "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
+                            "start": "2020-03-12T00:11:57.047-04:00",
+                            "end": "2020-03-12T00:11:57.047-04:00"
                         }
                     },
-                    "display": "HHvTPP_6wS"
+                    "display": "PjWFM9DhQ9"
                 },
-                "link": [
+                "reasonCode": [
                     {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
+                        "coding": [
+                            {
+                                "system": "ydT63GYA1p",
+                                "version": "VwWBgENyBo",
+                                "code": "OgscMdQS2Z",
+                                "display": "rBzPGighaI",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "mjDZR_e5jB"
+                    }
+                ],
+                "reasonReference": [
+                    {
+                        "reference": "Dy5q640XB3",
+                        "type": "q8tfUrwBv7",
+                        "identifier": {
+                            "use": "old",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "gIVODm6Olw",
+                                        "version": "Et4epCUIye",
+                                        "code": "Qrf_H8g_br",
+                                        "display": "LrUVpxbzf8",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "jfxwrI3QTv"
+                            },
+                            "system": "ke24mNxtdp",
+                            "value": "5hLJlBUrql",
+                            "period": {
+                                "start": "2020-03-12T00:11:57.05-04:00",
+                                "end": "2020-03-12T00:11:57.05-04:00"
+                            }
+                        },
+                        "display": "kqdeq_hk5V"
+                    }
+                ],
+                "bodySite": [
+                    {
+                        "coding": [
+                            {
+                                "system": "Yi9EAVzg6j",
+                                "version": "ZcRfD63ApF",
+                                "code": "NY2D95YWcf",
+                                "display": "mE04ObwnRR",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "vwpSyUWgLG"
+                    }
+                ],
+                "outcome": {
+                    "coding": [
+                        {
+                            "system": "wwUTzsh2pi",
+                            "version": "tKlOXO_y6y",
+                            "code": "IHsRkMuPFC",
+                            "display": "SGV66JKa13",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "6O7BFMMFLx"
+                },
+                "report": [
+                    {
+                        "reference": "tQ5slCaTXh",
+                        "type": "OTM9izwF1o",
+                        "identifier": {
+                            "use": "secondary",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "X9fp5tb98q",
+                                        "version": "tTiIxA4PgX",
+                                        "code": "ep08BqUTOr",
+                                        "display": "lKdfdkUWN0",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "YhwGrsU7QG"
+                            },
+                            "system": "I7zvXfuSn2",
+                            "value": "cIMbM65jrX",
+                            "period": {
+                                "start": "2020-03-12T00:11:57.141-04:00",
+                                "end": "2020-03-12T00:11:57.142-04:00"
+                            }
+                        },
+                        "display": "9bcEkZs_Eu"
+                    }
+                ],
+                "complication": [
+                    {
+                        "coding": [
+                            {
+                                "system": "sGqZvt5SPM",
+                                "version": "UWpQTUHSrO",
+                                "code": "yDWSOcQWw5",
+                                "display": "cGi8g4dyKK",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "xrf3szcUsI"
+                    }
+                ],
+                "complicationDetail": [
+                    {
+                        "reference": "u9PqveZoa1",
+                        "type": "GlZKjvqeQj",
+                        "identifier": {
+                            "use": "usual",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "6s2M1XiRIj",
+                                        "version": "CAq60C_7_e",
+                                        "code": "GWU9doqsOn",
+                                        "display": "4VE_TuwgUL",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "9FhgLZWWQX"
+                            },
+                            "system": "bsbnlcukNS",
+                            "value": "e0HyZAPCQu",
+                            "period": {
+                                "start": "2020-03-12T00:11:57.052-04:00",
+                                "end": "2020-03-12T00:11:57.052-04:00"
+                            }
+                        },
+                        "display": "SfjwHBK5jc"
+                    }
+                ],
+                "followUp": [
+                    {
+                        "coding": [
+                            {
+                                "system": "1KCvpBgMLH",
+                                "version": "108dPYZbst",
+                                "code": "ukiKNLW3xz",
+                                "display": "WPVbIKi658",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "27_OC3lLsf"
+                    }
+                ],
+                "note": [
+                    {
+                        "authorReference": {
+                            "reference": "SPTQOajwZ7",
+                            "type": "Q2QJtEUrea",
                             "identifier": {
-                                "use": "temp",
+                                "use": "secondary",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
+                                            "system": "ljYEJD_gYs",
+                                            "version": "AbonpquH2W",
+                                            "code": "TPTnPsRYOm",
+                                            "display": "veieRj2BER",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "text": "GCrswApU_H"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
+                                "system": "B_TUgwVFHt",
+                                "value": "rC52mkBip8",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                                    "start": "2020-03-12T00:11:57.048-04:00",
+                                    "end": "2020-03-12T00:11:57.048-04:00"
                                 }
                             },
-                            "display": "BNnVKMbPmJ"
+                            "display": "1QqBxKAX8i"
                         },
-                        "type": "refer"
+                        "time": "2020-03-12T00:11:57.048-04:00",
+                        "text": "LsLeKs1AzT"
+                    }
+                ],
+                "focalDevice": [
+                    {
+                        "action": {
+                            "coding": [
+                                {
+                                    "system": "o_6LPePhS_",
+                                    "version": "GZsslTfGgn",
+                                    "code": "Tk84EUaPSE",
+                                    "display": "6HpFHf0Ocq",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "M1Kgh8Opwx"
+                        },
+                        "manipulated": {
+                            "reference": "Device/TlRTzsalX_",
+                            "type": "Device",
+                            "identifier": {
+                                "use": "old",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "8EwrfLjCyK",
+                                            "version": "qPnPmU6A0N",
+                                            "code": "OCqT0MsQh6",
+                                            "display": "9tKQvCsmuU",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "qaVdLEaXMX"
+                                },
+                                "system": "OoBcTWPeCx",
+                                "value": "yEl12scXUj",
+                                "period": {
+                                    "start": "2020-03-12T00:11:57.053-04:00",
+                                    "end": "2020-03-12T00:11:57.053-04:00"
+                                }
+                            },
+                            "display": "q_Ve_d93XN"
+                        }
+                    }
+                ],
+                "usedReference": [
+                    {
+                        "reference": "qVOQWb_2kt",
+                        "type": "pKr8TdlJOZ",
+                        "identifier": {
+                            "use": "old",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "I_6Bln8gna",
+                                        "version": "3Gary7PD3M",
+                                        "code": "Ths9365V6w",
+                                        "display": "IA1_5VVkCp",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "Lqb3QktoAS"
+                            },
+                            "system": "B3upiLnJ_z",
+                            "value": "KHYj55mjfa",
+                            "period": {
+                                "start": "2020-03-12T00:11:57.054-04:00",
+                                "end": "2020-03-12T00:11:57.054-04:00"
+                            }
+                        },
+                        "display": "qYJQ9j5YHR"
+                    }
+                ],
+                "usedCode": [
+                    {
+                        "coding": [
+                            {
+                                "system": "nfaOmrS2Od",
+                                "version": "ahBs70Ma9j",
+                                "code": "McgTItkvP3",
+                                "display": "xAb6mQLLvu",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "kuidkX_Lh3"
                     }
                 ]
             }
@@ -1736,7 +2064,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "Procedure_FocalDevice": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,52 +2072,22 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
-                            ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
+                        "action": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
+                            "description": "The kind of change that happened to the device during the procedure."
                         },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
+                        "manipulated": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The device that was manipulated (changed) during the procedure."
                         }
                     }
                 }
             ],
             "required": [
-                "language"
+                "manipulated"
             ]
         },
-        "Patient_Contact": {
+        "Procedure_Performer": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1797,48 +2095,23 @@
                 {
                     "type": "object",
                     "properties": {
-                        "relationship": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
-                            }
+                        "function": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Distinguishes the type of involvement of the performer in the procedure. For example, surgeon, anaesthetist, endoscopist."
                         },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
-                            }
-                        },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
-                        },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
-                        },
-                        "organization": {
+                        "actor": {
                             "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
+                            "description": "The practitioner who was involved in the procedure."
                         },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                        "onBehalfOf": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The organization the device or practitioner was acting on behalf of."
                         }
                     }
                 }
+            ],
+            "required": [
+                "actor"
             ]
         },
         "Element": {

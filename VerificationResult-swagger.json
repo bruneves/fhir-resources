@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "VerificationResult API",
+        "description": "A simplified version of the HL7 FHIR API for VerificationResult resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "VerificationResult"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/VerificationResult": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a VerificationResult resource",
+                "operationId": "createVerificationResult",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,29 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/VerificationResult"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create VerificationResult operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for VerificationResult resources",
+                "operationId": "searchVerificationResult",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "identifier",
-                        "description": "A patient identifier",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "target",
+                        "description": "A resource that was validated",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +133,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search VerificationResult operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +141,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/VerificationResult/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a VerificationResult resource",
+                "operationId": "vreadVerificationResult",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +161,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read VerificationResult operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/VerificationResult"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/VerificationResult/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a VerificationResult resource",
+                "operationId": "readVerificationResult",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +186,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read VerificationResult operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/VerificationResult"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing VerificationResult resource",
+                "operationId": "updateVerificationResult",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +211,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/VerificationResult"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update VerificationResult operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create VerificationResult operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a VerificationResult resource",
+                "operationId": "deleteVerificationResult",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +237,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete VerificationResult operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/VerificationResult/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "VerificationResult"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a VerificationResult resource",
+                "operationId": "historyVerificationResult",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +259,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History VerificationResult operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +545,7 @@
                 }
             ]
         },
-        "Patient": {
+        "VerificationResult": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -707,141 +553,119 @@
                 {
                     "type": "object",
                     "properties": {
-                        "identifier": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
-                            }
-                        },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
-                        },
-                        "name": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
-                            }
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
-                        },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
-                        },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
-                        },
-                        "contact": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
-                            }
-                        },
-                        "communication": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
-                            }
-                        },
-                        "generalPractitioner": {
+                        "target": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
+                                "description": "A resource that was validated."
                             }
                         },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
-                        },
-                        "link": {
+                        "targetLocation": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "type": "string",
+                                "pattern": "[ \\r\\n\\t\\S]+",
+                                "description": "The fhirpath location(s) within the resource that was validated."
+                            }
+                        },
+                        "need": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The frequency with which the target must be validated (none; initial; periodic)."
+                        },
+                        "status": {
+                            "type": "string",
+                            "enum": [
+                                "attested",
+                                "validated",
+                                "in-process",
+                                "req-revalid",
+                                "val-fail",
+                                "reval-fail"
+                            ],
+                            "description": "The validation status of the target (attested; validated; in process; requires revalidation; validation failed; revalidation failed)."
+                        },
+                        "statusDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "When the validation status was updated."
+                        },
+                        "validationType": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "What the target is validated against (nothing; primary source; multiple sources)."
+                        },
+                        "validationProcess": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "The primary process by which the target is validated (edit check; value set; primary source; multiple sources; standalone; in context)."
+                            }
+                        },
+                        "frequency": {
+                            "$ref": "#/definitions/Timing",
+                            "description": "Frequency of revalidation."
+                        },
+                        "lastPerformed": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "The date/time validation was last completed (including failed validations)."
+                        },
+                        "nextScheduled": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date when target is next validated, if appropriate."
+                        },
+                        "failureAction": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The result if validation fails (fatal; warning; record only; none)."
+                        },
+                        "primarySource": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/VerificationResult_PrimarySource",
+                                "description": "Information about the primary source(s) involved in validation."
+                            }
+                        },
+                        "attestation": {
+                            "$ref": "#/definitions/VerificationResult_Attestation",
+                            "description": "Information about the entity attesting to information."
+                        },
+                        "validator": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/VerificationResult_Validator",
+                                "description": "Information about the entity validating information."
                             }
                         }
                     }
                 }
             ],
+            "required": [
+                "status"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "VerificationResult",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "GdHv5ba9ay",
+                    "lastUpdated": "2020-03-12T00:12:03.687-04:00",
+                    "source": "7udpSrWyC2",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "qH8Zh6Pboc"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "KWF83qAhFm",
+                            "version": "4vCVx5Xtyt",
+                            "code": "jtcWHG6he5",
+                            "display": "Aqe3rafGMH",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "BK5PgzzQZm",
+                            "version": "Hx5qv610wJ",
+                            "code": "9DKcAWzbGD",
+                            "display": "4FHKMJHujM",
                             "userSelected": true
                         },
                         {
@@ -849,311 +673,535 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "MNQk0xPMRT",
+                "language": "SmBfnoNj5F",
                 "text": {
-                    "status": "generated",
+                    "status": "extensions",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
-                "identifier": [
+                "target": [
                     {
-                        "use": "official",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "RwELMTpc3R"
-                        },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
-                        }
-                    }
-                ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
-                "contact": [
-                    {
-                        "relationship": [
-                            {
+                        "reference": "QKkLGUqr1z",
+                        "type": "zCwoyjapmO",
+                        "identifier": {
+                            "use": "official",
+                            "type": {
                                 "coding": [
                                     {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
+                                        "system": "w6E09kzMEb",
+                                        "version": "QpeLicibua",
+                                        "code": "wleluXphE4",
+                                        "display": "hi3jz0OQwR",
                                         "userSelected": true
                                     }
                                 ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
+                                "text": "6XK8WCNRHa"
+                            },
+                            "system": "oPpEiuO3kk",
+                            "value": "Y9DnX2Ha3q",
                             "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
+                                "start": "2020-03-12T00:12:03.684-04:00",
+                                "end": "2020-03-12T00:12:03.684-04:00"
                             }
                         },
-                        "telecom": [
+                        "display": "bkaz4QgCK1"
+                    }
+                ],
+                "targetLocation": [
+                    "OhGTL3Xrmq"
+                ],
+                "need": {
+                    "coding": [
+                        {
+                            "system": "Csrh1DxMOe",
+                            "version": "mWaiYxVURO",
+                            "code": "JK_AruadkM",
+                            "display": "fmSwaNqNt9",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "GbcUcNdPRk"
+                },
+                "status": "in-process",
+                "statusDate": "2020-03-12T00:12:03.69-04:00",
+                "validationType": {
+                    "coding": [
+                        {
+                            "system": "JCQz91hnoy",
+                            "version": "WBoA0CpAUZ",
+                            "code": "ykCilFJ657",
+                            "display": "qyT4TJ3JAD",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "sDr8uDW_wK"
+                },
+                "validationProcess": [
+                    {
+                        "coding": [
                             {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
+                                "system": "97CHf7PhdZ",
+                                "version": "gDo40YbEXg",
+                                "code": "PjV8W6QHl9",
+                                "display": "Vf0fRkkgru",
+                                "userSelected": true
                             }
                         ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
+                        "text": "yyJOjy1IVo"
+                    }
+                ],
+                "frequency": {
+                    "event": [
+                        "2020-03-12T00:12:03.686-04:00"
+                    ],
+                    "repeat": {
+                        "boundsDuration": {
+                            "value": 159803404298,
+                            "comparator": "<=",
+                            "unit": "miN3OZbkGk",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "h"
+                        },
+                        "count": 716428881,
+                        "countMax": 1656560405,
+                        "duration": 168079460140,
+                        "durationMax": 478436197169,
+                        "durationUnit": "h",
+                        "frequency": 490590422,
+                        "frequencyMax": 266329673,
+                        "period": 12940631871,
+                        "periodMax": 74712579095,
+                        "periodUnit": "a",
+                        "dayOfWeek": [
+                            "mon"
+                        ],
+                        "when": [
+                            "CM"
+                        ]
+                    },
+                    "code": {
+                        "coding": [
+                            {
+                                "system": "7fIHvZE47b",
+                                "version": "nI8s2JRQt_",
+                                "code": "Va4YAJ0xYP",
+                                "display": "ZYNsJ8d_3B",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "3evREHlp0X"
+                    }
+                },
+                "lastPerformed": "2020-03-12T00:12:03.691-04:00",
+                "nextScheduled": "2020-03-12",
+                "failureAction": {
+                    "coding": [
+                        {
+                            "system": "R8JLl_9bli",
+                            "version": "MEwIB9uaXE",
+                            "code": "Q3XG167dpN",
+                            "display": "wzmjPl4OmT",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "XWRbja2eIf"
+                },
+                "primarySource": [
+                    {
+                        "who": {
+                            "reference": "Organization/E1QX0Z2KnD",
+                            "type": "Organization",
+                            "identifier": {
+                                "use": "official",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "zyrX7zskNu",
+                                            "version": "aoMJ43OR7f",
+                                            "code": "lhRdljgOU0",
+                                            "display": "BIMFnmKhP4",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "Sms2BsXBYE"
+                                },
+                                "system": "hhdC2NBSGo",
+                                "value": "DRa16GJFPO",
+                                "period": {
+                                    "start": "2020-03-12T00:12:03.689-04:00",
+                                    "end": "2020-03-12T00:12:03.689-04:00"
+                                }
+                            },
+                            "display": "WtZWKPG5U4"
+                        },
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "CvHq1dZBSo",
+                                        "version": "xUcKFlSy28",
+                                        "code": "tlgtaXaCDb",
+                                        "display": "zNVb5keYqA",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "oIMwR7wczP"
+                            }
+                        ],
+                        "communicationMethod": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "nNXLrDKtg1",
+                                        "version": "WtwiHiQKLz",
+                                        "code": "pZsDr4Bzku",
+                                        "display": "DJFCxOnFAC",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "S1HGX5WT4D"
+                            }
+                        ],
+                        "validationStatus": {
+                            "coding": [
+                                {
+                                    "system": "Fk3Or5Rw32",
+                                    "version": "DDtwn38hN4",
+                                    "code": "7rwLZyyQRW",
+                                    "display": "xitMYJaoUs",
+                                    "userSelected": true
+                                }
                             ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
+                            "text": "iYjIHmiIA0"
+                        },
+                        "validationDate": "2020-03-12T00:12:03.69-04:00",
+                        "canPushUpdates": {
+                            "coding": [
+                                {
+                                    "system": "v0Cgc1kFzv",
+                                    "version": "Hh7w3KXqyv",
+                                    "code": "QIbnPOJe88",
+                                    "display": "yON31GMSf1",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "TCH97IfHde"
+                        },
+                        "pushTypeAvailable": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "FOnHzrqpbd",
+                                        "version": "XzYJmSuhTE",
+                                        "code": "cWaVhxU7Th",
+                                        "display": "Y352pXlIrV",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "SLE1oILt68"
+                            }
+                        ]
+                    }
+                ],
+                "attestation": {
+                    "who": {
+                        "reference": "Practitioner/3rIZO8YHzT",
+                        "type": "Practitioner",
+                        "identifier": {
+                            "use": "temp",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "sK54GEfq32",
+                                        "version": "mXDT1mASm7",
+                                        "code": "figiJLJPN2",
+                                        "display": "zAI34H_rWe",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "o61BLboaL0"
+                            },
+                            "system": "vAMe6vL3II",
+                            "value": "eSqxj6hL1l",
                             "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
+                                "start": "2020-03-12T00:12:03.697-04:00",
+                                "end": "2020-03-12T00:12:03.697-04:00"
                             }
                         },
-                        "gender": "female",
+                        "display": "3j_M94UhQg"
+                    },
+                    "onBehalfOf": {
+                        "reference": "Organization/qkP6oNS04Z",
+                        "type": "Organization",
+                        "identifier": {
+                            "use": "usual",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "783Nhd6tjG",
+                                        "version": "YbyZKX_MHc",
+                                        "code": "2NWXYd6S92",
+                                        "display": "rTNA8sqR6e",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "R8aZD9WtP6"
+                            },
+                            "system": "s9aDvvyV2p",
+                            "value": "gRw8tUSheE",
+                            "period": {
+                                "start": "2020-03-12T00:12:03.697-04:00",
+                                "end": "2020-03-12T00:12:03.697-04:00"
+                            }
+                        },
+                        "display": "jw4yILpVAe"
+                    },
+                    "communicationMethod": {
+                        "coding": [
+                            {
+                                "system": "U4Ogi7VrYA",
+                                "version": "MVPjrKe6kM",
+                                "code": "yDYSg4SRMz",
+                                "display": "ScjZM_ZJvM",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "BRIGKp90yb"
+                    },
+                    "date": "2020-03-12",
+                    "sourceIdentityCertificate": "QvE2kobb8i",
+                    "proxyIdentityCertificate": "45t9I6SAY_",
+                    "proxySignature": {
+                        "type": [
+                            {
+                                "system": "yFpnoxIZXW",
+                                "version": "14y78OeALL",
+                                "code": "qHWwTND4KH",
+                                "display": "2LVo3V68uc",
+                                "userSelected": true
+                            }
+                        ],
+                        "when": "2020-03-12T00:12:03.694-04:00",
+                        "who": {
+                            "reference": "Practitioner/VlgAYg3yqr",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "usual",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "zF4wZDjmhD",
+                                            "version": "CRAfW2Vza6",
+                                            "code": "l0esnE6W2m",
+                                            "display": "1EAxpkUk_M",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "qu1NEL2vUl"
+                                },
+                                "system": "Qxujzb9N9H",
+                                "value": "yhazNMueSq",
+                                "period": {
+                                    "start": "2020-03-12T00:12:03.693-04:00",
+                                    "end": "2020-03-12T00:12:03.694-04:00"
+                                }
+                            },
+                            "display": "6Z8YSvTgae"
+                        },
+                        "onBehalfOf": {
+                            "reference": "Practitioner/piDlceOwDo",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "temp",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "cvnPTNbMxd",
+                                            "version": "zaajRbVM2_",
+                                            "code": "_Ocyh3HIK1",
+                                            "display": "uBvj1tCDkz",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "ie8GNgjPjh"
+                                },
+                                "system": "9F5XhoDvtE",
+                                "value": "TA_BZGFtEl",
+                                "period": {
+                                    "start": "2020-03-12T00:12:03.694-04:00",
+                                    "end": "2020-03-12T00:12:03.694-04:00"
+                                }
+                            },
+                            "display": "Jkk3efPphJ"
+                        },
+                        "targetFormat": "qx2VP_tRS5",
+                        "sigFormat": "9sfCEPJQpI",
+                        "data": "ClISYk4="
+                    },
+                    "sourceSignature": {
+                        "type": [
+                            {
+                                "system": "SRiGdx8EYu",
+                                "version": "TlYtKMBXfA",
+                                "code": "4l2DMgXjbA",
+                                "display": "VWWvvNHMVp",
+                                "userSelected": true
+                            }
+                        ],
+                        "when": "2020-03-12T00:12:03.696-04:00",
+                        "who": {
+                            "reference": "Practitioner/foj5QRS8gf",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "temp",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "OPQp_moymP",
+                                            "version": "gPFntXASpe",
+                                            "code": "IsPvx1TKB5",
+                                            "display": "k25XxXGGvV",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "pMIpGVif3H"
+                                },
+                                "system": "pUdeUFYgn0",
+                                "value": "VH2UYS2fCP",
+                                "period": {
+                                    "start": "2020-03-12T00:12:03.695-04:00",
+                                    "end": "2020-03-12T00:12:03.695-04:00"
+                                }
+                            },
+                            "display": "MCF0xHIxL_"
+                        },
+                        "onBehalfOf": {
+                            "reference": "Practitioner/_GUeejllM3",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "temp",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "ejEdUWoiAn",
+                                            "version": "QgT_J7TZz7",
+                                            "code": "8rKFwDVFeB",
+                                            "display": "600U_r37Oa",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "nPuQEyISWZ"
+                                },
+                                "system": "UaENuVslUm",
+                                "value": "Fzwkemzl_N",
+                                "period": {
+                                    "start": "2020-03-12T00:12:03.696-04:00",
+                                    "end": "2020-03-12T00:12:03.696-04:00"
+                                }
+                            },
+                            "display": "Okrg_3WieU"
+                        },
+                        "targetFormat": "yCF_nEI4bB",
+                        "sigFormat": "51oAmOR5ni",
+                        "data": "NQhBGEo="
+                    }
+                },
+                "validator": [
+                    {
                         "organization": {
-                            "reference": "Organization/UQC_PURYU2",
+                            "reference": "Organization/Gj_6CdyiJe",
                             "type": "Organization",
                             "identifier": {
                                 "use": "usual",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
+                                            "system": "uhG4rd3Ip8",
+                                            "version": "99I9pHEytQ",
+                                            "code": "DFGLwlejFL",
+                                            "display": "n7SbyboeAd",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "lr5rIPHEgi"
+                                    "text": "gjxPB_Of4t"
                                 },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
+                                "system": "CUGGmjyxuU",
+                                "value": "kXgE0njKYf",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
+                                    "start": "2020-03-12T00:12:03.698-04:00",
+                                    "end": "2020-03-12T00:12:03.698-04:00"
                                 }
                             },
-                            "display": "yjYGiCCEuA"
+                            "display": "EH7p7ZgbM_"
                         },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
-                    }
-                ],
-                "communication": [
-                    {
-                        "language": {
-                            "coding": [
+                        "identityCertificate": "mHzqLjKQ9u",
+                        "attestationSignature": {
+                            "type": [
                                 {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
+                                    "system": "aTw6H3bJza",
+                                    "version": "Jo4GSJ2bQv",
+                                    "code": "XGTIziV9iH",
+                                    "display": "a1ZlFDTfTF",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
+                            "when": "2020-03-12T00:12:03.699-04:00",
+                            "who": {
+                                "reference": "Practitioner/K96Jjwzuts",
+                                "type": "Practitioner",
+                                "identifier": {
+                                    "use": "secondary",
+                                    "type": {
+                                        "coding": [
+                                            {
+                                                "system": "QNkg4Vd6FH",
+                                                "version": "3fmXd_khf8",
+                                                "code": "91IegmDBUx",
+                                                "display": "MgKoCirxH8",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "hOfBOdBVIs"
+                                    },
+                                    "system": "O04kA0fSGg",
+                                    "value": "2GiZUo2CZv",
+                                    "period": {
+                                        "start": "2020-03-12T00:12:03.699-04:00",
+                                        "end": "2020-03-12T00:12:03.699-04:00"
                                     }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
-                            }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
-                        "use": "temp",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "gbUHUfQGKD"
-                        },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
-                        }
-                    },
-                    "display": "HHvTPP_6wS"
-                },
-                "link": [
-                    {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "1WL8O58DRg"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
-                                }
+                                "display": "_Dpyg5vACV"
                             },
-                            "display": "BNnVKMbPmJ"
-                        },
-                        "type": "refer"
+                            "onBehalfOf": {
+                                "reference": "Practitioner/_ws22ZgDJX",
+                                "type": "Practitioner",
+                                "identifier": {
+                                    "use": "temp",
+                                    "type": {
+                                        "coding": [
+                                            {
+                                                "system": "ukcDSP3pwI",
+                                                "version": "ZNnIdDnUXJ",
+                                                "code": "7LMHBiu0Aj",
+                                                "display": "i5JT4iEKAb",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "6qFp1p4uv2"
+                                    },
+                                    "system": "R6wicFd5l8",
+                                    "value": "_6rDyASyPs",
+                                    "period": {
+                                        "start": "2020-03-12T00:12:03.699-04:00",
+                                        "end": "2020-03-12T00:12:03.699-04:00"
+                                    }
+                                },
+                                "display": "8Eej1WHcrV"
+                            },
+                            "targetFormat": "20kPh9ZUMY",
+                            "sigFormat": "S9D71kXozz",
+                            "data": "KnVKPFo="
+                        }
                     }
                 ]
             }
@@ -1736,7 +1784,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "VerificationResult_Validator": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,98 +1792,118 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
+                        "organization": {
                             "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
+                            "description": "Reference to the organization validating information."
+                        },
+                        "identityCertificate": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A digital identity certificate associated with the validator."
+                        },
+                        "attestationSignature": {
+                            "$ref": "#/definitions/Signature",
+                            "description": "Signed assertion by the validator that they have validated the information."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "organization"
+            ]
+        },
+        "VerificationResult_Attestation": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "who": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The individual or organization attesting to information."
+                        },
+                        "onBehalfOf": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "When the who is asserting on behalf of another (organization or individual)."
+                        },
+                        "communicationMethod": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The method by which attested information was submitted/retrieved (manual; API; Push)."
+                        },
+                        "date": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date the information was attested to."
+                        },
+                        "sourceIdentityCertificate": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A digital identity certificate associated with the attestation source."
+                        },
+                        "proxyIdentityCertificate": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A digital identity certificate associated with the proxy entity submitting attested information on behalf of the attestation source."
+                        },
+                        "proxySignature": {
+                            "$ref": "#/definitions/Signature",
+                            "description": "Signed assertion by the proxy entity indicating that they have the right to submit attested information on behalf of the attestation source."
+                        },
+                        "sourceSignature": {
+                            "$ref": "#/definitions/Signature",
+                            "description": "Signed assertion by the attestation source that they have attested to the information."
+                        }
+                    }
+                }
+            ]
+        },
+        "VerificationResult_PrimarySource": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "who": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Reference to the primary source."
                         },
                         "type": {
-                            "type": "string",
-                            "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
-                            ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-                        },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
+                                "description": "Type of primary source (License Board; Primary Education; Continuing Education; Postal Service; Relationship owner; Registration Authority; legal source; issuing source; authoritative source)."
                             }
                         },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
+                        "communicationMethod": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Method for communicating with the primary source (manual; API; Push)."
                             }
                         },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
+                        "validationStatus": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Status of the validation of the target against the primary source (successful; failed; unknown)."
                         },
-                        "gender": {
+                        "validationDate": {
                             "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "When the target was validated against the primary source."
                         },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
+                        "canPushUpdates": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Ability of the primary source to push updates/alerts (yes; no; undetermined)."
                         },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                        "pushTypeAvailable": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Type of alerts/updates the primary source can send (specific requested changes; any changes; as defined by source)."
+                            }
                         }
                     }
                 }

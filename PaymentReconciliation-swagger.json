@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "PaymentReconciliation API",
+        "description": "A simplified version of the HL7 FHIR API for PaymentReconciliation resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "PaymentReconciliation"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/PaymentReconciliation": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a PaymentReconciliation resource",
+                "operationId": "createPaymentReconciliation",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,78 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PaymentReconciliation"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create PaymentReconciliation operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for PaymentReconciliation resources",
+                "operationId": "searchPaymentReconciliation",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
+                        "name": "created",
+                        "description": "The creation date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "disposition",
+                        "description": "The contents of the disposition message",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "The business identifier of the ExplanationOfBenefit",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
+                        "name": "outcome",
+                        "description": "The processing outcome",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
+                        "name": "payment-issuer",
+                        "description": "The organization which generated this resource",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "name": "request",
+                        "description": "The reference to the claim",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
+                        "name": "requestor",
+                        "description": "The reference to the provider who submitted the claim",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "status",
+                        "description": "The status of the payment reconciliation",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +182,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search PaymentReconciliation operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +190,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/PaymentReconciliation/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a PaymentReconciliation resource",
+                "operationId": "vreadPaymentReconciliation",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +210,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read PaymentReconciliation operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PaymentReconciliation"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/PaymentReconciliation/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a PaymentReconciliation resource",
+                "operationId": "readPaymentReconciliation",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +235,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read PaymentReconciliation operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PaymentReconciliation"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing PaymentReconciliation resource",
+                "operationId": "updatePaymentReconciliation",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +260,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/PaymentReconciliation"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update PaymentReconciliation operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create PaymentReconciliation operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a PaymentReconciliation resource",
+                "operationId": "deletePaymentReconciliation",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +286,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete PaymentReconciliation operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/PaymentReconciliation/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "PaymentReconciliation"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a PaymentReconciliation resource",
+                "operationId": "historyPaymentReconciliation",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +308,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History PaymentReconciliation operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +594,7 @@
                 }
             ]
         },
-        "Patient": {
+        "PaymentReconciliation": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -711,137 +606,119 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "description": "A unique identifier assigned to this payment reconciliation."
                             }
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
-                        },
-                        "name": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
-                            }
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
-                        },
-                        "gender": {
+                        "status": {
                             "type": "string",
                             "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
+                                "active",
+                                "cancelled",
+                                "draft",
+                                "entered-in-error"
                             ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+                            "description": "The status of the resource instance."
                         },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
+                        "period": {
+                            "$ref": "#/definitions/Period",
+                            "description": "The period of time for which payments have been gathered into this bulk payment for settlement."
                         },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
+                        "created": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "The date when the resource was created."
                         },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
-                        },
-                        "contact": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
-                            }
-                        },
-                        "communication": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
-                            }
-                        },
-                        "generalPractitioner": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
-                            }
-                        },
-                        "managingOrganization": {
+                        "paymentIssuer": {
                             "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
+                            "description": "The party who generated the payment."
                         },
-                        "link": {
+                        "request": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Original request resource reference."
+                        },
+                        "requestor": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The practitioner who is responsible for the services rendered to the patient."
+                        },
+                        "outcome": {
+                            "type": "string",
+                            "enum": [
+                                "queued",
+                                "complete",
+                                "error",
+                                "partial"
+                            ],
+                            "description": "The outcome of a request for a reconciliation."
+                        },
+                        "disposition": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A human readable description of the status of the request for the reconciliation."
+                        },
+                        "paymentDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date of payment as indicated on the financial instrument."
+                        },
+                        "paymentAmount": {
+                            "$ref": "#/definitions/Money",
+                            "description": "Total payment amount as indicated on the financial instrument."
+                        },
+                        "paymentIdentifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Issuer's unique identifier for the payment instrument."
+                        },
+                        "detail": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/PaymentReconciliation_Detail",
+                                "description": "Distribution of the payment amount for a previously acknowledged payable."
+                            }
+                        },
+                        "formCode": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A code for the form to be used for printing the content."
+                        },
+                        "processNote": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PaymentReconciliation_ProcessNote",
+                                "description": "A note that describes or explains the processing in a human readable form."
                             }
                         }
                     }
                 }
             ],
+            "required": [
+                "status",
+                "created",
+                "paymentDate",
+                "paymentAmount"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "PaymentReconciliation",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "eJyxcgWFHZ",
+                    "lastUpdated": "2020-03-12T00:11:56.866-04:00",
+                    "source": "Pr3zpXPLdG",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "Q4NOnrLOFk"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "Jl4z6mbmh1",
+                            "version": "JiqOMs21rP",
+                            "code": "No6WiqsONa",
+                            "display": "rFpPWTHxj_",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "a5L1GoaXu6",
+                            "version": "qvc9eKdGTU",
+                            "code": "OoeyqjYMu4",
+                            "display": "0d9_FRmH9j",
                             "userSelected": true
                         },
                         {
@@ -849,311 +726,356 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "zUHpcbeewa",
+                "language": "h8qxuSAeG5",
                 "text": {
-                    "status": "generated",
+                    "status": "additional",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
                 "identifier": [
                     {
-                        "use": "official",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "RwELMTpc3R"
-                        },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
-                        }
-                    }
-                ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
-                "contact": [
-                    {
-                        "relationship": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
-                        "telecom": [
-                            {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
-                            }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
-                            "identifier": {
-                                "use": "usual",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "lr5rIPHEgi"
-                                },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
-                                }
-                            },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
-                    }
-                ],
-                "communication": [
-                    {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
-                            }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
                         "use": "temp",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "zCFPDIXg1_",
+                                    "version": "Z_QB44iEgf",
+                                    "code": "ME8ef47Bl1",
+                                    "display": "s834A8MIlR",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "AmIUfIId3w"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
+                        "system": "GFPkDKpKKr",
+                        "value": "Tl3HKYq4pu",
                         "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
+                            "start": "2020-03-12T00:11:56.874-04:00",
+                            "end": "2020-03-12T00:11:56.874-04:00"
+                        }
+                    }
+                ],
+                "status": "cancelled",
+                "period": {
+                    "start": "2020-03-12T00:11:56.867-04:00",
+                    "end": "2020-03-12T00:11:56.867-04:00"
+                },
+                "created": "2020-03-12T00:11:56.864-04:00",
+                "paymentIssuer": {
+                    "reference": "Organization/ve1qDJjHqe",
+                    "type": "Organization",
+                    "identifier": {
+                        "use": "old",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "Oku54Zxyka",
+                                    "version": "du27Ox2UrC",
+                                    "code": "i8eeF_8mmX",
+                                    "display": "oeYxDnNGWh",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "o_qj_Pp37W"
+                        },
+                        "system": "5L18hXkK8B",
+                        "value": "FbJY0dYoX2",
+                        "period": {
+                            "start": "2020-03-12T00:11:56.876-04:00",
+                            "end": "2020-03-12T00:11:56.876-04:00"
                         }
                     },
-                    "display": "HHvTPP_6wS"
+                    "display": "OS9ghdimzr"
                 },
-                "link": [
+                "request": {
+                    "reference": "Task/toR0d22a5C",
+                    "type": "Task",
+                    "identifier": {
+                        "use": "official",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "zKlGbgEPHS",
+                                    "version": "QWMjnGrugG",
+                                    "code": "IXiNUiFT6p",
+                                    "display": "lnlFG4PXLU",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "wiG_Iq4qU3"
+                        },
+                        "system": "ww8qxQqFYW",
+                        "value": "C1HVdyecEw",
+                        "period": {
+                            "start": "2020-03-12T00:11:56.875-04:00",
+                            "end": "2020-03-12T00:11:56.875-04:00"
+                        }
+                    },
+                    "display": "7899Z9WOXi"
+                },
+                "requestor": {
+                    "reference": "Practitioner/5DmfTKWCd9",
+                    "type": "Practitioner",
+                    "identifier": {
+                        "use": "old",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "nTQtFGh50G",
+                                    "version": "HYWxVXAWDS",
+                                    "code": "z1iZcyvChX",
+                                    "display": "XktSqPOKck",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "VveWFuFkJ4"
+                        },
+                        "system": "xzcmPj5RIN",
+                        "value": "Pfnphur__s",
+                        "period": {
+                            "start": "2020-03-12T00:11:56.875-04:00",
+                            "end": "2020-03-12T00:11:56.875-04:00"
+                        }
+                    },
+                    "display": "rIs4uRIYhH"
+                },
+                "outcome": "queued",
+                "disposition": "IGF1AOmY50",
+                "paymentDate": "2020-03-12",
+                "paymentAmount": {
+                    "value": 25990673237,
+                    "currency": "lwZhwe1uFQ"
+                },
+                "paymentIdentifier": {
+                    "use": "official",
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "q4RDpDrCp8",
+                                "version": "V9zwLk52hC",
+                                "code": "9xyHodTMAF",
+                                "display": "CM23W8zQqC",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "b55MTwRQea"
+                    },
+                    "system": "JBUhGXuTwQ",
+                    "value": "l5pfy9oAgA",
+                    "period": {
+                        "start": "2020-03-12T00:11:56.877-04:00",
+                        "end": "2020-03-12T00:11:56.877-04:00"
+                    }
+                },
+                "detail": [
                     {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
+                        "identifier": {
+                            "use": "usual",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "I43QC35SjX",
+                                        "version": "FZvzVt5WeY",
+                                        "code": "NmwEpFxO2L",
+                                        "display": "__EtkvW_JA",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "Q385dPVSLi"
+                            },
+                            "system": "8eyKuAuNSK",
+                            "value": "hyIZplL6Sn",
+                            "period": {
+                                "start": "2020-03-12T00:11:56.87-04:00",
+                                "end": "2020-03-12T00:11:56.87-04:00"
+                            }
+                        },
+                        "predecessor": {
+                            "use": "official",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "XGljiUlYma",
+                                        "version": "grLgDy5iM6",
+                                        "code": "tiDtM497DI",
+                                        "display": "g6bmtBaW0J",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "07BxWtENUR"
+                            },
+                            "system": "hiK7vqKXZ2",
+                            "value": "cucXEQJuKq",
+                            "period": {
+                                "start": "2020-03-12T00:11:56.872-04:00",
+                                "end": "2020-03-12T00:11:56.872-04:00"
+                            }
+                        },
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "eqrICYjS4G",
+                                    "version": "DM49PzlhwV",
+                                    "code": "1b_Crw6SjQ",
+                                    "display": "lNngVVN30X",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "ZxQyq0aAna"
+                        },
+                        "request": {
+                            "reference": "lykafFrfwi",
+                            "type": "IvvRFKf4PD",
                             "identifier": {
                                 "use": "temp",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
+                                            "system": "cLinKikx4c",
+                                            "version": "K0QOkt3pvG",
+                                            "code": "YBlD5ZDejX",
+                                            "display": "BMyDP9PayB",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "text": "NSUu78doVZ"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
+                                "system": "D9vcKJ2A1c",
+                                "value": "bHh_mskNlw",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                                    "start": "2020-03-12T00:11:56.872-04:00",
+                                    "end": "2020-03-12T00:11:56.872-04:00"
                                 }
                             },
-                            "display": "BNnVKMbPmJ"
+                            "display": "s1alaMaPUs"
                         },
-                        "type": "refer"
+                        "submitter": {
+                            "reference": "Practitioner/DzRR5IyEf8",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "official",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "rWh3EsCYF2",
+                                            "version": "XRodFIenZj",
+                                            "code": "ZbBc2y2vvB",
+                                            "display": "4Ra3cjPH_i",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "N0VhPYCWOY"
+                                },
+                                "system": "Csib1GoAvw",
+                                "value": "QFocoKv0nV",
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.873-04:00",
+                                    "end": "2020-03-12T00:11:56.873-04:00"
+                                }
+                            },
+                            "display": "JhRIa3kIUu"
+                        },
+                        "response": {
+                            "reference": "4cadsjKmtT",
+                            "type": "IaHJt28s27",
+                            "identifier": {
+                                "use": "official",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "55u41cuNei",
+                                            "version": "xqp4QcyVIG",
+                                            "code": "8nrYRGDqXT",
+                                            "display": "LF6SKe5pxJ",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "fv5Qngg4T4"
+                                },
+                                "system": "VrRr_VF3_L",
+                                "value": "PfuKymJprX",
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.871-04:00",
+                                    "end": "2020-03-12T00:11:56.871-04:00"
+                                }
+                            },
+                            "display": "yakaKj0Kyn"
+                        },
+                        "date": "2020-03-12",
+                        "responsible": {
+                            "reference": "PractitionerRole/4RJHMkORZ2",
+                            "type": "PractitionerRole",
+                            "identifier": {
+                                "use": "usual",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "YH3w43zIQv",
+                                            "version": "Y7ko8D6Pj0",
+                                            "code": "2uXkKaNr5m",
+                                            "display": "RBFB2s5eIt",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "a_vjWuSMtu"
+                                },
+                                "system": "OM8dFBcPNB",
+                                "value": "Wxmuy_PJXY",
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.869-04:00",
+                                    "end": "2020-03-12T00:11:56.869-04:00"
+                                }
+                            },
+                            "display": "nVxjCmbGxO"
+                        },
+                        "payee": {
+                            "reference": "Practitioner/Noqkv0hx2M",
+                            "type": "Practitioner",
+                            "identifier": {
+                                "use": "official",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "dClodaRw17",
+                                            "version": "XDcy5PeR_W",
+                                            "code": "kbS86Cwyme",
+                                            "display": "J0U8NpaElE",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "S90hOYs0Eg"
+                                },
+                                "system": "li5W_Zj7nC",
+                                "value": "U34JaADByc",
+                                "period": {
+                                    "start": "2020-03-12T00:11:56.869-04:00",
+                                    "end": "2020-03-12T00:11:56.87-04:00"
+                                }
+                            },
+                            "display": "lrukMf0NmH"
+                        },
+                        "amount": {
+                            "value": 34668491088,
+                            "currency": "TSgyniqx5t"
+                        }
+                    }
+                ],
+                "formCode": {
+                    "coding": [
+                        {
+                            "system": "qpANslJUCl",
+                            "version": "hw6tD6R0pl",
+                            "code": "E4vQPV4rQ4",
+                            "display": "5AStSf34lZ",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "VNAWqeCZPl"
+                },
+                "processNote": [
+                    {
+                        "type": "printoper",
+                        "text": "9YuDMIEeA8"
                     }
                 ]
             }
@@ -1736,7 +1658,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "PaymentReconciliation_ProcessNote": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,101 +1666,78 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
-                        },
                         "type": {
                             "type": "string",
                             "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
+                                "display",
+                                "print",
+                                "printoper"
                             ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
+                            "description": "The business purpose of the note text."
                         },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
-                            }
-                        },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
-                            }
-                        },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
-                        },
-                        "gender": {
+                        "text": {
                             "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
-                        },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
-                        },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The explanation or description associated with the processing."
                         }
                     }
                 }
+            ]
+        },
+        "PaymentReconciliation_Detail": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "identifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Unique identifier for the current payment item for the referenced payable."
+                        },
+                        "predecessor": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Unique identifier for the prior payment item for the referenced payable."
+                        },
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Code to indicate the nature of the payment."
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A resource, such as a Claim, the evaluation of which could lead to payment."
+                        },
+                        "submitter": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The party which submitted the claim or financial transaction."
+                        },
+                        "response": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A resource, such as a ClaimResponse, which contains a commitment to payment."
+                        },
+                        "date": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date from the response resource containing a commitment to pay."
+                        },
+                        "responsible": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A reference to the individual who is responsible for inquiries regarding the response and its payment."
+                        },
+                        "payee": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The party which is receiving the payment."
+                        },
+                        "amount": {
+                            "$ref": "#/definitions/Money",
+                            "description": "The monetary amount allocated from the total payment to the payable."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
             ]
         },
         "Element": {

@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "SubstanceSpecification API",
+        "description": "A simplified version of the HL7 FHIR API for SubstanceSpecification resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "SubstanceSpecification"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/SubstanceSpecification": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a SubstanceSpecification resource",
+                "operationId": "createSubstanceSpecification",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,29 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SubstanceSpecification"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create SubstanceSpecification operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for SubstanceSpecification resources",
+                "operationId": "searchSubstanceSpecification",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "identifier",
-                        "description": "A patient identifier",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "code",
+                        "description": "The specific code",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +133,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search SubstanceSpecification operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +141,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/SubstanceSpecification/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a SubstanceSpecification resource",
+                "operationId": "vreadSubstanceSpecification",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +161,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read SubstanceSpecification operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SubstanceSpecification"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/SubstanceSpecification/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a SubstanceSpecification resource",
+                "operationId": "readSubstanceSpecification",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +186,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read SubstanceSpecification operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SubstanceSpecification"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing SubstanceSpecification resource",
+                "operationId": "updateSubstanceSpecification",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +211,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SubstanceSpecification"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update SubstanceSpecification operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create SubstanceSpecification operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a SubstanceSpecification resource",
+                "operationId": "deleteSubstanceSpecification",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +237,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete SubstanceSpecification operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/SubstanceSpecification/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "SubstanceSpecification"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a SubstanceSpecification resource",
+                "operationId": "historySubstanceSpecification",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +259,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History SubstanceSpecification operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +545,7 @@
                 }
             ]
         },
-        "Patient": {
+        "SubstanceSpecification": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -708,140 +554,131 @@
                     "type": "object",
                     "properties": {
                         "identifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Identifier by which this substance is known."
+                        },
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "High level categorization, e.g. polymer or nucleic acid."
+                        },
+                        "status": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Status of substance within the catalogue e.g. approved."
+                        },
+                        "domain": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "If the substance applies to only human or veterinary use."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Textual description of the substance."
+                        },
+                        "source": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "$ref": "#/definitions/Reference",
+                                "description": "Supporting literature."
                             }
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+                        "comment": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Textual comment about this record of a substance."
+                        },
+                        "moiety": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Moiety",
+                                "description": "Moiety, for structural modifications."
+                            }
+                        },
+                        "property": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Property",
+                                "description": "General specifications for this substance, including how it is related to other substances."
+                            }
+                        },
+                        "referenceInformation": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "General information detailing this substance."
+                        },
+                        "structure": {
+                            "$ref": "#/definitions/SubstanceSpecification_Structure",
+                            "description": "Structural information."
+                        },
+                        "code": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Code",
+                                "description": "Property type e.g. viscosity, pH, isoelectric point."
+                            }
                         },
                         "name": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
+                                "$ref": "#/definitions/SubstanceSpecification_Name",
+                                "description": "Textual name for this moiety substance."
                             }
                         },
-                        "telecom": {
+                        "molecularWeight": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
+                                "$ref": "#/definitions/SubstanceSpecification_Structure_Isotope_MolecularWeight",
+                                "description": "The molecular weight or weight range (for proteins, polymers or nucleic acids)."
                             }
                         },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
-                        },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "address": {
+                        "relationship": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
+                                "$ref": "#/definitions/SubstanceSpecification_Relationship",
+                                "description": "A link between this substance and another, with details of the relationship."
                             }
                         },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
-                        },
-                        "contact": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
-                            }
-                        },
-                        "communication": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
-                            }
-                        },
-                        "generalPractitioner": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
-                            }
-                        },
-                        "managingOrganization": {
+                        "nucleicAcid": {
                             "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
+                            "description": "Data items specific to nucleic acids."
                         },
-                        "link": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
-                            }
+                        "polymer": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Data items specific to polymers."
+                        },
+                        "protein": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Data items specific to proteins."
+                        },
+                        "sourceMaterial": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Material or taxonomic/anatomical source for the substance."
                         }
                     }
                 }
             ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "SubstanceSpecification",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "dTYOzTvqVa",
+                    "lastUpdated": "2020-03-12T00:12:01.296-04:00",
+                    "source": "Ts6XirldPr",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "v_qXMa24hr"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "_p_Ms5ypyg",
+                            "version": "EkCnbjniD9",
+                            "code": "yNgz5UUY8b",
+                            "display": "fawWbH57l1",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "txjbTeaaI2",
+                            "version": "7MtxmMw6Ca",
+                            "code": "dqKDKyUhut",
+                            "display": "axbUS4mUbO",
                             "userSelected": true
                         },
                         {
@@ -849,313 +686,894 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "3dpKJySXxM",
+                "language": "EgbHgheMPy",
                 "text": {
-                    "status": "generated",
+                    "status": "additional",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
-                "identifier": [
+                "identifier": {
+                    "use": "temp",
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "eFTqCSCb11",
+                                "version": "LKMo9AkpNg",
+                                "code": "0cGf0Lf23a",
+                                "display": "HD5c5lWu8x",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "XJhEVFggLk"
+                    },
+                    "system": "oKsOF4NP9m",
+                    "value": "_ZmT9IPWIl",
+                    "period": {
+                        "start": "2020-03-12T00:12:01.301-04:00",
+                        "end": "2020-03-12T00:12:01.301-04:00"
+                    }
+                },
+                "type": {
+                    "coding": [
+                        {
+                            "system": "rH8xZ_8t3W",
+                            "version": "mNZH6gAXMg",
+                            "code": "v3bJPYBqfa",
+                            "display": "NJMkhhwnFY",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "jALYuflogE"
+                },
+                "status": {
+                    "coding": [
+                        {
+                            "system": "3YNg0bVpBp",
+                            "version": "oPKoMGzFts",
+                            "code": "CmfqsoJMqT",
+                            "display": "jEDfy6Kca4",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "CxNnBuhMzX"
+                },
+                "domain": {
+                    "coding": [
+                        {
+                            "system": "BbavBPejLD",
+                            "version": "AE2qs4SQB_",
+                            "code": "RmK68EWATs",
+                            "display": "8zJ9pAWWm5",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "u0Ek0zdHuE"
+                },
+                "description": "11aLdBXN1p",
+                "source": [
                     {
+                        "reference": "VqFpeGrbEo",
+                        "type": "Y2mQE1hRhE",
+                        "identifier": {
+                            "use": "official",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "KWHERrO646",
+                                        "version": "h2dYxlSDqr",
+                                        "code": "G_YmjijNY0",
+                                        "display": "P5xtM4ipYc",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "2kT7t4kxrU"
+                            },
+                            "system": "Qi3BT57r92",
+                            "value": "JkekJbwqot",
+                            "period": {
+                                "start": "2020-03-12T00:12:01.294-04:00",
+                                "end": "2020-03-12T00:12:01.294-04:00"
+                            }
+                        },
+                        "display": "KhajAcObSt"
+                    }
+                ],
+                "comment": "xr02kVCGpH",
+                "moiety": [
+                    {
+                        "role": {
+                            "coding": [
+                                {
+                                    "system": "K_9cdTWMhV",
+                                    "version": "AXHU4mcKpb",
+                                    "code": "19Ce4DC_cT",
+                                    "display": "UCpXWttpp1",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "ZtXXlDfO8W"
+                        },
+                        "identifier": {
+                            "use": "official",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "SLWL8OQNnV",
+                                        "version": "oxIkZc_4dd",
+                                        "code": "HPujprTkLp",
+                                        "display": "14reXBwv3f",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "FvGKqA5CwU"
+                            },
+                            "system": "dEfHjTRTGa",
+                            "value": "jennrjyu8v",
+                            "period": {
+                                "start": "2020-03-12T00:12:01.307-04:00",
+                                "end": "2020-03-12T00:12:01.307-04:00"
+                            }
+                        },
+                        "name": "2G13YrKaFo",
+                        "stereochemistry": {
+                            "coding": [
+                                {
+                                    "system": "7KivoLkSEL",
+                                    "version": "2je_JxXuKZ",
+                                    "code": "ryvcwLUXQr",
+                                    "display": "387FcFGyvc",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "IrYN6mEa8_"
+                        },
+                        "opticalActivity": {
+                            "coding": [
+                                {
+                                    "system": "wf3WCa9Sns",
+                                    "version": "mJblFLcp7Y",
+                                    "code": "v5aflr1GkJ",
+                                    "display": "kAxp069FBM",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "TeWmC9sefO"
+                        },
+                        "molecularFormula": "xXGw89Dsei",
+                        "amountQuantity": {
+                            "value": 128902179162,
+                            "comparator": ">=",
+                            "unit": "l4wqutq153",
+                            "system": "nIABKdEFuR",
+                            "code": "b80WvGlVcz"
+                        }
+                    }
+                ],
+                "property": [
+                    {
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "OKwGK3O4dQ",
+                                    "version": "ANyOgkJ_fy",
+                                    "code": "xTpZVgSJrL",
+                                    "display": "ETQRLU_UEo",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "5RLSj95T0M"
+                        },
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "Y9C4_wkYqE",
+                                    "version": "lLhAqD7kFD",
+                                    "code": "VR7TaOn9R_",
+                                    "display": "U1w6tjxHI9",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "8FFsiWgObO"
+                        },
+                        "parameters": "qGZYTAo76o",
+                        "definingSubstanceReference": {
+                            "reference": "iP76XVfroS",
+                            "type": "waT8yFiahT",
+                            "identifier": {
+                                "use": "old",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "WACuhQ7Zvm",
+                                            "version": "fb7AbQ48tE",
+                                            "code": "GUtWC8qTv7",
+                                            "display": "Dfo7eiH4si",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "7lnZipSHTu"
+                                },
+                                "system": "Jy7xv2OwuV",
+                                "value": "HzgjmtUfyv",
+                                "period": {
+                                    "start": "2020-03-12T00:12:01.301-04:00",
+                                    "end": "2020-03-12T00:12:01.301-04:00"
+                                }
+                            },
+                            "display": "kGd7oPGKcq"
+                        },
+                        "amountQuantity": {
+                            "value": 542827623701,
+                            "comparator": "<",
+                            "unit": "_GlbMa5Mal",
+                            "system": "7t_ar4KVGg",
+                            "code": "HeJHj8xLEr"
+                        }
+                    }
+                ],
+                "referenceInformation": {
+                    "reference": "SubstanceReferenceInformation/iGBFoXsP_n",
+                    "type": "SubstanceReferenceInformation",
+                    "identifier": {
+                        "use": "usual",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "_C893PtLyt",
+                                    "version": "Uo5VYvvRoQ",
+                                    "code": "p8IDxXgVZJ",
+                                    "display": "aFPXGcDrRO",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "exRkI8TpUh"
+                        },
+                        "system": "ss9UlLb25J",
+                        "value": "98jCZaX0iT",
+                        "period": {
+                            "start": "2020-03-12T00:12:01.31-04:00",
+                            "end": "2020-03-12T00:12:01.311-04:00"
+                        }
+                    },
+                    "display": "YGCjZa8lKB"
+                },
+                "structure": {
+                    "stereochemistry": {
+                        "coding": [
+                            {
+                                "system": "ulT_otbUYm",
+                                "version": "Hmjf_fTq48",
+                                "code": "XTHrBpWTH5",
+                                "display": "5qtmZOOVkY",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "kPfXL105xM"
+                    },
+                    "opticalActivity": {
+                        "coding": [
+                            {
+                                "system": "hoM00Rm_ri",
+                                "version": "KvlewuGpgV",
+                                "code": "TTZkqqrmgP",
+                                "display": "80TLMTD9ER",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "0lBhPVMHhO"
+                    },
+                    "molecularFormula": "Vt_2nV3KmU",
+                    "molecularFormulaByMoiety": "9x7xGczfzS",
+                    "isotope": [
+                        {
+                            "identifier": {
+                                "use": "secondary",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "cOMhqT2r8p",
+                                            "version": "ACO79jn_uz",
+                                            "code": "oPr2SkmPqb",
+                                            "display": "nnlQOW5slr",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "7ETG5SIJht"
+                                },
+                                "system": "XAPjCLLqiZ",
+                                "value": "fLbfpnkh7F",
+                                "period": {
+                                    "start": "2020-03-12T00:12:01.305-04:00",
+                                    "end": "2020-03-12T00:12:01.305-04:00"
+                                }
+                            },
+                            "name": {
+                                "coding": [
+                                    {
+                                        "system": "K0VM96pyUk",
+                                        "version": "rKPe86xBKS",
+                                        "code": "7q0Kz5qpHp",
+                                        "display": "3vSHN8xqV1",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "ZmEFh5sk9i"
+                            },
+                            "substitution": {
+                                "coding": [
+                                    {
+                                        "system": "wVmPoikRKp",
+                                        "version": "YmK5UvxQ8S",
+                                        "code": "N7Tauegd_U",
+                                        "display": "irXZqMqRbe",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "2vNDM8ZeKM"
+                            },
+                            "halfLife": {
+                                "value": 538804748648,
+                                "comparator": "<",
+                                "unit": "FFYVSGTJC9",
+                                "system": "hDn6uotGgf",
+                                "code": "kW8Pia9Sxn"
+                            },
+                            "molecularWeight": {
+                                "method": {
+                                    "coding": [
+                                        {
+                                            "system": "Jr6Jr0m20e",
+                                            "version": "KTr9Qg60Ud",
+                                            "code": "pXQ4VtdpHn",
+                                            "display": "jtEmjXvUmc",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "ffjx7y3pG8"
+                                },
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "bjfHH5hShT",
+                                            "version": "qB_k8soJcd",
+                                            "code": "Umoh80SxGO",
+                                            "display": "MsdBVreJxk",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "vtkGSG9mGu"
+                                },
+                                "amount": {
+                                    "value": 469149221213,
+                                    "comparator": "<=",
+                                    "unit": "haKqFOh6LR",
+                                    "system": "kXiBlOrxML",
+                                    "code": "KhzMa4QXHI"
+                                }
+                            }
+                        }
+                    ],
+                    "molecularWeight": {
+                        "method": {
+                            "coding": [
+                                {
+                                    "system": "Slb77LfZz4",
+                                    "version": "tVDFSdue5i",
+                                    "code": "LKPvByM6WJ",
+                                    "display": "t1z9IE0bZ2",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "fvoDTv3Mmz"
+                        },
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "sTPn0By_TI",
+                                    "version": "9CN3lQKQGp",
+                                    "code": "OTmPdltB1l",
+                                    "display": "ZlVWkSDVv0",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "PnJGrJ64t5"
+                        },
+                        "amount": {
+                            "value": 275271868464,
+                            "comparator": "<",
+                            "unit": "rakeSf4gGZ",
+                            "system": "H_FTF2_JiF",
+                            "code": "QXIjr17Wwu"
+                        }
+                    },
+                    "source": [
+                        {
+                            "reference": "xzvjKotCik",
+                            "type": "QbxgoCnLAP",
+                            "identifier": {
+                                "use": "secondary",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "b9i6gjFVEW",
+                                            "version": "maRUxFa0Db",
+                                            "code": "DvOzdM27Wd",
+                                            "display": "y4NyDUtiM0",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "386dYNEoBA"
+                                },
+                                "system": "luNhlcTA5F",
+                                "value": "Kb8SIrUgf2",
+                                "period": {
+                                    "start": "2020-03-12T00:12:01.302-04:00",
+                                    "end": "2020-03-12T00:12:01.302-04:00"
+                                }
+                            },
+                            "display": "EvWx9LsXzM"
+                        }
+                    ],
+                    "representation": [
+                        {
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "JmPZ0khrHi",
+                                        "version": "WKSQvns_f9",
+                                        "code": "X68NunntG2",
+                                        "display": "pG66PQrsap",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "CmLBaN4X_O"
+                            },
+                            "representation": "Ze3gLEseQH",
+                            "attachment": {
+                                "contentType": "aNtaliBtc3",
+                                "language": "5NwsLyBhDd",
+                                "data": "eRQadwM=",
+                                "url": "ws1Je01yau",
+                                "size": 1273944059,
+                                "hash": "TkQddkw=",
+                                "title": "QQssf6JvMa",
+                                "creation": "2020-03-12T00:12:01.303-04:00"
+                            }
+                        }
+                    ]
+                },
+                "code": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "Fs25sU0TkB",
+                                    "version": "ryRVsjh2bG",
+                                    "code": "ofBMai_u01",
+                                    "display": "lbOIIyghzt",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "nFUojubVVn"
+                        },
+                        "status": {
+                            "coding": [
+                                {
+                                    "system": "VRJqPblY9t",
+                                    "version": "urq_KH7pcR",
+                                    "code": "Cm3jXGv_Zd",
+                                    "display": "owAoXWY1KE",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "aIQZhE_DS_"
+                        },
+                        "statusDate": "2020-03-12T00:12:01.296-04:00",
+                        "comment": "7s_YBD0yws",
+                        "source": [
+                            {
+                                "reference": "zMNAVdm9G8",
+                                "type": "8TLfEVV1yt",
+                                "identifier": {
+                                    "use": "old",
+                                    "type": {
+                                        "coding": [
+                                            {
+                                                "system": "VOc482JQYl",
+                                                "version": "JjQVIIh4dY",
+                                                "code": "ZjgIrWHcwJ",
+                                                "display": "5kaJ4hOXFt",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "1xDZ37UloE"
+                                    },
+                                    "system": "NBuwv4c1Kt",
+                                    "value": "NlBUjZsm6M",
+                                    "period": {
+                                        "start": "2020-03-12T00:12:01.295-04:00",
+                                        "end": "2020-03-12T00:12:01.295-04:00"
+                                    }
+                                },
+                                "display": "9rkuf89CWm"
+                            }
+                        ]
+                    }
+                ],
+                "name": [
+                    {
+                        "name": "j8HKOrea_2",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "csBNmX79tx",
+                                    "version": "50ldtjoCsR",
+                                    "code": "Spe1gTxvtp",
+                                    "display": "iCXT8uUoBG",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "KM64mbTUkL"
+                        },
+                        "status": {
+                            "coding": [
+                                {
+                                    "system": "5YMqjxOS_y",
+                                    "version": "bBq7e77Vyv",
+                                    "code": "UhIZzGfKXP",
+                                    "display": "s26vFT8rX_",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "pQvWW7HJC4"
+                        },
+                        "preferred": true,
+                        "language": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "rlbSZWuPVQ",
+                                        "version": "bsE2vJD1Lm",
+                                        "code": "zm0Kq2eyuw",
+                                        "display": "8_tWu7BEXq",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "YCI9o51qxU"
+                            }
+                        ],
+                        "domain": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "8npVTZtdde",
+                                        "version": "h7k67l5tAt",
+                                        "code": "IJT7B4HK34",
+                                        "display": "BA6K7Jo1yr",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "hhJ4nt9oD1"
+                            }
+                        ],
+                        "jurisdiction": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "sBswG40OU4",
+                                        "version": "9hURX847vq",
+                                        "code": "EXdb44qXA7",
+                                        "display": "14Yp8zodPP",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "7giM5Fwxl0"
+                            }
+                        ],
+                        "official": [
+                            {
+                                "authority": {
+                                    "coding": [
+                                        {
+                                            "system": "mkI8bfNfIc",
+                                            "version": "j6Mt9bCuTP",
+                                            "code": "7sithNs9yD",
+                                            "display": "eahWkSQRr2",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "JsTvzVO7hr"
+                                },
+                                "status": {
+                                    "coding": [
+                                        {
+                                            "system": "0DdNebOsZv",
+                                            "version": "X1Q8cnr4YC",
+                                            "code": "rSlXi8UMTB",
+                                            "display": "7hAakcBsRy",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "hU2z4PFDaF"
+                                },
+                                "date": "2020-03-12T00:12:01.292-04:00"
+                            }
+                        ],
+                        "source": [
+                            {
+                                "reference": "jygVvo1Oxr",
+                                "type": "m1k_WkRHlL",
+                                "identifier": {
+                                    "use": "official",
+                                    "type": {
+                                        "coding": [
+                                            {
+                                                "system": "nEGaYke0KU",
+                                                "version": "ea1nT0ukRM",
+                                                "code": "hv5PNFvMh3",
+                                                "display": "w9L6V1AwU_",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "IctCQuJC4c"
+                                    },
+                                    "system": "l1RtOYMM1F",
+                                    "value": "PQBic7R7vo",
+                                    "period": {
+                                        "start": "2020-03-12T00:12:01.291-04:00",
+                                        "end": "2020-03-12T00:12:01.291-04:00"
+                                    }
+                                },
+                                "display": "EqD08Py9hJ"
+                            }
+                        ]
+                    }
+                ],
+                "molecularWeight": [
+                    {
+                        "method": {
+                            "coding": [
+                                {
+                                    "system": "4eai0cOU2T",
+                                    "version": "moogSddW3O",
+                                    "code": "X7eohRpcvW",
+                                    "display": "jyLKAci2M6",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "W__f7wxjn1"
+                        },
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "TSLlWrQur7",
+                                    "version": "Ev3OFyTIwT",
+                                    "code": "0lqIRYhap0",
+                                    "display": "fttOF7WD3G",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "jZduikpDFX"
+                        },
+                        "amount": {
+                            "value": 378832057861,
+                            "comparator": "<",
+                            "unit": "kgOCOuljcD",
+                            "system": "qWFqbmrgiu",
+                            "code": "STBc75D0j2"
+                        }
+                    }
+                ],
+                "relationship": [
+                    {
+                        "substanceReference": {
+                            "reference": "a9ptJdk4mB",
+                            "type": "5HZBUpfHuT",
+                            "identifier": {
+                                "use": "old",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "XMcBBTtEeG",
+                                            "version": "W6YT5xDrvI",
+                                            "code": "yN_MTsgTVO",
+                                            "display": "JvSlweboEV",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "QQizxbC_Iv"
+                                },
+                                "system": "8V34FMwUSe",
+                                "value": "XmWcZPIlMV",
+                                "period": {
+                                    "start": "2020-03-12T00:12:01.299-04:00",
+                                    "end": "2020-03-12T00:12:01.299-04:00"
+                                }
+                            },
+                            "display": "ldfDvK4L7a"
+                        },
+                        "relationship": {
+                            "coding": [
+                                {
+                                    "system": "R1WMsVqn_v",
+                                    "version": "ROs6xSn9b3",
+                                    "code": "yL2BeFfiEb",
+                                    "display": "RdxZEoRrep",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "fBG1xYWc9z"
+                        },
+                        "isDefining": true,
+                        "amountQuantity": {
+                            "value": 90571354692,
+                            "comparator": "<=",
+                            "unit": "WugZUuq7W7",
+                            "system": "SNat7fi0An",
+                            "code": "TWO5S8CRPf"
+                        },
+                        "amountRatioLowLimit": {
+                            "numerator": {
+                                "value": 439853999127,
+                                "comparator": ">=",
+                                "unit": "7MvxhC1xYe",
+                                "system": "kZECcBawe0",
+                                "code": "ty8eBC5OWT"
+                            },
+                            "denominator": {
+                                "value": 202736157793,
+                                "comparator": "<=",
+                                "unit": "hQYUdKVrUI",
+                                "system": "KRvCIy31rM",
+                                "code": "szn0SuQfJR"
+                            }
+                        },
+                        "amountType": {
+                            "coding": [
+                                {
+                                    "system": "MBddPU0btD",
+                                    "version": "x_ZvY5SHpt",
+                                    "code": "h7hkoP8cSx",
+                                    "display": "Pi3xBveScU",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "9a0CsJgs32"
+                        },
+                        "source": [
+                            {
+                                "reference": "bFFaXOUjv1",
+                                "type": "6HHi9dq7rP",
+                                "identifier": {
+                                    "use": "official",
+                                    "type": {
+                                        "coding": [
+                                            {
+                                                "system": "TDya5kXSej",
+                                                "version": "KviLH7Unk8",
+                                                "code": "fob_r3r0A1",
+                                                "display": "IQB7lIoN_z",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "xw2sEVd0gW"
+                                    },
+                                    "system": "Pjaoj1RJan",
+                                    "value": "mKOGUpIzmd",
+                                    "period": {
+                                        "start": "2020-03-12T00:12:01.297-04:00",
+                                        "end": "2020-03-12T00:12:01.297-04:00"
+                                    }
+                                },
+                                "display": "VExdrFmvkC"
+                            }
+                        ]
+                    }
+                ],
+                "nucleicAcid": {
+                    "reference": "SubstanceNucleicAcid/XBwRm95n2m",
+                    "type": "SubstanceNucleicAcid",
+                    "identifier": {
                         "use": "official",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
+                                    "system": "fRXrc3mK16",
+                                    "version": "EpZKvJ2atK",
+                                    "code": "Wlupsj8yOd",
+                                    "display": "cVwDA02NrB",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "RwELMTpc3R"
+                            "text": "3ITY4pJuBe"
                         },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
+                        "system": "aYrPh43ZUs",
+                        "value": "Qi_mBXEx1g",
                         "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
+                            "start": "2020-03-12T00:12:01.311-04:00",
+                            "end": "2020-03-12T00:12:01.311-04:00"
                         }
-                    }
-                ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
+                    },
+                    "display": "LU0wZ365Tw"
                 },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
-                "contact": [
-                    {
-                        "relationship": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
-                        "telecom": [
-                            {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
-                            }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
-                            "identifier": {
-                                "use": "usual",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "lr5rIPHEgi"
-                                },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
-                                }
-                            },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
-                    }
-                ],
-                "communication": [
-                    {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
-                            }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
+                "polymer": {
+                    "reference": "SubstancePolymer/ZMGMQ6b500",
+                    "type": "SubstancePolymer",
                     "identifier": {
-                        "use": "temp",
+                        "use": "usual",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "jTU65T1ZPi",
+                                    "version": "ZFdmF4ZTlM",
+                                    "code": "pSgcy_psiO",
+                                    "display": "RwKjyKRY6F",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "p5hcn2J3JL"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
+                        "system": "URkRvfFQ41",
+                        "value": "Lg8iXih3I2",
                         "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
+                            "start": "2020-03-12T00:12:01.308-04:00",
+                            "end": "2020-03-12T00:12:01.308-04:00"
                         }
                     },
-                    "display": "HHvTPP_6wS"
+                    "display": "6cwQzxiaOo"
                 },
-                "link": [
-                    {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "1WL8O58DRg"
-                                },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                "protein": {
+                    "reference": "SubstanceProtein/VvPp25q6dr",
+                    "type": "SubstanceProtein",
+                    "identifier": {
+                        "use": "old",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "JNvBpDjeUk",
+                                    "version": "7fHfjg9olh",
+                                    "code": "lukgyjmpfL",
+                                    "display": "ya30qOOKHx",
+                                    "userSelected": true
                                 }
-                            },
-                            "display": "BNnVKMbPmJ"
+                            ],
+                            "text": "d9Bg0NFt5c"
                         },
-                        "type": "refer"
-                    }
-                ]
+                        "system": "snlPsDvsxu",
+                        "value": "75ephq1mnB",
+                        "period": {
+                            "start": "2020-03-12T00:12:01.309-04:00",
+                            "end": "2020-03-12T00:12:01.309-04:00"
+                        }
+                    },
+                    "display": "X_9ViOfEnB"
+                },
+                "sourceMaterial": {
+                    "reference": "SubstanceSourceMaterial/jxWKjGFNNi",
+                    "type": "SubstanceSourceMaterial",
+                    "identifier": {
+                        "use": "usual",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "_5XpqjpXfv",
+                                    "version": "Q7ARNUuWiY",
+                                    "code": "93_0jFAT15",
+                                    "display": "tpI5ep7PoX",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "nh5YT9vT83"
+                        },
+                        "system": "JjDeo0P55l",
+                        "value": "kKHEgsNVsU",
+                        "period": {
+                            "start": "2020-03-12T00:12:01.312-04:00",
+                            "end": "2020-03-12T00:12:01.312-04:00"
+                        }
+                    },
+                    "display": "esVQ0A0UDS"
+                }
             }
         },
         "Bundle": {
@@ -1736,7 +2154,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "SubstanceSpecification_Relationship": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,29 +2162,59 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
+                        "substanceReference": {
                             "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
+                            "description": "A pointer to another substance, as a resource or just a representational code."
                         },
-                        "type": {
+                        "substanceCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A pointer to another substance, as a resource or just a representational code."
+                        },
+                        "relationship": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "For example \"salt to parent\", \"active moiety\", \"starting material\"."
+                        },
+                        "isDefining": {
+                            "type": "boolean",
+                            "description": "For example where an enzyme strongly bonds with a particular substance, this is a defining relationship for that enzyme, out of several possible substance relationships."
+                        },
+                        "amountQuantity": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other."
+                        },
+                        "amountRange": {
+                            "$ref": "#/definitions/Range",
+                            "description": "A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other."
+                        },
+                        "amountRatio": {
+                            "$ref": "#/definitions/Ratio",
+                            "description": "A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other."
+                        },
+                        "amountString": {
                             "type": "string",
-                            "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
-                            ],
-                            "description": "The type of link between this patient resource and another patient resource."
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other."
+                        },
+                        "amountRatioLowLimit": {
+                            "$ref": "#/definitions/Ratio",
+                            "description": "For use when the numeric."
+                        },
+                        "amountType": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "An operator for the amount, for example \"average\", \"approximately\", \"less than\"."
+                        },
+                        "source": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "Supporting literature."
+                            }
                         }
                     }
                 }
-            ],
-            "required": [
-                "other",
-                "type"
             ]
         },
-        "Patient_Communication": {
+        "SubstanceSpecification_Name": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1774,22 +2222,80 @@
                 {
                     "type": "object",
                     "properties": {
-                        "language": {
+                        "name": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The actual name."
+                        },
+                        "type": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
+                            "description": "Name type."
+                        },
+                        "status": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The status of the name."
                         },
                         "preferred": {
                             "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
+                            "description": "If this is the preferred name for this substance."
+                        },
+                        "language": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Language of the name."
+                            }
+                        },
+                        "domain": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "The use context of this name for example if there is a different name a drug active ingredient as opposed to a food colour additive."
+                            }
+                        },
+                        "jurisdiction": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "The jurisdiction where this name applies."
+                            }
+                        },
+                        "synonym": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Name",
+                                "description": "A synonym of this name."
+                            }
+                        },
+                        "translation": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Name",
+                                "description": "A translation for this name."
+                            }
+                        },
+                        "official": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Name_Official",
+                                "description": "Details of the official nature of this name."
+                            }
+                        },
+                        "source": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "Supporting literature."
+                            }
                         }
                     }
                 }
             ],
             "required": [
-                "language"
+                "name"
             ]
         },
-        "Patient_Contact": {
+        "SubstanceSpecification_Name_Official": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1797,45 +2303,280 @@
                 {
                     "type": "object",
                     "properties": {
-                        "relationship": {
+                        "authority": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Which authority uses this official name."
+                        },
+                        "status": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The status of the official name."
+                        },
+                        "date": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "Date of official name change."
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Code": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The specific code."
+                        },
+                        "status": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Status of the code assignment."
+                        },
+                        "statusDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "The date at which the code status is changed as part of the terminology maintenance."
+                        },
+                        "comment": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Any comment can be provided in this field, if necessary."
+                        },
+                        "source": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
+                                "$ref": "#/definitions/Reference",
+                                "description": "Supporting literature."
                             }
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Structure": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "stereochemistry": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Stereochemistry type."
+                        },
+                        "opticalActivity": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Optical activity type."
+                        },
+                        "molecularFormula": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Molecular formula."
+                        },
+                        "molecularFormulaByMoiety": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Specified per moiety according to the Hill system, i.e. first C, then H, then alphabetical, each moiety separated by a dot."
+                        },
+                        "isotope": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Structure_Isotope",
+                                "description": "Applicable for single substances that contain a radionuclide or a non-natural isotopic ratio."
+                            }
+                        },
+                        "molecularWeight": {
+                            "$ref": "#/definitions/SubstanceSpecification_Structure_Isotope_MolecularWeight",
+                            "description": "The molecular weight or weight range (for proteins, polymers or nucleic acids)."
+                        },
+                        "source": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "Supporting literature."
+                            }
+                        },
+                        "representation": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubstanceSpecification_Structure_Representation",
+                                "description": "Molecular structural representation."
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Structure_Representation": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The type of structure (e.g. Full, Partial, Representative)."
+                        },
+                        "representation": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The structural representation as text string in a format e.g. InChI, SMILES, MOLFILE, CDX."
+                        },
+                        "attachment": {
+                            "$ref": "#/definitions/Attachment",
+                            "description": "An attached file with the structural representation."
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Structure_Isotope": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "identifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Substance identifier for each non-natural or radioisotope."
                         },
                         "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Substance name for each non-natural or radioisotope."
                         },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
-                            }
+                        "substitution": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The type of isotopic substitution present in a single substance."
                         },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
+                        "halfLife": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "Half life - for a non-natural nuclide."
                         },
-                        "gender": {
+                        "molecularWeight": {
+                            "$ref": "#/definitions/SubstanceSpecification_Structure_Isotope_MolecularWeight",
+                            "description": "The molecular weight or weight range (for proteins, polymers or nucleic acids)."
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Structure_Isotope_MolecularWeight": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "method": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The method by which the molecular weight was determined."
+                        },
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Type of molecular weight such as exact, average (also known as. number average), weight average."
+                        },
+                        "amount": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "Used to capture quantitative values for a variety of elements. If only limits are given, the arithmetic mean would be the average. If only a single definite value for a given element is given, it would be captured in this field."
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Property": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "category": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A category for this property, e.g. Physical, Chemical, Enzymatic."
+                        },
+                        "code": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Property type e.g. viscosity, pH, isoelectric point."
+                        },
+                        "parameters": {
                             "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Parameters that were used in the measurement of a property (e.g. for viscosity: measured at 20C with a pH of 7.1)."
                         },
-                        "organization": {
+                        "definingSubstanceReference": {
                             "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
+                            "description": "A substance upon which a defining property depends (e.g. for solubility: in water, in alcohol)."
                         },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                        "definingSubstanceCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A substance upon which a defining property depends (e.g. for solubility: in water, in alcohol)."
+                        },
+                        "amountQuantity": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "Quantitative value for this property."
+                        },
+                        "amountString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Quantitative value for this property."
+                        }
+                    }
+                }
+            ]
+        },
+        "SubstanceSpecification_Moiety": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "role": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Role that the moiety is playing."
+                        },
+                        "identifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Identifier by which this moiety substance is known."
+                        },
+                        "name": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Textual name for this moiety substance."
+                        },
+                        "stereochemistry": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Stereochemistry type."
+                        },
+                        "opticalActivity": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Optical activity type."
+                        },
+                        "molecularFormula": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Molecular formula."
+                        },
+                        "amountQuantity": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "Quantitative value for this moiety."
+                        },
+                        "amountString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Quantitative value for this moiety."
                         }
                     }
                 }

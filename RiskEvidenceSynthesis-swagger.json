@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "RiskEvidenceSynthesis API",
+        "description": "A simplified version of the HL7 FHIR API for RiskEvidenceSynthesis resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "RiskEvidenceSynthesis"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/RiskEvidenceSynthesis": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a RiskEvidenceSynthesis resource",
+                "operationId": "createRiskEvidenceSynthesis",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,134 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/RiskEvidenceSynthesis"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create RiskEvidenceSynthesis operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for RiskEvidenceSynthesis resources",
+                "operationId": "searchRiskEvidenceSynthesis",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
+                        "name": "context",
+                        "description": "A use context assigned to the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
+                        "name": "context-quantity",
+                        "description": "A quantity- or range-valued use context assigned to the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
+                        "name": "context-type",
+                        "description": "A type of use context assigned to the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
+                        "name": "date",
+                        "description": "The risk evidence synthesis publication date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
+                        "name": "description",
+                        "description": "The description of the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "effective",
+                        "description": "The time during which the risk evidence synthesis is intended to be in use",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "External identifier for the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
+                        "name": "jurisdiction",
+                        "description": "Intended jurisdiction for the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "description": "Computationally friendly name of the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
+                        "name": "publisher",
+                        "description": "Name of the publisher of the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
+                        "name": "status",
+                        "description": "The current status of the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
+                        "name": "title",
+                        "description": "The human-friendly name of the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "url",
+                        "description": "The uri that identifies the risk evidence synthesis",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "version",
+                        "description": "The business version of the risk evidence synthesis",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-quantity",
+                        "description": "A use context type and quantity- or range-based value assigned to the risk evidence synthesis",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-value",
+                        "description": "A use context type and value assigned to the risk evidence synthesis",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +238,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search RiskEvidenceSynthesis operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +246,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/RiskEvidenceSynthesis/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a RiskEvidenceSynthesis resource",
+                "operationId": "vreadRiskEvidenceSynthesis",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +266,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read RiskEvidenceSynthesis operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/RiskEvidenceSynthesis"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/RiskEvidenceSynthesis/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a RiskEvidenceSynthesis resource",
+                "operationId": "readRiskEvidenceSynthesis",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +291,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read RiskEvidenceSynthesis operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/RiskEvidenceSynthesis"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing RiskEvidenceSynthesis resource",
+                "operationId": "updateRiskEvidenceSynthesis",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +316,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/RiskEvidenceSynthesis"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update RiskEvidenceSynthesis operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create RiskEvidenceSynthesis operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a RiskEvidenceSynthesis resource",
+                "operationId": "deleteRiskEvidenceSynthesis",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +342,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete RiskEvidenceSynthesis operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/RiskEvidenceSynthesis/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "RiskEvidenceSynthesis"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a RiskEvidenceSynthesis resource",
+                "operationId": "historyRiskEvidenceSynthesis",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +364,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History RiskEvidenceSynthesis operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +650,7 @@
                 }
             ]
         },
-        "Patient": {
+        "RiskEvidenceSynthesis": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -707,141 +658,214 @@
                 {
                     "type": "object",
                     "properties": {
+                        "url": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "An absolute URI that is used to identify this risk evidence synthesis when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this risk evidence synthesis is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the risk evidence synthesis is stored on different servers."
+                        },
                         "identifier": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "description": "A formal identifier that is used to identify this risk evidence synthesis when it is represented in other formats, or referenced in a specification, model, design or an instance."
                             }
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+                        "version": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The identifier that is used to identify this version of the risk evidence synthesis when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the risk evidence synthesis author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
                         },
                         "name": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
-                            }
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A natural language name identifying the risk evidence synthesis. This name should be usable as an identifier for the module by machine processing applications such as code generation."
                         },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
+                        "title": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A short, descriptive, user-friendly title for the risk evidence synthesis."
                         },
-                        "gender": {
+                        "status": {
                             "type": "string",
                             "enum": [
-                                "male",
-                                "female",
-                                "other",
+                                "draft",
+                                "active",
+                                "retired",
                                 "unknown"
                             ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+                            "description": "The status of this risk evidence synthesis. Enables tracking the life-cycle of the content."
                         },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
+                        "date": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "The date  (and optionally time) when the risk evidence synthesis was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the risk evidence synthesis changes."
                         },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
+                        "publisher": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The name of the organization or individual that published the risk evidence synthesis."
                         },
                         "contact": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "Contact details to assist a user in finding and communicating with the publisher."
                             }
                         },
-                        "communication": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A free text natural language description of the risk evidence synthesis from a consumer's perspective."
+                        },
+                        "note": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
+                                "$ref": "#/definitions/Annotation",
+                                "description": "A human-readable string to clarify or explain concepts about the resource."
                             }
                         },
-                        "generalPractitioner": {
+                        "useContext": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
+                                "$ref": "#/definitions/UsageContext",
+                                "description": "The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate risk evidence synthesis instances."
                             }
                         },
-                        "managingOrganization": {
+                        "jurisdiction": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A legal or geographic region in which the risk evidence synthesis is intended to be used."
+                            }
+                        },
+                        "copyright": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A copyright statement relating to the risk evidence synthesis and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the risk evidence synthesis."
+                        },
+                        "approvalDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage."
+                        },
+                        "lastReviewDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date."
+                        },
+                        "effectivePeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "The period during which the risk evidence synthesis content was or is planned to be in active use."
+                        },
+                        "topic": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Descriptive topics related to the content of the RiskEvidenceSynthesis. Topics provide a high-level categorization grouping types of EffectEvidenceSynthesiss that can be useful for filtering and searching."
+                            }
+                        },
+                        "author": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individiual or organization primarily involved in the creation and maintenance of the content."
+                            }
+                        },
+                        "editor": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individual or organization primarily responsible for internal coherence of the content."
+                            }
+                        },
+                        "reviewer": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individual or organization primarily responsible for review of some aspect of the content."
+                            }
+                        },
+                        "endorser": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "An individual or organization responsible for officially endorsing the content for use in some setting."
+                            }
+                        },
+                        "relatedArtifact": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RelatedArtifact",
+                                "description": "Related artifacts such as additional documentation, justification, or bibliographic references."
+                            }
+                        },
+                        "synthesisType": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Type of synthesis eg meta-analysis."
+                        },
+                        "studyType": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Type of study eg randomized trial."
+                        },
+                        "population": {
                             "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
+                            "description": "A reference to a EvidenceVariable resource that defines the population for the research."
                         },
-                        "link": {
+                        "exposure": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A reference to a EvidenceVariable resource that defines the exposure for the research."
+                        },
+                        "outcome": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A reference to a EvidenceVariable resomece that defines the outcome for the research."
+                        },
+                        "sampleSize": {
+                            "$ref": "#/definitions/RiskEvidenceSynthesis_SampleSize",
+                            "description": "A description of the size of the sample involved in the synthesis."
+                        },
+                        "riskEstimate": {
+                            "$ref": "#/definitions/RiskEvidenceSynthesis_RiskEstimate",
+                            "description": "The estimated risk of the outcome."
+                        },
+                        "certainty": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/RiskEvidenceSynthesis_Certainty",
+                                "description": "A description of the certainty of the risk estimate."
                             }
                         }
                     }
                 }
             ],
+            "required": [
+                "status",
+                "population",
+                "outcome"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "RiskEvidenceSynthesis",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "yfOYEHbbTG",
+                    "lastUpdated": "2020-03-12T00:11:58.391-04:00",
+                    "source": "nfNTP8nj7o",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "_dz45wkU0b"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "qrpU243A2x",
+                            "version": "EXARNljn40",
+                            "code": "Qq5U8Omx8U",
+                            "display": "dsSbsgBKPF",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "vLFUMI0G6R",
+                            "version": "qQOPEhW1ml",
+                            "code": "MrIp8DgX7C",
+                            "display": "AYbljge8Ne",
                             "userSelected": true
                         },
                         {
@@ -849,311 +873,503 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "qz66TFAv_U",
+                "language": "yHDd_m2Zxa",
                 "text": {
                     "status": "generated",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
+                "url": "X3KWbq4UBl",
                 "identifier": [
                     {
-                        "use": "official",
+                        "use": "usual",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
+                                    "system": "kvanBExtr8",
+                                    "version": "VXvOYeIRHC",
+                                    "code": "DUKCBHKJXq",
+                                    "display": "Yv2KZwRYr8",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "RwELMTpc3R"
+                            "text": "kNjZA8jbBt"
                         },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
+                        "system": "TVYUlkGm4v",
+                        "value": "u_LSsabi2L",
                         "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
+                            "start": "2020-03-12T00:11:58.396-04:00",
+                            "end": "2020-03-12T00:11:58.396-04:00"
                         }
                     }
                 ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
+                "version": "O3NsOBpeB_",
+                "name": "LSDQHtETRX",
+                "title": "HELb7_xnqC",
+                "status": "unknown",
+                "date": "2020-03-12T00:11:58.405-04:00",
+                "publisher": "fBIlOgNwX0",
                 "contact": [
                     {
-                        "relationship": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
+                        "name": "H4DjEk1yXK",
                         "telecom": [
                             {
                                 "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
+                                "value": "lnLOMbgWXN",
+                                "use": "temp",
+                                "rank": 1869901638,
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
+                                    "start": "2020-03-12T00:11:58.391-04:00",
+                                    "end": "2020-03-12T00:11:58.391-04:00"
                                 }
                             }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
+                        ]
+                    }
+                ],
+                "description": "h04Byv_rV4",
+                "note": [
+                    {
+                        "authorReference": {
+                            "reference": "18lF6js5PD",
+                            "type": "N27ciNqnqD",
                             "identifier": {
-                                "use": "usual",
+                                "use": "old",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
+                                            "system": "iZpLUYVKg8",
+                                            "version": "FAk1Y5rPZT",
+                                            "code": "l7p7_krUdB",
+                                            "display": "pRs3RMZRnn",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "lr5rIPHEgi"
+                                    "text": "E59QYC_Ntp"
                                 },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
+                                "system": "o75qwVHHF_",
+                                "value": "Hn_jotQkJt",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
+                                    "start": "2020-03-12T00:11:58.39-04:00",
+                                    "end": "2020-03-12T00:11:58.39-04:00"
                                 }
                             },
-                            "display": "yjYGiCCEuA"
+                            "display": "7hgVBXV1rr"
                         },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
+                        "time": "2020-03-12T00:11:58.39-04:00",
+                        "text": "burKzTviQP"
                     }
                 ],
-                "communication": [
+                "useContext": [
                     {
-                        "language": {
+                        "code": {
+                            "system": "DXVE7bI455",
+                            "version": "H06vhOwMeR",
+                            "code": "AB6N2wloVN",
+                            "display": "ymUDuROG8Q",
+                            "userSelected": true
+                        },
+                        "valueCodeableConcept": {
                             "coding": [
                                 {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
+                                    "system": "1liGS3Otjy",
+                                    "version": "ICaOLh7gwS",
+                                    "code": "pi7aT9iW6m",
+                                    "display": "JRlk_qH14O",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
+                            "text": "9Fs_MzCo7P"
+                        }
                     }
                 ],
-                "generalPractitioner": [
+                "jurisdiction": [
                     {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
+                        "coding": [
+                            {
+                                "system": "BvioJtSQqq",
+                                "version": "x5ADtDVmgc",
+                                "code": "H1FhU7I5fi",
+                                "display": "DNuJZBo0ui",
+                                "userSelected": true
                             }
-                        },
-                        "display": "rAMkIBGPD2"
+                        ],
+                        "text": "CuhOnrKv0B"
                     }
                 ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
+                "copyright": "CpADrHTomu",
+                "approvalDate": "2020-03-12",
+                "lastReviewDate": "2020-03-12",
+                "effectivePeriod": {
+                    "start": "2020-03-12T00:11:58.392-04:00",
+                    "end": "2020-03-12T00:11:58.392-04:00"
+                },
+                "topic": [
+                    {
+                        "coding": [
+                            {
+                                "system": "vr00iRLB5W",
+                                "version": "e1e_0bjcHW",
+                                "code": "wFcibi4nVQ",
+                                "display": "6phrVVkhrL",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "Wv5nNTzH5n"
+                    }
+                ],
+                "author": [
+                    {
+                        "name": "s9FYGBsfhy",
+                        "telecom": [
+                            {
+                                "system": "other",
+                                "value": "ofF9pZrIU_",
+                                "use": "old",
+                                "rank": 1883941571,
+                                "period": {
+                                    "start": "2020-03-12T00:11:58.393-04:00",
+                                    "end": "2020-03-12T00:11:58.393-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "editor": [
+                    {
+                        "name": "EjngKkEHvN",
+                        "telecom": [
+                            {
+                                "system": "fax",
+                                "value": "KEWadvwgOo",
+                                "use": "mobile",
+                                "rank": 106971348,
+                                "period": {
+                                    "start": "2020-03-12T00:11:58.389-04:00",
+                                    "end": "2020-03-12T00:11:58.389-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "reviewer": [
+                    {
+                        "name": "XVHjAuYAFN",
+                        "telecom": [
+                            {
+                                "system": "email",
+                                "value": "LaaLiQI8Dt",
+                                "use": "work",
+                                "rank": 1795688840,
+                                "period": {
+                                    "start": "2020-03-12T00:11:58.393-04:00",
+                                    "end": "2020-03-12T00:11:58.394-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "endorser": [
+                    {
+                        "name": "0l12TuXBQJ",
+                        "telecom": [
+                            {
+                                "system": "other",
+                                "value": "MjJoFowIlj",
+                                "use": "temp",
+                                "rank": 535807879,
+                                "period": {
+                                    "start": "2020-03-12T00:11:58.394-04:00",
+                                    "end": "2020-03-12T00:11:58.394-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "relatedArtifact": [
+                    {
+                        "type": "derived-from",
+                        "label": "LbLlp4ZEvw",
+                        "display": "W7ukbkhwpz",
+                        "citation": "v_uf4Vx_Uj",
+                        "url": "1rdSaQyUGU",
+                        "document": {
+                            "contentType": "ZxM2yeoBIg",
+                            "language": "sxN8bMYBNB",
+                            "data": "Ql5Le34=",
+                            "url": "IlAlR62XPh",
+                            "size": 1555844702,
+                            "hash": "MEoKXXI=",
+                            "title": "PfJlj2Edtk",
+                            "creation": "2020-03-12T00:11:58.397-04:00"
+                        },
+                        "resource": "J3WJ1tG4ob"
+                    }
+                ],
+                "synthesisType": {
+                    "coding": [
+                        {
+                            "system": "ZSPOAvCjJM",
+                            "version": "5jp5XuVPzZ",
+                            "code": "O4z0FopRW_",
+                            "display": "4GYjhaAQrY",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "677pyFcpoa"
+                },
+                "studyType": {
+                    "coding": [
+                        {
+                            "system": "4Vstdn0iUW",
+                            "version": "qPVF7WTTwD",
+                            "code": "7l5s3jUmcR",
+                            "display": "uVF22hsfwh",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "NIkVyzmlYY"
+                },
+                "population": {
+                    "reference": "EvidenceVariable/bHisR4B85r",
+                    "type": "EvidenceVariable",
                     "identifier": {
-                        "use": "temp",
+                        "use": "secondary",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "PBVA1Fq0Le",
+                                    "version": "DwUH34v04C",
+                                    "code": "eM9j2v0nin",
+                                    "display": "1O8ovWGhgj",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "Gqtu1v95sl"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
+                        "system": "QabmWGmf7U",
+                        "value": "cVdx92OV9I",
                         "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
+                            "start": "2020-03-12T00:11:58.397-04:00",
+                            "end": "2020-03-12T00:11:58.397-04:00"
                         }
                     },
-                    "display": "HHvTPP_6wS"
+                    "display": "yTA2iGP9Au"
                 },
-                "link": [
+                "exposure": {
+                    "reference": "EvidenceVariable/Vnxq2CJhCp",
+                    "type": "EvidenceVariable",
+                    "identifier": {
+                        "use": "secondary",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "9Num7COmx8",
+                                    "version": "PgCur6EwqN",
+                                    "code": "frJymkAoW6",
+                                    "display": "smJH_ByR49",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "ZUUVNickBA"
+                        },
+                        "system": "Af_iLsFhq1",
+                        "value": "6GyETXKCgp",
+                        "period": {
+                            "start": "2020-03-12T00:11:58.399-04:00",
+                            "end": "2020-03-12T00:11:58.399-04:00"
+                        }
+                    },
+                    "display": "6hwuBhJ45_"
+                },
+                "outcome": {
+                    "reference": "EvidenceVariable/saBu0c7Gvc",
+                    "type": "EvidenceVariable",
+                    "identifier": {
+                        "use": "secondary",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "1KpWZo0G0V",
+                                    "version": "WB5bVZdu_e",
+                                    "code": "hIttEOl4eA",
+                                    "display": "yzZ66UxibD",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "fgA9vsO4Ue"
+                        },
+                        "system": "NwDevI78fk",
+                        "value": "bPouwWjsM4",
+                        "period": {
+                            "start": "2020-03-12T00:11:58.395-04:00",
+                            "end": "2020-03-12T00:11:58.395-04:00"
+                        }
+                    },
+                    "display": "U3IBPY8mtC"
+                },
+                "sampleSize": {
+                    "description": "kIp46nZ_99",
+                    "numberOfStudies": 1343872568,
+                    "numberOfParticipants": 1021443078
+                },
+                "riskEstimate": {
+                    "description": "WrEYWn18qR",
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "5LK7k708q8",
+                                "version": "iyTUVYJkr1",
+                                "code": "b9SThJIPwv",
+                                "display": "bi45_mcY76",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "sepy4bznSU"
+                    },
+                    "value": 335736018490,
+                    "unitOfMeasure": {
+                        "coding": [
+                            {
+                                "system": "http://unitsofmeasure.org",
+                                "version": "2.1",
+                                "code": "mm[Hg]",
+                                "display": "mm[Hg]",
+                                "userSelected": false
+                            }
+                        ],
+                        "text": "mm[Hg]"
+                    },
+                    "denominatorCount": 1142811825,
+                    "numeratorCount": 398187909,
+                    "precisionEstimate": [
+                        {
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "EvDMRIMC6b",
+                                        "version": "BuS505oXVn",
+                                        "code": "8IESrbGIHX",
+                                        "display": "yTZ8DbrBXb",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "ByHcAzaz0R"
+                            },
+                            "level": 5840111924,
+                            "to": 508618547968
+                        }
+                    ]
+                },
+                "certainty": [
                     {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
+                        "rating": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "CyPFrO1FWp",
+                                        "version": "W6ACkJLWAY",
+                                        "code": "LJtZtoLnM2",
+                                        "display": "x1HZXP3qdG",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "RY2PsnKlLV"
+                            }
+                        ],
+                        "note": [
+                            {
+                                "authorReference": {
+                                    "reference": "4ncIHX0usa",
+                                    "type": "ey_zIwxMN_",
+                                    "identifier": {
+                                        "use": "temp",
+                                        "type": {
+                                            "coding": [
+                                                {
+                                                    "system": "QcZIsfAOqn",
+                                                    "version": "x67BpeSmNG",
+                                                    "code": "PYORdNmPPw",
+                                                    "display": "7uSO0KwEAK",
+                                                    "userSelected": true
+                                                }
+                                            ],
+                                            "text": "ZSO4FV5EkC"
+                                        },
+                                        "system": "McDf9A52F_",
+                                        "value": "EwhXljb4Rh",
+                                        "period": {
+                                            "start": "2020-03-12T00:11:58.401-04:00",
+                                            "end": "2020-03-12T00:11:58.402-04:00"
+                                        }
+                                    },
+                                    "display": "PVspK_YaNA"
+                                },
+                                "time": "2020-03-12T00:11:58.402-04:00",
+                                "text": "i6ejPpbrQT"
+                            }
+                        ],
+                        "certaintySubcomponent": [
+                            {
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
+                                            "system": "DeJZJmzTsy",
+                                            "version": "RdFzzkDsCo",
+                                            "code": "olgjHgG_TW",
+                                            "display": "hR_8StiJf2",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "text": "cuuGLa4gaw"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
-                                }
-                            },
-                            "display": "BNnVKMbPmJ"
-                        },
-                        "type": "refer"
+                                "rating": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "system": "pVcjC2btOa",
+                                                "version": "VMJwMu4vA_",
+                                                "code": "6el2LRQwAw",
+                                                "display": "EbJk64QcnX",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "JwboTnzsrZ"
+                                    }
+                                ],
+                                "note": [
+                                    {
+                                        "authorReference": {
+                                            "reference": "7EjP23aTAq",
+                                            "type": "tCWg9t5_Ks",
+                                            "identifier": {
+                                                "use": "temp",
+                                                "type": {
+                                                    "coding": [
+                                                        {
+                                                            "system": "hYuxlAfa5S",
+                                                            "version": "kXLqGj2W11",
+                                                            "code": "zo9InCOZB4",
+                                                            "display": "gMTjaPXnY6",
+                                                            "userSelected": true
+                                                        }
+                                                    ],
+                                                    "text": "0RmH3JKwCw"
+                                                },
+                                                "system": "JSTVnhOEp_",
+                                                "value": "ZZAzuu13_9",
+                                                "period": {
+                                                    "start": "2020-03-12T00:11:58.403-04:00",
+                                                    "end": "2020-03-12T00:11:58.404-04:00"
+                                                }
+                                            },
+                                            "display": "cTj8fvages"
+                                        },
+                                        "time": "2020-03-12T00:11:58.404-04:00",
+                                        "text": "yd0dMCZaCo"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
@@ -1736,7 +1952,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "RiskEvidenceSynthesis_Certainty": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,98 +1960,157 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
-                            ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-                        },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
+                        "rating": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
+                                "description": "A rating of the certainty of the effect estimate."
                             }
                         },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
+                        "note": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
+                                "$ref": "#/definitions/Annotation",
+                                "description": "A human-readable string to clarify or explain concepts about the resource."
                             }
                         },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
+                        "certaintySubcomponent": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RiskEvidenceSynthesis_Certainty_CertaintySubcomponent",
+                                "description": "A description of a component of the overall certainty."
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "RiskEvidenceSynthesis_Certainty_CertaintySubcomponent": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Type of subcomponent of certainty rating."
                         },
-                        "gender": {
+                        "rating": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A rating of a subcomponent of rating certainty."
+                            }
+                        },
+                        "note": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Annotation",
+                                "description": "A human-readable string to clarify or explain concepts about the resource."
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "RiskEvidenceSynthesis_RiskEstimate": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "description": {
                             "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Human-readable summary of risk estimate."
                         },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Examples include proportion and mean."
                         },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                        "value": {
+                            "type": "number",
+                            "description": "The point estimate of the risk estimate."
+                        },
+                        "unitOfMeasure": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Specifies the UCUM unit for the outcome."
+                        },
+                        "denominatorCount": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The sample size for the group that was measured for this risk estimate."
+                        },
+                        "numeratorCount": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The number of group members with the outcome of interest."
+                        },
+                        "precisionEstimate": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RiskEvidenceSynthesis_RiskEstimate_PrecisionEstimate",
+                                "description": "A description of the precision of the estimate for the effect."
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "RiskEvidenceSynthesis_RiskEstimate_PrecisionEstimate": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Examples include confidence interval and interquartile range."
+                        },
+                        "level": {
+                            "type": "number",
+                            "description": "Use 95 for a 95% confidence interval."
+                        },
+                        "from": {
+                            "type": "number",
+                            "description": "Lower bound of confidence interval."
+                        },
+                        "to": {
+                            "type": "number",
+                            "description": "Upper bound of confidence interval."
+                        }
+                    }
+                }
+            ]
+        },
+        "RiskEvidenceSynthesis_SampleSize": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Human-readable summary of sample size."
+                        },
+                        "numberOfStudies": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Number of studies included in this evidence synthesis."
+                        },
+                        "numberOfParticipants": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Number of participants included in this evidence synthesis."
                         }
                     }
                 }

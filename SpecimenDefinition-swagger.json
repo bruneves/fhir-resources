@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "SpecimenDefinition API",
+        "description": "A simplified version of the HL7 FHIR API for SpecimenDefinition resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "SpecimenDefinition"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/SpecimenDefinition": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a SpecimenDefinition resource",
+                "operationId": "createSpecimenDefinition",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,43 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SpecimenDefinition"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create SpecimenDefinition operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for SpecimenDefinition resources",
+                "operationId": "searchSpecimenDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "container",
+                        "description": "The type of specimen conditioned in container expected by the lab",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "The unique identifier associated with the specimen",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "type",
+                        "description": "The type of collected specimen",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +147,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search SpecimenDefinition operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +155,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/SpecimenDefinition/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a SpecimenDefinition resource",
+                "operationId": "vreadSpecimenDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +175,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read SpecimenDefinition operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SpecimenDefinition"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/SpecimenDefinition/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a SpecimenDefinition resource",
+                "operationId": "readSpecimenDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +200,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read SpecimenDefinition operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SpecimenDefinition"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing SpecimenDefinition resource",
+                "operationId": "updateSpecimenDefinition",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +225,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/SpecimenDefinition"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update SpecimenDefinition operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create SpecimenDefinition operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a SpecimenDefinition resource",
+                "operationId": "deleteSpecimenDefinition",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +251,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete SpecimenDefinition operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/SpecimenDefinition/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "SpecimenDefinition"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a SpecimenDefinition resource",
+                "operationId": "historySpecimenDefinition",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +273,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History SpecimenDefinition operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +559,7 @@
                 }
             ]
         },
-        "Patient": {
+        "SpecimenDefinition": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -708,140 +568,66 @@
                     "type": "object",
                     "properties": {
                         "identifier": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
-                            }
+                            "$ref": "#/definitions/Identifier",
+                            "description": "A business identifier associated with the kind of specimen."
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
-                        },
-                        "name": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
-                            }
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
-                        },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
-                        },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "deceasedDateTime": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
-                        },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
+                        "typeCollected": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
+                            "description": "The kind of material to be collected."
                         },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
+                        "patientPreparation": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "Preparation of the patient for specimen collection."
                             }
                         },
-                        "contact": {
+                        "timeAspect": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Time aspect of specimen collection (duration or offset)."
+                        },
+                        "collection": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "The action to be performed for collecting the specimen."
                             }
                         },
-                        "communication": {
+                        "typeTested": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
-                            }
-                        },
-                        "generalPractitioner": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
-                            }
-                        },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
-                        },
-                        "link": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/SpecimenDefinition_TypeTested",
+                                "description": "Specimen conditioned in a container as expected by the testing laboratory."
                             }
                         }
                     }
                 }
             ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "SpecimenDefinition",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "GgmhzWapLF",
+                    "lastUpdated": "2020-03-12T00:11:58.672-04:00",
+                    "source": "0eJhB5XFat",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "B6pzO4Sknj"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "5QaRwit8W3",
+                            "version": "UA3DgmtoP9",
+                            "code": "P987t8_ISr",
+                            "display": "pC_dUpoKd8",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "scHcm4wWh5",
+                            "version": "EYtJJ5sBoi",
+                            "code": "FLW_abJdGw",
+                            "display": "Wl7IqWKfNe",
                             "userSelected": true
                         },
                         {
@@ -849,311 +635,212 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "B1eA6pxflD",
+                "language": "UpytNrxATO",
                 "text": {
                     "status": "generated",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
-                "identifier": [
-                    {
-                        "use": "official",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "RwELMTpc3R"
-                        },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
-                        }
-                    }
-                ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
+                "identifier": {
+                    "use": "official",
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "9M2t_qt9c_",
+                                "version": "w4HJmH7opY",
+                                "code": "LgT1fqANE5",
+                                "display": "_q3Tf2nqrX",
+                                "userSelected": true
+                            }
                         ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
+                        "text": "leB99uByVu"
+                    },
+                    "system": "TGiGKnh8a1",
+                    "value": "tcQCgtnjdQ",
+                    "period": {
+                        "start": "2020-03-12T00:11:58.674-04:00",
+                        "end": "2020-03-12T00:11:58.674-04:00"
                     }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
+                },
+                "typeCollected": {
                     "coding": [
                         {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
+                            "system": "kus4NIV87v",
+                            "version": "HC0n6EHi3z",
+                            "code": "l4QgjQZgcU",
+                            "display": "47vd6gzzGD",
                             "userSelected": true
                         }
                     ],
-                    "text": "_XU7GZGDCJ"
+                    "text": "YR5JoLHkU7"
                 },
-                "multipleBirthBoolean": true,
-                "photo": [
+                "patientPreparation": [
                     {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
-                "contact": [
-                    {
-                        "relationship": [
+                        "coding": [
                             {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
+                                "system": "H6Pfr1RBZI",
+                                "version": "bj9mw4lI9I",
+                                "code": "iVpQOan8Vj",
+                                "display": "l6P2pCwm84",
+                                "userSelected": true
                             }
                         ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
-                        "telecom": [
+                        "text": "qzDcE0if2a"
+                    }
+                ],
+                "timeAspect": "mfPXUT0b3H",
+                "collection": [
+                    {
+                        "coding": [
                             {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
+                                "system": "1fEcgbKQyt",
+                                "version": "5sIZsuwMaI",
+                                "code": "XWqumlwQC5",
+                                "display": "Ht5Gm_MpzA",
+                                "userSelected": true
                             }
                         ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
-                            "identifier": {
-                                "use": "usual",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "lr5rIPHEgi"
-                                },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
-                                }
-                            },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
+                        "text": "XSrk5tOwNO"
                     }
                 ],
-                "communication": [
+                "typeTested": [
                     {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
-                            }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
-                        "use": "temp",
+                        "isDerived": true,
                         "type": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "ImgBvsAhiX",
+                                    "version": "80S2sJcoNj",
+                                    "code": "P7oiHYPUxV",
+                                    "display": "iP_7kKXMiy",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "9CCz1MUJOf"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
-                        }
-                    },
-                    "display": "HHvTPP_6wS"
-                },
-                "link": [
-                    {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
+                        "preference": "preferred",
+                        "container": {
+                            "material": {
+                                "coding": [
+                                    {
+                                        "system": "4RtbWwvUN0",
+                                        "version": "PS8zqDusOR",
+                                        "code": "B7QdUzXaaP",
+                                        "display": "9SsdNwZ3Jl",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "lmko3ZI3bY"
+                            },
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "TllZb7PiFJ",
+                                        "version": "4L502PGo6m",
+                                        "code": "g2gb2dZdFs",
+                                        "display": "Z7yP_HL9bo",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "z9CCzDxkNs"
+                            },
+                            "cap": {
+                                "coding": [
+                                    {
+                                        "system": "KSVlSW82w4",
+                                        "version": "5oiAP8JzrU",
+                                        "code": "czbYr9jpmk",
+                                        "display": "grANwvMbGT",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "KlTeHTL4Lc"
+                            },
+                            "description": "BW2kZzh3Vc",
+                            "capacity": {
+                                "value": 138162283639,
+                                "unit": "xmkpWsbTSC",
+                                "system": "XA7nj8SfzD",
+                                "code": "ABKrXSdC4n"
+                            },
+                            "minimumVolumeQuantity": {
+                                "value": 530296412938,
+                                "unit": "PPWEMy4I9W",
+                                "system": "L63TyJReTl",
+                                "code": "RBhDH4fEkt"
+                            },
+                            "additive": [
+                                {
+                                    "additiveCodeableConcept": {
+                                        "coding": [
+                                            {
+                                                "system": "HjIYReIG7B",
+                                                "version": "awZQSBpnF6",
+                                                "code": "1V9K6XpToQ",
+                                                "display": "nQAxv7LUeL",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "M8hPUZ6VI7"
+                                    }
+                                }
+                            ],
+                            "preparation": "HuSNX22eyl"
+                        },
+                        "requirement": "KvckZgQb9t",
+                        "retentionTime": {
+                            "value": 181664970299,
+                            "comparator": ">",
+                            "unit": "yiHoxZrrSN",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "h"
+                        },
+                        "rejectionCriterion": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "LotaHdDZMu",
+                                        "version": "cGWEme7nr2",
+                                        "code": "8kbWz0kTyL",
+                                        "display": "j7bG7JAwb6",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "Ib8CYc77dx"
+                            }
+                        ],
+                        "handling": [
+                            {
+                                "temperatureQualifier": {
                                     "coding": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
+                                            "system": "BlTquvBbbd",
+                                            "version": "HreMOJuOtS",
+                                            "code": "W3DY7dMIEm",
+                                            "display": "C39tSVcAL0",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "text": "5PyrUicFRK"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
-                                }
-                            },
-                            "display": "BNnVKMbPmJ"
-                        },
-                        "type": "refer"
+                                "temperatureRange": {
+                                    "low": {
+                                        "value": 95029040694,
+                                        "unit": "w4gqjqGnZl",
+                                        "system": "V9g7jWGCp8",
+                                        "code": "kmRLmAQfb_"
+                                    }
+                                },
+                                "maxDuration": {
+                                    "value": 52433073221,
+                                    "comparator": "<=",
+                                    "unit": "3sBhNDQ1eO",
+                                    "system": "http://unitsofmeasure.org",
+                                    "code": "h"
+                                },
+                                "instruction": "InioieT5hL"
+                            }
+                        ]
                     }
                 ]
             }
@@ -1736,7 +1423,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "SpecimenDefinition_TypeTested": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,98 +1431,154 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
+                        "isDerived": {
+                            "type": "boolean",
+                            "description": "Primary of secondary specimen."
                         },
                         "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The kind of specimen conditioned for testing expected by lab."
+                        },
+                        "preference": {
                             "type": "string",
                             "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
+                                "preferred",
+                                "alternate"
                             ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
+                            "description": "The preference for this type of conditioned specimen."
                         },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
+                        "container": {
+                            "$ref": "#/definitions/SpecimenDefinition_TypeTested_Container",
+                            "description": "The specimen's container."
+                        },
+                        "requirement": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Requirements for delivery and special handling of this kind of conditioned specimen."
+                        },
+                        "retentionTime": {
+                            "$ref": "#/definitions/Duration",
+                            "description": "The usual time that a specimen of this kind is retained after the ordered tests are completed, for the purpose of additional testing."
+                        },
+                        "rejectionCriterion": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
+                                "description": "Criterion for rejection of the specimen in its container by the laboratory."
                             }
                         },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
+                        "handling": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
+                                "$ref": "#/definitions/SpecimenDefinition_TypeTested_Handling",
+                                "description": "Set of instructions for preservation/transport of the specimen at a defined temperature interval, prior the testing process."
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "preference"
+            ]
+        },
+        "SpecimenDefinition_TypeTested_Handling": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "temperatureQualifier": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "It qualifies the interval of temperature, which characterizes an occurrence of handling. Conditions that are not related to temperature may be handled in the instruction element."
+                        },
+                        "temperatureRange": {
+                            "$ref": "#/definitions/Range",
+                            "description": "The temperature interval for this set of handling instructions."
+                        },
+                        "maxDuration": {
+                            "$ref": "#/definitions/Duration",
+                            "description": "The maximum time interval of preservation of the specimen with these conditions."
+                        },
+                        "instruction": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Additional textual instructions for the preservation or transport of the specimen. For instance, 'Protect from light exposure'."
+                        }
+                    }
+                }
+            ]
+        },
+        "SpecimenDefinition_TypeTested_Container": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "material": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The type of material of the container."
+                        },
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "The type of container used to contain this kind of specimen."
+                        },
+                        "cap": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Color of container cap."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The textual description of the kind of container."
+                        },
+                        "capacity": {
+                            "$ref": "#/definitions/SimpleQuantity",
+                            "description": "The capacity (volume or other measure) of this kind of container."
+                        },
+                        "minimumVolumeQuantity": {
+                            "$ref": "#/definitions/SimpleQuantity",
+                            "description": "The minimum volume to be conditioned in the container."
+                        },
+                        "minimumVolumeString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The minimum volume to be conditioned in the container."
+                        },
+                        "additive": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SpecimenDefinition_TypeTested_Container_Additive",
+                                "description": "Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
                             }
                         },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
-                        },
-                        "gender": {
+                        "preparation": {
                             "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Special processing that should be applied to the container for this kind of specimen."
+                        }
+                    }
+                }
+            ]
+        },
+        "SpecimenDefinition_TypeTested_Container_Additive": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "additiveCodeableConcept": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
                         },
-                        "organization": {
+                        "additiveReference": {
                             "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
-                        },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
+                            "description": "Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA."
                         }
                     }
                 }

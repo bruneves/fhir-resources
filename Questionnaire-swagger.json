@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "Questionnaire API",
+        "description": "A simplified version of the HL7 FHIR API for Questionnaire resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "Questionnaire"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/Questionnaire": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a Questionnaire resource",
+                "operationId": "createQuestionnaire",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,155 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Questionnaire"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create Questionnaire operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for Questionnaire resources",
+                "operationId": "searchQuestionnaire",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
+                        "name": "code",
+                        "description": "A code that corresponds to one of its items in the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
+                        "name": "context",
+                        "description": "A use context assigned to the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
+                        "name": "context-quantity",
+                        "description": "A quantity- or range-valued use context assigned to the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
+                        "name": "context-type",
+                        "description": "A type of use context assigned to the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
+                        "name": "date",
+                        "description": "The questionnaire publication date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
+                        "name": "definition",
+                        "description": "ElementDefinition - details for the item",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
+                        "name": "description",
+                        "description": "The description of the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "effective",
+                        "description": "The time during which the questionnaire is intended to be in use",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "External identifier for the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
+                        "name": "jurisdiction",
+                        "description": "Intended jurisdiction for the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "description": "Computationally friendly name of the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
+                        "name": "publisher",
+                        "description": "Name of the publisher of the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
+                        "name": "status",
+                        "description": "The current status of the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
+                        "name": "subject-type",
+                        "description": "Resource that can be subject of QuestionnaireResponse",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "title",
+                        "description": "The human-friendly name of the questionnaire",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "url",
+                        "description": "The uri that identifies the questionnaire",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "version",
+                        "description": "The business version of the questionnaire",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-quantity",
+                        "description": "A use context type and quantity- or range-based value assigned to the questionnaire",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-value",
+                        "description": "A use context type and value assigned to the questionnaire",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +259,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search Questionnaire operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +267,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/Questionnaire/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a Questionnaire resource",
+                "operationId": "vreadQuestionnaire",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +287,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read Questionnaire operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Questionnaire"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/Questionnaire/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a Questionnaire resource",
+                "operationId": "readQuestionnaire",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +312,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read Questionnaire operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Questionnaire"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing Questionnaire resource",
+                "operationId": "updateQuestionnaire",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +337,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/Questionnaire"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update Questionnaire operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create Questionnaire operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a Questionnaire resource",
+                "operationId": "deleteQuestionnaire",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +363,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete Questionnaire operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/Questionnaire/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "Questionnaire"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a Questionnaire resource",
+                "operationId": "historyQuestionnaire",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +385,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History Questionnaire operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +671,7 @@
                 }
             ]
         },
-        "Patient": {
+        "Questionnaire": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -707,141 +679,316 @@
                 {
                     "type": "object",
                     "properties": {
+                        "url": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "An absolute URI that is used to identify this questionnaire when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this questionnaire is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the questionnaire is stored on different servers."
+                        },
                         "identifier": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
+                                "description": "A formal identifier that is used to identify this questionnaire when it is represented in other formats, or referenced in a specification, model, design or an instance."
                             }
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+                        "version": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The identifier that is used to identify this version of the questionnaire when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the questionnaire author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
                         },
                         "name": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A natural language name identifying the questionnaire. This name should be usable as an identifier for the module by machine processing applications such as code generation."
+                        },
+                        "title": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A short, descriptive, user-friendly title for the questionnaire."
+                        },
+                        "derivedFrom": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
+                                "type": "string",
+                                "pattern": "\\S*",
+                                "description": "The URL of a Questionnaire that this Questionnaire is based on."
                             }
                         },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
-                        },
-                        "gender": {
+                        "status": {
                             "type": "string",
                             "enum": [
-                                "male",
-                                "female",
-                                "other",
+                                "draft",
+                                "active",
+                                "retired",
                                 "unknown"
                             ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+                            "description": "The status of this questionnaire. Enables tracking the life-cycle of the content."
                         },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
+                        "experimental": {
                             "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "A Boolean value to indicate that this questionnaire is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
                         },
-                        "deceasedDateTime": {
+                        "subjectType": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "Account",
+                                    "ActivityDefinition",
+                                    "AdverseEvent",
+                                    "AllergyIntolerance",
+                                    "Appointment",
+                                    "AppointmentResponse",
+                                    "AuditEvent",
+                                    "Basic",
+                                    "Binary",
+                                    "BiologicallyDerivedProduct",
+                                    "BodyStructure",
+                                    "Bundle",
+                                    "CapabilityStatement",
+                                    "CarePlan",
+                                    "CareTeam",
+                                    "CatalogEntry",
+                                    "ChargeItem",
+                                    "ChargeItemDefinition",
+                                    "Claim",
+                                    "ClaimResponse",
+                                    "ClinicalImpression",
+                                    "CodeSystem",
+                                    "Communication",
+                                    "CommunicationRequest",
+                                    "CompartmentDefinition",
+                                    "Composition",
+                                    "ConceptMap",
+                                    "Condition",
+                                    "Consent",
+                                    "Contract",
+                                    "Coverage",
+                                    "CoverageEligibilityRequest",
+                                    "CoverageEligibilityResponse",
+                                    "DetectedIssue",
+                                    "Device",
+                                    "DeviceDefinition",
+                                    "DeviceMetric",
+                                    "DeviceRequest",
+                                    "DeviceUseStatement",
+                                    "DiagnosticReport",
+                                    "DocumentManifest",
+                                    "DocumentReference",
+                                    "DomainResource",
+                                    "EffectEvidenceSynthesis",
+                                    "Encounter",
+                                    "Endpoint",
+                                    "EnrollmentRequest",
+                                    "EnrollmentResponse",
+                                    "EpisodeOfCare",
+                                    "EventDefinition",
+                                    "Evidence",
+                                    "EvidenceVariable",
+                                    "ExampleScenario",
+                                    "ExplanationOfBenefit",
+                                    "FamilyMemberHistory",
+                                    "Flag",
+                                    "Goal",
+                                    "GraphDefinition",
+                                    "Group",
+                                    "GuidanceResponse",
+                                    "HealthcareService",
+                                    "ImagingStudy",
+                                    "Immunization",
+                                    "ImmunizationEvaluation",
+                                    "ImmunizationRecommendation",
+                                    "ImplementationGuide",
+                                    "InsurancePlan",
+                                    "Invoice",
+                                    "Library",
+                                    "Linkage",
+                                    "List",
+                                    "Location",
+                                    "Measure",
+                                    "MeasureReport",
+                                    "Media",
+                                    "Medication",
+                                    "MedicationAdministration",
+                                    "MedicationDispense",
+                                    "MedicationKnowledge",
+                                    "MedicationRequest",
+                                    "MedicationStatement",
+                                    "MedicinalProduct",
+                                    "MedicinalProductAuthorization",
+                                    "MedicinalProductContraindication",
+                                    "MedicinalProductIndication",
+                                    "MedicinalProductIngredient",
+                                    "MedicinalProductInteraction",
+                                    "MedicinalProductManufactured",
+                                    "MedicinalProductPackaged",
+                                    "MedicinalProductPharmaceutical",
+                                    "MedicinalProductUndesirableEffect",
+                                    "MessageDefinition",
+                                    "MessageHeader",
+                                    "MolecularSequence",
+                                    "NamingSystem",
+                                    "NutritionOrder",
+                                    "Observation",
+                                    "ObservationDefinition",
+                                    "OperationDefinition",
+                                    "OperationOutcome",
+                                    "Organization",
+                                    "OrganizationAffiliation",
+                                    "Parameters",
+                                    "Patient",
+                                    "PaymentNotice",
+                                    "PaymentReconciliation",
+                                    "Person",
+                                    "PlanDefinition",
+                                    "Practitioner",
+                                    "PractitionerRole",
+                                    "Procedure",
+                                    "Provenance",
+                                    "Questionnaire",
+                                    "QuestionnaireResponse",
+                                    "RelatedPerson",
+                                    "RequestGroup",
+                                    "ResearchDefinition",
+                                    "ResearchElementDefinition",
+                                    "ResearchStudy",
+                                    "ResearchSubject",
+                                    "Resource",
+                                    "RiskAssessment",
+                                    "RiskEvidenceSynthesis",
+                                    "Schedule",
+                                    "SearchParameter",
+                                    "ServiceRequest",
+                                    "Slot",
+                                    "Specimen",
+                                    "SpecimenDefinition",
+                                    "StructureDefinition",
+                                    "StructureMap",
+                                    "Subscription",
+                                    "Substance",
+                                    "SubstanceNucleicAcid",
+                                    "SubstancePolymer",
+                                    "SubstanceProtein",
+                                    "SubstanceReferenceInformation",
+                                    "SubstanceSourceMaterial",
+                                    "SubstanceSpecification",
+                                    "SupplyDelivery",
+                                    "SupplyRequest",
+                                    "Task",
+                                    "TerminologyCapabilities",
+                                    "TestReport",
+                                    "TestScript",
+                                    "ValueSet",
+                                    "VerificationResult",
+                                    "VisionPrescription"
+                                ],
+                                "description": "The types of subjects that can be the subject of responses created for the questionnaire."
+                            }
+                        },
+                        "date": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "The date  (and optionally time) when the questionnaire was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the questionnaire changes."
                         },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
+                        "publisher": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The name of the organization or individual that published the questionnaire."
                         },
                         "contact": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "Contact details to assist a user in finding and communicating with the publisher."
                             }
                         },
-                        "communication": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A free text natural language description of the questionnaire from a consumer's perspective."
+                        },
+                        "useContext": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
+                                "$ref": "#/definitions/UsageContext",
+                                "description": "The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate questionnaire instances."
                             }
                         },
-                        "generalPractitioner": {
+                        "jurisdiction": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A legal or geographic region in which the questionnaire is intended to be used."
                             }
                         },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
+                        "purpose": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Explanation of why this questionnaire is needed and why it has been designed as it has."
                         },
-                        "link": {
+                        "copyright": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A copyright statement relating to the questionnaire and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the questionnaire."
+                        },
+                        "approvalDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage."
+                        },
+                        "lastReviewDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date."
+                        },
+                        "effectivePeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "The period during which the questionnaire content was or is planned to be in active use."
+                        },
+                        "code": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/Coding",
+                                "description": "An identifier for this question or group of questions in a particular terminology such as LOINC."
+                            }
+                        },
+                        "item": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Questionnaire_Item",
+                                "description": "A particular question, question grouping or display text that is part of the questionnaire."
                             }
                         }
                     }
                 }
             ],
+            "required": [
+                "status"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "Questionnaire",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "fy8deE1yQ5",
+                    "lastUpdated": "2020-03-12T00:11:57.315-04:00",
+                    "source": "UY5In0le2p",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "i9FBAzfjdI"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "r_NX969W8z",
+                            "version": "67XK5Fs_90",
+                            "code": "uot_dszmP3",
+                            "display": "nepST7y2dR",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "ShVsbbYYoF",
+                            "version": "wEX4r7qrn1",
+                            "code": "37idDvmNCz",
+                            "display": "HTfbG9KJCN",
                             "userSelected": true
                         },
                         {
@@ -849,311 +996,148 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "U8xuIZSUcW",
+                "language": "TIdVECyoil",
                 "text": {
-                    "status": "generated",
+                    "status": "empty",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
+                "url": "in86sUPt7T",
                 "identifier": [
                     {
-                        "use": "official",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "RwELMTpc3R"
-                        },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
-                        }
-                    }
-                ],
-                "active": true,
-                "name": [
-                    {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
-                        ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "telecom": [
-                    {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
-                    }
-                ],
-                "contact": [
-                    {
-                        "relationship": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
-                            ],
-                            "prefix": [
-                                "L7jpFe1JOD"
-                            ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
-                        "telecom": [
-                            {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
-                            }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
-                            "identifier": {
-                                "use": "usual",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "lr5rIPHEgi"
-                                },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
-                                }
-                            },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
-                        }
-                    }
-                ],
-                "communication": [
-                    {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "fckw4EML29"
-                            },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
-                            }
-                        },
-                        "display": "rAMkIBGPD2"
-                    }
-                ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
                         "use": "temp",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
+                                    "system": "3udwHGQdJj",
+                                    "version": "2big3DNdK3",
+                                    "code": "SaalUxxX5A",
+                                    "display": "C3yg8afGRh",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "gbUHUfQGKD"
+                            "text": "1PEkoVKGzF"
                         },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
+                        "system": "fJOUYevH_5",
+                        "value": "jqxzukPVxH",
                         "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
+                            "start": "2020-03-12T00:11:57.317-04:00",
+                            "end": "2020-03-12T00:11:57.317-04:00"
                         }
-                    },
-                    "display": "HHvTPP_6wS"
-                },
-                "link": [
+                    }
+                ],
+                "version": "Bo9zFr27iZ",
+                "name": "7k0uA7QuFN",
+                "title": "TybvDoGb6J",
+                "derivedFrom": [
+                    "h41ZBcs_vI"
+                ],
+                "status": "active",
+                "experimental": true,
+                "subjectType": [
+                    "SpecimenDefinition"
+                ],
+                "date": "2020-03-12T00:11:57.326-04:00",
+                "publisher": "4GpvKf2SXk",
+                "contact": [
                     {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "1WL8O58DRg"
-                                },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
+                        "name": "k6EicqHraV",
+                        "telecom": [
+                            {
+                                "system": "fax",
+                                "value": "VurWs8o0Bo",
+                                "use": "mobile",
+                                "rank": 1814565890,
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                                    "start": "2020-03-12T00:11:57.315-04:00",
+                                    "end": "2020-03-12T00:11:57.315-04:00"
                                 }
-                            },
-                            "display": "BNnVKMbPmJ"
+                            }
+                        ]
+                    }
+                ],
+                "description": "RQ3Vy8pYIf",
+                "useContext": [
+                    {
+                        "code": {
+                            "system": "FX0bbPDQtj",
+                            "version": "3hh6HKbJ06",
+                            "code": "jZXCiugkZH",
+                            "display": "CIdMzmhfm3",
+                            "userSelected": true
                         },
-                        "type": "refer"
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "s5PsqjnUyD",
+                                    "version": "XVxhMHK1DK",
+                                    "code": "CJ7SIs2DYr",
+                                    "display": "08R8MXwGW7",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "YftM1yMR1L"
+                        }
+                    }
+                ],
+                "jurisdiction": [
+                    {
+                        "coding": [
+                            {
+                                "system": "n43e6okcg8",
+                                "version": "3jQ6M0hk6u",
+                                "code": "11Q12kziCS",
+                                "display": "7XDNFcGnQ8",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "R3xKynF7g1"
+                    }
+                ],
+                "purpose": "FhxEn5SgVV",
+                "copyright": "M7YVBI51qU",
+                "approvalDate": "2020-03-12",
+                "lastReviewDate": "2020-03-12",
+                "effectivePeriod": {
+                    "start": "2020-03-12T00:11:57.316-04:00",
+                    "end": "2020-03-12T00:11:57.317-04:00"
+                },
+                "code": [
+                    {
+                        "system": "iNsY2sViLk",
+                        "version": "Gj2i0VAVy8",
+                        "code": "gDaiR5UflO",
+                        "display": "JnrynSksER",
+                        "userSelected": true
+                    }
+                ],
+                "item": [
+                    {
+                        "linkId": "keET01AulJ",
+                        "definition": "JBa2XjGrtp",
+                        "code": [
+                            {
+                                "system": "lxzyCX5DYQ",
+                                "version": "9DitVsVaHF",
+                                "code": "mJYvG6NYE3",
+                                "display": "4huQhABqDf",
+                                "userSelected": true
+                            }
+                        ],
+                        "prefix": "UYdSEzK8r3",
+                        "text": "8P34MprOhR",
+                        "type": "date",
+                        "enableWhen": [
+                            {
+                                "question": "LZQzUxB8jO",
+                                "operator": ">=",
+                                "answerBoolean": true
+                            }
+                        ],
+                        "enableBehavior": "all",
+                        "required": true,
+                        "repeats": true,
+                        "readOnly": true
                     }
                 ]
             }
@@ -1736,7 +1720,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "Questionnaire_Item": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,29 +1728,123 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
+                        "linkId": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "An identifier that is unique within the Questionnaire allowing linkage to the equivalent item in a QuestionnaireResponse resource."
+                        },
+                        "definition": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "This element is a URI that refers to an [ElementDefinition](elementdefinition.html) that provides information about this item, including information that might otherwise be included in the instance of the Questionnaire resource. A detailed description of the construction of the URI is shown in Comments, below. If this element is present then the following element values MAY be derived from the Element Definition if the corresponding elements of this Questionnaire resource instance have no value:\n\n* code (ElementDefinition.code) \n* type (ElementDefinition.type) \n* required (ElementDefinition.min) \n* repeats (ElementDefinition.max) \n* maxLength (ElementDefinition.maxLength) \n* answerValueSet (ElementDefinition.binding)\n* options (ElementDefinition.binding)."
+                        },
+                        "code": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Coding",
+                                "description": "A terminology code that corresponds to this group or question (e.g. a code from LOINC, which defines many questions and answers)."
+                            }
+                        },
+                        "prefix": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A short label for a particular group, question or set of display text within the questionnaire used for reference by the individual completing the questionnaire."
+                        },
+                        "text": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The name of a section, the text of a question or text content for a display item."
                         },
                         "type": {
                             "type": "string",
                             "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
+                                "group",
+                                "display",
+                                "question",
+                                "boolean",
+                                "decimal",
+                                "integer",
+                                "date",
+                                "dateTime",
+                                "time",
+                                "string",
+                                "text",
+                                "url",
+                                "choice",
+                                "open-choice",
+                                "attachment",
+                                "reference",
+                                "quantity"
                             ],
-                            "description": "The type of link between this patient resource and another patient resource."
+                            "description": "The type of questionnaire item this is - whether text for display, a grouping of other items or a particular type of data to be captured (string, integer, coded choice, etc.)."
+                        },
+                        "enableWhen": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Questionnaire_Item_EnableWhen",
+                                "description": "A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true."
+                            }
+                        },
+                        "enableBehavior": {
+                            "type": "string",
+                            "enum": [
+                                "all",
+                                "any"
+                            ],
+                            "description": "Controls how multiple enableWhen values are interpreted -  whether all or any must be true."
+                        },
+                        "required": {
+                            "type": "boolean",
+                            "description": "An indication, if true, that the item must be present in a \"completed\" QuestionnaireResponse.  If false, the item may be skipped when answering the questionnaire."
+                        },
+                        "repeats": {
+                            "type": "boolean",
+                            "description": "An indication, if true, that the item may occur multiple times in the response, collecting multiple answers for questions or multiple sets of answers for groups."
+                        },
+                        "readOnly": {
+                            "type": "boolean",
+                            "description": "An indication, when true, that the value cannot be changed by a human respondent to the Questionnaire."
+                        },
+                        "maxLength": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The maximum number of characters that are permitted in the answer to be considered a \"valid\" QuestionnaireResponse."
+                        },
+                        "answerValueSet": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "A reference to a value set containing a list of codes representing permitted answers for a \"choice\" or \"open-choice\" question."
+                        },
+                        "answerOption": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Questionnaire_Item_AnswerOption",
+                                "description": "One of the permitted answers for a \"choice\" or \"open-choice\" question."
+                            }
+                        },
+                        "initial": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Questionnaire_Item_Initial",
+                                "description": "One or more values that should be pre-populated in the answer when initially rendering the questionnaire for user input."
+                            }
+                        },
+                        "item": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Questionnaire_Item",
+                                "description": "Text, questions and other groups to be nested beneath a question or group."
+                            }
                         }
                     }
                 }
             ],
             "required": [
-                "other",
+                "linkId",
                 "type"
             ]
         },
-        "Patient_Communication": {
+        "Questionnaire_Item_Initial": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1774,71 +1852,185 @@
                 {
                     "type": "object",
                     "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-                        },
-                        "preferred": {
+                        "valueBoolean": {
                             "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueDecimal": {
+                            "type": "number",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueInteger": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueDateTime": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueTime": {
+                            "type": "string",
+                            "pattern": "([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueUri": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueAttachment": {
+                            "$ref": "#/definitions/Attachment",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueCoding": {
+                            "$ref": "#/definitions/Coding",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueQuantity": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "The actual value to for an initial answer."
+                        },
+                        "valueReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The actual value to for an initial answer."
+                        }
+                    }
+                }
+            ]
+        },
+        "Questionnaire_Item_AnswerOption": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "valueInteger": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "A potential answer that's allowed as the answer to this question."
+                        },
+                        "valueDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "A potential answer that's allowed as the answer to this question."
+                        },
+                        "valueTime": {
+                            "type": "string",
+                            "pattern": "([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?",
+                            "description": "A potential answer that's allowed as the answer to this question."
+                        },
+                        "valueString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A potential answer that's allowed as the answer to this question."
+                        },
+                        "valueCoding": {
+                            "$ref": "#/definitions/Coding",
+                            "description": "A potential answer that's allowed as the answer to this question."
+                        },
+                        "valueReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A potential answer that's allowed as the answer to this question."
+                        },
+                        "initialSelected": {
+                            "type": "boolean",
+                            "description": "Indicates whether the answer value is selected when the list of possible answers is initially shown."
+                        }
+                    }
+                }
+            ]
+        },
+        "Questionnaire_Item_EnableWhen": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "question": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The linkId for the question whose answer (or lack of answer) governs whether this item is enabled."
+                        },
+                        "operator": {
+                            "type": "string",
+                            "enum": [
+                                "exists",
+                                "=",
+                                "!=",
+                                ">",
+                                "<",
+                                ">=",
+                                "<="
+                            ],
+                            "description": "Specifies the criteria by which the question is enabled."
+                        },
+                        "answerBoolean": {
+                            "type": "boolean",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerDecimal": {
+                            "type": "number",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerInteger": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerDate": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerDateTime": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerTime": {
+                            "type": "string",
+                            "pattern": "([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerString": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerCoding": {
+                            "$ref": "#/definitions/Coding",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerQuantity": {
+                            "$ref": "#/definitions/Quantity",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
+                        },
+                        "answerReference": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "A value that the referenced question is tested using the specified operator in order for the item to be enabled."
                         }
                     }
                 }
             ],
             "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
-                            }
-                        },
-                        "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
-                        },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
-                            }
-                        },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
-                        },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
-                        },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
-                        },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
-                        }
-                    }
-                }
+                "question",
+                "operator"
             ]
         },
         "Element": {

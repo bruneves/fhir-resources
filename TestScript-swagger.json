@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Patient API",
-        "description": "A simplified version of the HL7 FHIR API for Patient resources.",
+        "title": "TestScript API",
+        "description": "A simplified version of the HL7 FHIR API for TestScript resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Patient"
+            "name": "TestScript"
         }
     ],
     "paths": {
-        "/Patient": {
+        "/TestScript": {
             "post": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Create a Patient resource",
-                "operationId": "createPatient",
+                "summary": "Create a TestScript resource",
+                "operationId": "createTestScript",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,183 +85,134 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/TestScript"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Patient operation successful"
+                        "description": "Create TestScript operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Search for Patient resources",
-                "operationId": "searchPatient",
+                "summary": "Search for TestScript resources",
+                "operationId": "searchTestScript",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "active",
-                        "description": "Whether the patient record is active",
+                        "name": "context",
+                        "description": "A use context assigned to the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n* [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text\r\n",
+                        "name": "context-quantity",
+                        "description": "A quantity- or range-valued use context assigned to the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-city",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A city specified in an address\r\n* [Person](person.html): A city specified in an address\r\n* [Practitioner](practitioner.html): A city specified in an address\r\n* [RelatedPerson](relatedperson.html): A city specified in an address\r\n",
+                        "name": "context-type",
+                        "description": "A type of use context assigned to the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-country",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A country specified in an address\r\n* [Person](person.html): A country specified in an address\r\n* [Practitioner](practitioner.html): A country specified in an address\r\n* [RelatedPerson](relatedperson.html): A country specified in an address\r\n",
+                        "name": "date",
+                        "description": "The test script publication date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "address-postalcode",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A postalCode specified in an address\r\n* [Person](person.html): A postal code specified in an address\r\n* [Practitioner](practitioner.html): A postalCode specified in an address\r\n* [RelatedPerson](relatedperson.html): A postal code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-state",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A state specified in an address\r\n* [Person](person.html): A state specified in an address\r\n* [Practitioner](practitioner.html): A state specified in an address\r\n* [RelatedPerson](relatedperson.html): A state specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "address-use",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A use code specified in an address\r\n* [Person](person.html): A use code specified in an address\r\n* [Practitioner](practitioner.html): A use code specified in an address\r\n* [RelatedPerson](relatedperson.html): A use code specified in an address\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "birthdate",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The patient's date of birth\r\n* [Person](person.html): The person's date of birth\r\n* [RelatedPerson](relatedperson.html): The Related Person's date of birth\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "death-date",
-                        "description": "The date of death has been provided and satisfies this search value",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "deceased",
-                        "description": "This patient has been marked as deceased, or as a death date entered",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "email",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in an email contact\r\n* [Person](person.html): A value in an email contact\r\n* [Practitioner](practitioner.html): A value in an email contact\r\n* [PractitionerRole](practitionerrole.html): A value in an email contact\r\n* [RelatedPerson](relatedperson.html): A value in an email contact\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "family",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the family name of the patient\r\n* [Practitioner](practitioner.html): A portion of the family name\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "gender",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): Gender of the patient\r\n* [Person](person.html): The gender of the person\r\n* [Practitioner](practitioner.html): Gender of the practitioner\r\n* [RelatedPerson](relatedperson.html): Gender of the related person\r\n",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "general-practitioner",
-                        "description": "Patient's nominated general practitioner, not the organization that manages the record",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "given",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of the given name of the patient\r\n* [Practitioner](practitioner.html): A portion of the given name\r\n",
+                        "name": "description",
+                        "description": "The description of the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "A patient identifier",
+                        "description": "External identifier for the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "language",
-                        "description": "Language code (irrespective of use value)",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "link",
-                        "description": "All patients linked to the given patient",
+                        "name": "jurisdiction",
+                        "description": "Intended jurisdiction for the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "name",
-                        "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+                        "description": "Computationally friendly name of the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "organization",
-                        "description": "The organization that is the custodian of the patient record",
+                        "name": "publisher",
+                        "description": "Name of the publisher of the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phone",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A value in a phone contact\r\n* [Person](person.html): A value in a phone contact\r\n* [Practitioner](practitioner.html): A value in a phone contact\r\n* [PractitionerRole](practitionerrole.html): A value in a phone contact\r\n* [RelatedPerson](relatedperson.html): A value in a phone contact\r\n",
+                        "name": "status",
+                        "description": "The current status of the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "phonetic",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [Person](person.html): A portion of name using some kind of phonetic matching algorithm\r\n* [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm\r\n* [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm\r\n",
+                        "name": "testscript-capability",
+                        "description": "TestScript required and validated capability",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "telecom",
-                        "description": "Multiple Resources: \r\n\r\n* [Patient](patient.html): The value in any kind of telecom details of the patient\r\n* [Person](person.html): The value in any kind of contact\r\n* [Practitioner](practitioner.html): The value in any kind of contact\r\n* [PractitionerRole](practitionerrole.html): The value in any kind of contact\r\n* [RelatedPerson](relatedperson.html): The value in any kind of contact\r\n",
+                        "name": "title",
+                        "description": "The human-friendly name of the test script",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "url",
+                        "description": "The uri that identifies the test script",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "version",
+                        "description": "The business version of the test script",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-quantity",
+                        "description": "A use context type and quantity- or range-based value assigned to the test script",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "context-type-value",
+                        "description": "A use context type and value assigned to the test script",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -287,7 +238,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Patient operation successful",
+                        "description": "Search TestScript operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -295,13 +246,13 @@
                 }
             }
         },
-        "/Patient/{id}/_history/{vid}": {
+        "/TestScript/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Read specific version of a Patient resource",
-                "operationId": "vreadPatient",
+                "summary": "Read specific version of a TestScript resource",
+                "operationId": "vreadTestScript",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -315,21 +266,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Patient operation successful",
+                        "description": "Versioned read TestScript operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/TestScript"
                         }
                     }
                 }
             }
         },
-        "/Patient/{id}": {
+        "/TestScript/{id}": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Read a Patient resource",
-                "operationId": "readPatient",
+                "summary": "Read a TestScript resource",
+                "operationId": "readTestScript",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -340,19 +291,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Patient operation successful",
+                        "description": "Read TestScript operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/TestScript"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Update an existing Patient resource",
-                "operationId": "updatePatient",
+                "summary": "Update an existing TestScript resource",
+                "operationId": "updateTestScript",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -365,25 +316,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Patient"
+                            "$ref": "#/definitions/TestScript"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Patient operation successful"
+                        "description": "Update TestScript operation successful"
                     },
                     "201": {
-                        "description": "Create Patient operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create TestScript operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Delete a Patient resource",
-                "operationId": "deletePatient",
+                "summary": "Delete a TestScript resource",
+                "operationId": "deleteTestScript",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -391,18 +342,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Patient operation successful"
+                        "description": "Delete TestScript operation successful"
                     }
                 }
             }
         },
-        "/Patient/{id}/_history": {
+        "/TestScript/{id}/_history": {
             "get": {
                 "tags": [
-                    "Patient"
+                    "TestScript"
                 ],
-                "summary": "Return the history of a Patient resource",
-                "operationId": "historyPatient",
+                "summary": "Return the history of a TestScript resource",
+                "operationId": "historyTestScript",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -413,7 +364,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Patient operation successful",
+                        "description": "History TestScript operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -699,7 +650,7 @@
                 }
             ]
         },
-        "Patient": {
+        "TestScript": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -707,141 +658,176 @@
                 {
                     "type": "object",
                     "properties": {
-                        "identifier": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Identifier",
-                                "description": "An identifier for this patient."
-                            }
+                        "url": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "An absolute URI that is used to identify this test script when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this test script is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the test script is stored on different servers."
                         },
-                        "active": {
-                            "type": "boolean",
-                            "description": "Whether this patient record is in active use. \nMany systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.\n\nIt is often used to filter patient lists to exclude inactive patients\n\nDeceased patients may also be marked as inactive for the same reasons, but may be active for some time after death."
+                        "identifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "A formal identifier that is used to identify this test script when it is represented in other formats, or referenced in a specification, model, design or an instance."
+                        },
+                        "version": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The identifier that is used to identify this version of the test script when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the test script author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence."
                         },
                         "name": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/HumanName",
-                                "description": "A name associated with the individual."
-                            }
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A natural language name identifying the test script. This name should be usable as an identifier for the module by machine processing applications such as code generation."
                         },
-                        "telecom": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted."
-                            }
+                        "title": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A short, descriptive, user-friendly title for the test script."
                         },
-                        "gender": {
+                        "status": {
                             "type": "string",
                             "enum": [
-                                "male",
-                                "female",
-                                "other",
+                                "draft",
+                                "active",
+                                "retired",
                                 "unknown"
                             ],
-                            "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes."
+                            "description": "The status of this test script. Enables tracking the life-cycle of the content."
                         },
-                        "birthDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date of birth for the individual."
-                        },
-                        "deceasedBoolean": {
+                        "experimental": {
                             "type": "boolean",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "A Boolean value to indicate that this test script is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage."
                         },
-                        "deceasedDateTime": {
+                        "date": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Indicates if the individual is deceased or not."
+                            "description": "The date  (and optionally time) when the test script was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the test script changes."
                         },
-                        "address": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Address",
-                                "description": "An address for the individual."
-                            }
-                        },
-                        "maritalStatus": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "This field contains a patient's most recent marital (civil) status."
-                        },
-                        "multipleBirthBoolean": {
-                            "type": "boolean",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "multipleBirthInteger": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer)."
-                        },
-                        "photo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Attachment",
-                                "description": "Image of the patient."
-                            }
+                        "publisher": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The name of the organization or individual that published the test script."
                         },
                         "contact": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Contact",
-                                "description": "A contact party (e.g. guardian, partner, friend) for the patient."
+                                "$ref": "#/definitions/ContactDetail",
+                                "description": "Contact details to assist a user in finding and communicating with the publisher."
                             }
                         },
-                        "communication": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A free text natural language description of the test script from a consumer's perspective."
+                        },
+                        "useContext": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Communication",
-                                "description": "A language which may be used to communicate with the patient about his or her health."
+                                "$ref": "#/definitions/UsageContext",
+                                "description": "The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate test script instances."
                             }
                         },
-                        "generalPractitioner": {
+                        "jurisdiction": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CodeableConcept",
+                                "description": "A legal or geographic region in which the test script is intended to be used."
+                            }
+                        },
+                        "purpose": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Explanation of why this test script is needed and why it has been designed as it has."
+                        },
+                        "copyright": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A copyright statement relating to the test script and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the test script."
+                        },
+                        "origin": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Origin",
+                                "description": "An abstract server used in operations within this test script in the origin element."
+                            }
+                        },
+                        "destination": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Destination",
+                                "description": "An abstract server used in operations within this test script in the destination element."
+                            }
+                        },
+                        "metadata": {
+                            "$ref": "#/definitions/TestScript_Metadata",
+                            "description": "The required capability must exist and are assumed to function correctly on the FHIR server being tested."
+                        },
+                        "fixture": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Fixture",
+                                "description": "Fixture in the test script - by reference (uri). All fixtures are required for the test script to execute."
+                            }
+                        },
+                        "profile": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Reference",
-                                "description": "Patient's nominated care provider."
+                                "description": "The type of origin profile the test system supports."
                             }
                         },
-                        "managingOrganization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization that is the custodian of the patient record."
-                        },
-                        "link": {
+                        "variable": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Patient_Link",
-                                "description": "Link to another patient resource that concerns the same actual patient."
+                                "$ref": "#/definitions/TestScript_Variable",
+                                "description": "Variable is set based either on element value in response body or on header field value in the response headers."
                             }
+                        },
+                        "setup": {
+                            "$ref": "#/definitions/TestScript_Setup",
+                            "description": "A series of required setup operations before tests are executed."
+                        },
+                        "test": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Test",
+                                "description": "A test in this script."
+                            }
+                        },
+                        "teardown": {
+                            "$ref": "#/definitions/TestScript_Teardown",
+                            "description": "A series of operations required to clean up after all the tests are executed (successfully or otherwise)."
                         }
                     }
                 }
             ],
+            "required": [
+                "url",
+                "name",
+                "status"
+            ],
             "example": {
-                "resourceType": "Patient",
+                "resourceType": "TestScript",
                 "meta": {
-                    "versionId": "nOoKy1fke6",
-                    "lastUpdated": "2020-03-12T00:11:56.805-04:00",
-                    "source": "7onH1PSxXZ",
+                    "versionId": "lQq2X3uMVt",
+                    "lastUpdated": "2020-03-12T00:12:03.573-04:00",
+                    "source": "G5NBlkTxR9",
                     "profile": [
-                        "u3JN_YKK1C"
+                        "exRf_hlu42"
                     ],
                     "security": [
                         {
-                            "system": "dZWmqXTmWp",
-                            "version": "gD5yP7ttQw",
-                            "code": "EP8Fhk5RkN",
-                            "display": "eeM2DZFijB",
+                            "system": "oDesTNXit2",
+                            "version": "fQY91xc0Ur",
+                            "code": "R0W41AmZ_M",
+                            "display": "9YcUqgRJ6U",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "8Sxo6rDWmU",
-                            "version": "MgKFdXco20",
-                            "code": "oxjPuHUjKn",
-                            "display": "DqOlpsIahu",
+                            "system": "RVePbP1Zw3",
+                            "version": "elZ3K3RL5D",
+                            "code": "AfYkm6TJ09",
+                            "display": "R9_FA3RWZ6",
                             "userSelected": true
                         },
                         {
@@ -849,313 +835,377 @@
                         }
                     ]
                 },
-                "implicitRules": "dTquUtrV_5",
-                "language": "kvTYDavLUI",
+                "implicitRules": "k7lNssG5YM",
+                "language": "bVj0UdZl7X",
                 "text": {
-                    "status": "generated",
+                    "status": "additional",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
-                "identifier": [
+                "url": "P6Sd7FB66S",
+                "identifier": {
+                    "use": "usual",
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "vRlv8UH122",
+                                "version": "ispYngFIIb",
+                                "code": "2FXSQVO66L",
+                                "display": "TAyaLP0nn5",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "zBSzaVX2tu"
+                    },
+                    "system": "9yTrk1c3xU",
+                    "value": "vubSr_RV2Q",
+                    "period": {
+                        "start": "2020-03-12T00:12:03.576-04:00",
+                        "end": "2020-03-12T00:12:03.576-04:00"
+                    }
+                },
+                "version": "eORRo_sTou",
+                "name": "fFQhzWj4VE",
+                "title": "iwLE6E5LfK",
+                "status": "draft",
+                "experimental": true,
+                "date": "2020-03-12T00:12:03.576-04:00",
+                "publisher": "rmPz75l0Zt",
+                "contact": [
                     {
-                        "use": "official",
-                        "type": {
+                        "name": "uhtm8vX3pm",
+                        "telecom": [
+                            {
+                                "system": "fax",
+                                "value": "pqdCAVFxbq",
+                                "use": "work",
+                                "rank": 561390753,
+                                "period": {
+                                    "start": "2020-03-12T00:12:03.574-04:00",
+                                    "end": "2020-03-12T00:12:03.574-04:00"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "description": "_ilefYIMoA",
+                "useContext": [
+                    {
+                        "code": {
+                            "system": "J1PFOWgK7y",
+                            "version": "pT7T88UbQa",
+                            "code": "mEOa9qoJ77",
+                            "display": "xTw3eDucPr",
+                            "userSelected": true
+                        },
+                        "valueCodeableConcept": {
                             "coding": [
                                 {
-                                    "system": "z6qLT3jgB9",
-                                    "version": "aZWQtezZjY",
-                                    "code": "7J8uWBfh5a",
-                                    "display": "TFEvRt3UO0",
+                                    "system": "vWvS1ttjxK",
+                                    "version": "anjCqipyfb",
+                                    "code": "GBcrtBCg3R",
+                                    "display": "KQNB5xLzGP",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "RwELMTpc3R"
-                        },
-                        "system": "ooJ4cdJwXx",
-                        "value": "SjkkGkF5XV",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.813-04:00",
-                            "end": "2020-03-12T00:11:56.814-04:00"
+                            "text": "OqkV_p9rYS"
                         }
                     }
                 ],
-                "active": true,
-                "name": [
+                "jurisdiction": [
                     {
-                        "use": "usual",
-                        "text": "3IvTBcOTgt",
-                        "family": "VLUk5lCbIW",
-                        "given": [
-                            "U6DXN1KMqh"
+                        "coding": [
+                            {
+                                "system": "FHZXXmWWSF",
+                                "version": "dOLkbBS9ZS",
+                                "code": "BcGrNRu68o",
+                                "display": "aT_b0XJHo3",
+                                "userSelected": true
+                            }
                         ],
-                        "prefix": [
-                            "BgsAxapmul"
-                        ],
-                        "suffix": [
-                            "FwPf1wAghj"
-                        ],
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
+                        "text": "gIlwKAYxf5"
                     }
                 ],
-                "telecom": [
+                "purpose": "fJfl9TeEn2",
+                "copyright": "8_2gztDA9d",
+                "origin": [
                     {
-                        "system": "fax",
-                        "value": "nwyqq1bgc9",
-                        "use": "work",
-                        "rank": 770727202,
-                        "period": {
-                            "start": "2020-03-12T00:11:56.811-04:00",
-                            "end": "2020-03-12T00:11:56.811-04:00"
-                        }
-                    }
-                ],
-                "gender": "other",
-                "birthDate": "2020-03-12",
-                "deceasedBoolean": true,
-                "address": [
-                    {
-                        "use": "work",
-                        "type": "both",
-                        "text": "ZZDe0Mvpew",
-                        "line": [
-                            "vNs3eZl6la"
-                        ],
-                        "city": "6CRihHRkM4",
-                        "district": "ri3IjjEzoR",
-                        "state": "3nxWJ6ICKK",
-                        "postalCode": "_zzxenyjCw",
-                        "country": "3c1A47HnHJ",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.801-04:00",
-                            "end": "2020-03-12T00:11:56.801-04:00"
-                        }
-                    }
-                ],
-                "maritalStatus": {
-                    "coding": [
-                        {
-                            "system": "WrYqbuAI8i",
-                            "version": "nFSzrK7c5T",
-                            "code": "LZgqE8R058",
-                            "display": "IBELVg2ZXY",
+                        "index": 1661664991,
+                        "profile": {
+                            "system": "eRo95jZLq2",
+                            "version": "iIRuDopGv5",
+                            "code": "h50alBO26I",
+                            "display": "_X9B_hRsAr",
                             "userSelected": true
                         }
-                    ],
-                    "text": "_XU7GZGDCJ"
-                },
-                "multipleBirthBoolean": true,
-                "photo": [
-                    {
-                        "contentType": "jHqHQ2JyPz",
-                        "language": "DP1C8553sz",
-                        "data": "Rx4vBVw=",
-                        "url": "dhNbOwYURv",
-                        "size": 1906949857,
-                        "hash": "VgUJKAg=",
-                        "title": "Oe8mbRF689",
-                        "creation": "2020-03-12T00:11:56.814-04:00"
                     }
                 ],
-                "contact": [
+                "destination": [
                     {
-                        "relationship": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5vQ_0LQEEt",
-                                        "version": "h81qoqfwLC",
-                                        "code": "Pxlp8_bUbU",
-                                        "display": "Pv08zUu07z",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "g4R9JUIswJ"
-                            }
-                        ],
-                        "name": {
-                            "use": "anonymous",
-                            "text": "midYj5mc7b",
-                            "family": "qYWCmtgR7A",
-                            "given": [
-                                "u6P3bheH2f"
+                        "index": 866273525,
+                        "profile": {
+                            "system": "Cqckud_zV6",
+                            "version": "g7fmbS2jYc",
+                            "code": "AYLiHBHrK5",
+                            "display": "8CMVR_6NP4",
+                            "userSelected": true
+                        }
+                    }
+                ],
+                "metadata": {
+                    "link": [
+                        {
+                            "url": "orJUpByEk2",
+                            "description": "SC3dEtBt3Q"
+                        }
+                    ],
+                    "capability": [
+                        {
+                            "required": true,
+                            "validated": true,
+                            "description": "kcnlm5RjGM",
+                            "origin": [
+                                986787470
                             ],
-                            "prefix": [
-                                "L7jpFe1JOD"
+                            "destination": 1847285010,
+                            "link": [
+                                "ZnL7XRgRJd"
                             ],
-                            "suffix": [
-                                "SZpAVJ6jft"
-                            ],
-                            "period": {
-                                "start": "2020-03-12T00:11:56.807-04:00",
-                                "end": "2020-03-12T00:11:56.807-04:00"
-                            }
-                        },
-                        "telecom": [
-                            {
-                                "system": "phone",
-                                "value": "mwR2ml9u4G",
-                                "use": "work",
-                                "rank": 1582234029,
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.809-04:00",
-                                    "end": "2020-03-12T00:11:56.809-04:00"
-                                }
-                            }
-                        ],
-                        "address": {
-                            "use": "billing",
-                            "type": "both",
-                            "text": "SlEoiFNKWU",
-                            "line": [
-                                "t0FeWgAa0M"
-                            ],
-                            "city": "b6JfXNsBLB",
-                            "district": "J8KJSB35oU",
-                            "state": "qUSNQJ8UjS",
-                            "postalCode": "Y99jZQ3RuP",
-                            "country": "6shY68Scu4",
-                            "period": {
-                                "start": "2020-03-12T00:11:56.808-04:00",
-                                "end": "2020-03-12T00:11:56.808-04:00"
-                            }
-                        },
-                        "gender": "female",
-                        "organization": {
-                            "reference": "Organization/UQC_PURYU2",
-                            "type": "Organization",
+                            "capabilities": "VQbmBPAviZ"
+                        }
+                    ]
+                },
+                "fixture": [
+                    {
+                        "autocreate": true,
+                        "autodelete": true,
+                        "resource": {
+                            "reference": "xie2h7ewA7",
+                            "type": "4ovRRlmFlb",
                             "identifier": {
                                 "use": "usual",
                                 "type": {
                                     "coding": [
                                         {
-                                            "system": "rWK6UMLS4o",
-                                            "version": "whtnc_LfXa",
-                                            "code": "n04RUa_Gp4",
-                                            "display": "UfAraR8mdk",
+                                            "system": "wJj1tLCwRN",
+                                            "version": "X74l4t8z3Y",
+                                            "code": "LFE27T2XBp",
+                                            "display": "6CdIJuI_4a",
                                             "userSelected": true
                                         }
                                     ],
-                                    "text": "lr5rIPHEgi"
+                                    "text": "4tKMm9KtaJ"
                                 },
-                                "system": "DJ2me3N3Jx",
-                                "value": "r5vwETxzC9",
+                                "system": "UXfM4lGD5S",
+                                "value": "wBG22VFKvm",
                                 "period": {
-                                    "start": "2020-03-12T00:11:56.811-04:00",
-                                    "end": "2020-03-12T00:11:56.811-04:00"
+                                    "start": "2020-03-12T00:12:03.573-04:00",
+                                    "end": "2020-03-12T00:12:03.573-04:00"
                                 }
                             },
-                            "display": "yjYGiCCEuA"
-                        },
-                        "period": {
-                            "start": "2020-03-12T00:11:56.81-04:00",
-                            "end": "2020-03-12T00:11:56.81-04:00"
+                            "display": "dAR1YDjZUx"
                         }
                     }
                 ],
-                "communication": [
+                "profile": [
                     {
-                        "language": {
-                            "coding": [
-                                {
-                                    "system": "RMlE5jNpUM",
-                                    "version": "vek_Kxp35T",
-                                    "code": "55utC79Uvt",
-                                    "display": "iAsbVobqnY",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "P5lXJ1__i8"
-                        },
-                        "preferred": true
-                    }
-                ],
-                "generalPractitioner": [
-                    {
-                        "reference": "AfDdn9EYJw",
-                        "type": "uM_J3f8wLy",
+                        "reference": "6VSg70QLqI",
+                        "type": "6qVz3kFs5K",
                         "identifier": {
                             "use": "secondary",
                             "type": {
                                 "coding": [
                                     {
-                                        "system": "M5KnRR5DNw",
-                                        "version": "lMRG3pCWGX",
-                                        "code": "dsiCoDpdeM",
-                                        "display": "arMQ_pEpri",
+                                        "system": "8adKbCQP30",
+                                        "version": "N83RmgcFIX",
+                                        "code": "CXumdZqTvk",
+                                        "display": "gyZXukBIlr",
                                         "userSelected": true
                                     }
                                 ],
-                                "text": "fckw4EML29"
+                                "text": "rQ0ju59LTn"
                             },
-                            "system": "oJyzoAuwmp",
-                            "value": "NTlm3xtGKm",
+                            "system": "KOJtENJRHi",
+                            "value": "DyweWZbnIU",
                             "period": {
-                                "start": "2020-03-12T00:11:56.816-04:00",
-                                "end": "2020-03-12T00:11:56.816-04:00"
+                                "start": "2020-03-12T00:12:03.463-04:00",
+                                "end": "2020-03-12T00:12:03.463-04:00"
                             }
                         },
-                        "display": "rAMkIBGPD2"
+                        "display": "0KBcMup25o"
                     }
                 ],
-                "managingOrganization": {
-                    "reference": "Organization/851Ct39aW0",
-                    "type": "Organization",
-                    "identifier": {
-                        "use": "temp",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "1aPqQMIbHW",
-                                    "version": "B6a_Q6aNLy",
-                                    "code": "L4J58YECV3",
-                                    "display": "RTEzWdTQZH",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "gbUHUfQGKD"
-                        },
-                        "system": "beHfwqdtwW",
-                        "value": "TYEecGpA_J",
-                        "period": {
-                            "start": "2020-03-12T00:11:56.812-04:00",
-                            "end": "2020-03-12T00:11:56.812-04:00"
-                        }
-                    },
-                    "display": "HHvTPP_6wS"
-                },
-                "link": [
+                "variable": [
                     {
-                        "other": {
-                            "reference": "Patient/pheF7qHTVk",
-                            "type": "Patient",
-                            "identifier": {
-                                "use": "temp",
+                        "name": "3SNaQOwk92",
+                        "defaultValue": "OyHShLtW9y",
+                        "description": "QmLnglc3Lc",
+                        "expression": "C4qZZkXdse",
+                        "headerField": "tzEgvZVgo3",
+                        "hint": "cE1mz5LuIX",
+                        "path": "RVzo0J8lSX",
+                        "sourceId": "fRRHNbZC3C"
+                    }
+                ],
+                "setup": {
+                    "action": [
+                        {
+                            "operation": {
                                 "type": {
-                                    "coding": [
+                                    "system": "0BxjYyrsPs",
+                                    "version": "UO1eeCdpng",
+                                    "code": "Dx7bFMCxFW",
+                                    "display": "qyYc7wMMra",
+                                    "userSelected": true
+                                },
+                                "resource": "instant",
+                                "label": "s3gKyqlWkL",
+                                "description": "7WjO4UAS1b",
+                                "accept": "lEi6H0R7Ic",
+                                "contentType": "8ooThO3_4l",
+                                "destination": 205258161,
+                                "encodeRequestUrl": true,
+                                "method": "put",
+                                "origin": 576615621,
+                                "params": "xkYx5JW7Xq",
+                                "requestHeader": [
+                                    {
+                                        "field": "vvjlG2PMDt",
+                                        "value": "RYC8vGSJKK"
+                                    }
+                                ],
+                                "requestId": "jyb8iiNKNH",
+                                "responseId": "BqdA8ZMExX",
+                                "sourceId": "JgMcnwq8uj",
+                                "targetId": "6MVUeSqTd5",
+                                "url": "WccjbuUjDf"
+                            },
+                            "assert": {
+                                "label": "nO5KHAIvEb",
+                                "description": "tuRWQPI0aa",
+                                "direction": "request",
+                                "compareToSourceId": "C8mzEXqzkB",
+                                "compareToSourceExpression": "OwBbj_jifN",
+                                "compareToSourcePath": "iVENxHESHZ",
+                                "contentType": "pMoXWOyZMK",
+                                "expression": "jedCRNaivR",
+                                "headerField": "kMs7jxSHip",
+                                "minimumId": "MBrNZ_VU0C",
+                                "navigationLinks": true,
+                                "operator": "eval",
+                                "path": "OLURNGJxeh",
+                                "requestMethod": "head",
+                                "requestURL": "Af5euEdvNc",
+                                "resource": "Age",
+                                "response": "conflict",
+                                "responseCode": "NHNRQz_lkT",
+                                "sourceId": "Sm7tTHaKhO",
+                                "validateProfileId": "8eSlzhXXP1",
+                                "value": "ivBBPr3lUz",
+                                "warningOnly": true
+                            }
+                        }
+                    ]
+                },
+                "test": [
+                    {
+                        "name": "FAmXGPur8E",
+                        "description": "sEVCfa_ZKz",
+                        "action": [
+                            {
+                                "operation": {
+                                    "type": {
+                                        "system": "hgGisqcDnL",
+                                        "version": "dEmI50udzZ",
+                                        "code": "RYbaIRo_VS",
+                                        "display": "FFSO7_KTDl",
+                                        "userSelected": true
+                                    },
+                                    "resource": "QuestionnaireResponse",
+                                    "label": "pxKVGBC2mi",
+                                    "description": "rPPXz6FZoN",
+                                    "accept": "9Uq8c8oLXS",
+                                    "contentType": "one5gUzHs8",
+                                    "destination": 1449384148,
+                                    "encodeRequestUrl": true,
+                                    "method": "put",
+                                    "origin": 809385778,
+                                    "params": "qd2TQtxvwC",
+                                    "requestHeader": [
                                         {
-                                            "system": "PlOwz98Ep7",
-                                            "version": "s92q8nCcy0",
-                                            "code": "QAtIunLFmH",
-                                            "display": "2FpqXszl5n",
-                                            "userSelected": true
+                                            "field": "mndNQiZeZF",
+                                            "value": "bG4Ff9bvKj"
                                         }
                                     ],
-                                    "text": "1WL8O58DRg"
+                                    "requestId": "pWJp22ZPgc",
+                                    "responseId": "gesteNOG57",
+                                    "sourceId": "FYRjjBwG-s",
+                                    "targetId": "PRHZqFu10m",
+                                    "url": "V1R40LH1ZY"
                                 },
-                                "system": "dCJxH89pCR",
-                                "value": "yTFSBva3JV",
-                                "period": {
-                                    "start": "2020-03-12T00:11:56.804-04:00",
-                                    "end": "2020-03-12T00:11:56.804-04:00"
+                                "assert": {
+                                    "label": "pM70zwi5Bb",
+                                    "description": "Tw7uW2jlon",
+                                    "direction": "response",
+                                    "compareToSourceId": "IlvfhKEFuy",
+                                    "compareToSourceExpression": "nfUmeYtVIv",
+                                    "compareToSourcePath": "A6h9w579Rl",
+                                    "contentType": "izxpm03_05",
+                                    "expression": "FH2rG0RZP5",
+                                    "headerField": "80FMCUA0uu",
+                                    "minimumId": "6lGbc1cEVm",
+                                    "navigationLinks": true,
+                                    "operator": "notIn",
+                                    "path": "xOaTcpk_hF",
+                                    "requestMethod": "get",
+                                    "requestURL": "Kr9TvRDOPy",
+                                    "resource": "SupplyRequest",
+                                    "response": "forbidden",
+                                    "responseCode": "71UmqeBaNw",
+                                    "sourceId": "BxPSTxXYbc",
+                                    "validateProfileId": "G0ozQsgYsx",
+                                    "value": "pSMhK1p0fG",
+                                    "warningOnly": true
                                 }
-                            },
-                            "display": "BNnVKMbPmJ"
-                        },
-                        "type": "refer"
+                            }
+                        ]
                     }
-                ]
+                ],
+                "teardown": {
+                    "action": [
+                        {
+                            "operation": {
+                                "type": {
+                                    "system": "ntbgetDgrq",
+                                    "version": "fn7XlfspHj",
+                                    "code": "LHoiZByv5S",
+                                    "display": "6Jg6kREzEG",
+                                    "userSelected": true
+                                },
+                                "resource": "MedicinalProductInteraction",
+                                "label": "n25CsIvG9l",
+                                "description": "5JQ8tEFcdb",
+                                "accept": "qX3z06001r",
+                                "contentType": "axIlJ_5Bf7",
+                                "destination": 1105518269,
+                                "encodeRequestUrl": true,
+                                "method": "options",
+                                "origin": 1564691369,
+                                "params": "8mr2MAf24z",
+                                "requestHeader": [
+                                    {
+                                        "field": "IQMW9ZDBwz",
+                                        "value": "2T4LcHcGrQ"
+                                    }
+                                ],
+                                "requestId": "YNOR7Qt0aa",
+                                "responseId": "KRo7nmoD8C",
+                                "sourceId": "6GPwjUIBSr",
+                                "targetId": "Xxy-PhlDG6",
+                                "url": "lnyKMPgU_i"
+                            }
+                        }
+                    ]
+                }
             }
         },
         "Bundle": {
@@ -1736,7 +1786,7 @@
                 "code"
             ]
         },
-        "Patient_Link": {
+        "TestScript_Teardown": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -1744,101 +1794,1091 @@
                 {
                     "type": "object",
                     "properties": {
-                        "other": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The other patient resource that the link refers to."
-                        },
-                        "type": {
-                            "type": "string",
-                            "enum": [
-                                "replaced-by",
-                                "replaces",
-                                "refer",
-                                "seealso"
-                            ],
-                            "description": "The type of link between this patient resource and another patient resource."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "other",
-                "type"
-            ]
-        },
-        "Patient_Communication": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "language": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \"en\" for English, or \"en-US\" for American English versus \"en-EN\" for England English."
-                        },
-                        "preferred": {
-                            "type": "boolean",
-                            "description": "Indicates whether or not the patient prefers this language (over other languages he masters up a certain level)."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "language"
-            ]
-        },
-        "Patient_Contact": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "relationship": {
+                        "action": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "The nature of the relationship between the patient and the contact person."
+                                "$ref": "#/definitions/TestScript_Teardown_Action",
+                                "description": "The teardown action will only contain an operation."
                             }
-                        },
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "action"
+            ]
+        },
+        "TestScript_Teardown_Action": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "operation": {
+                            "$ref": "#/definitions/TestScript_Setup_Action_Operation",
+                            "description": "The operation to perform."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "operation"
+            ]
+        },
+        "TestScript_Test": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
                         "name": {
-                            "$ref": "#/definitions/HumanName",
-                            "description": "A name associated with the contact person."
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The name of this test used for tracking/logging purposes by test engines."
                         },
-                        "telecom": {
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A short description of the test used by test engines for tracking and reporting purposes."
+                        },
+                        "action": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ContactPoint",
-                                "description": "A contact detail for the person, e.g. a telephone number or an email address."
+                                "$ref": "#/definitions/TestScript_Test_Action",
+                                "description": "Action would contain either an operation or an assertion."
                             }
-                        },
-                        "address": {
-                            "$ref": "#/definitions/Address",
-                            "description": "Address for the contact person."
-                        },
-                        "gender": {
-                            "type": "string",
-                            "enum": [
-                                "male",
-                                "female",
-                                "other",
-                                "unknown"
-                            ],
-                            "description": "Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes."
-                        },
-                        "organization": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Organization on behalf of which the contact is acting or for which the contact is working."
-                        },
-                        "period": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period during which this contact person or organization is valid to be contacted relating to this patient."
                         }
                     }
                 }
+            ],
+            "required": [
+                "action"
+            ]
+        },
+        "TestScript_Test_Action": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "operation": {
+                            "$ref": "#/definitions/TestScript_Setup_Action_Operation",
+                            "description": "The operation to perform."
+                        },
+                        "assert": {
+                            "$ref": "#/definitions/TestScript_Setup_Action_Assert",
+                            "description": "Evaluates the results of previous operations to determine if the server under test behaves appropriately."
+                        }
+                    }
+                }
+            ]
+        },
+        "TestScript_Setup": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "action": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Setup_Action",
+                                "description": "Action would contain either an operation or an assertion."
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "action"
+            ]
+        },
+        "TestScript_Setup_Action": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "operation": {
+                            "$ref": "#/definitions/TestScript_Setup_Action_Operation",
+                            "description": "The operation to perform."
+                        },
+                        "assert": {
+                            "$ref": "#/definitions/TestScript_Setup_Action_Assert",
+                            "description": "Evaluates the results of previous operations to determine if the server under test behaves appropriately."
+                        }
+                    }
+                }
+            ]
+        },
+        "TestScript_Setup_Action_Assert": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "label": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The label would be used for tracking/logging purposes by test engines."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The description would be used by test engines for tracking and reporting purposes."
+                        },
+                        "direction": {
+                            "type": "string",
+                            "enum": [
+                                "response",
+                                "request"
+                            ],
+                            "description": "The direction to use for the assertion."
+                        },
+                        "compareToSourceId": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Id of the source fixture used as the contents to be evaluated by either the \"source/expression\" or \"sourceId/path\" definition."
+                        },
+                        "compareToSourceExpression": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The FHIRPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both."
+                        },
+                        "compareToSourcePath": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "XPath or JSONPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both."
+                        },
+                        "contentType": {
+                            "type": "string",
+                            "pattern": "[^\\s]+(\\s[^\\s]+)*",
+                            "description": "The mime-type contents to compare against the request or response message 'Content-Type' header."
+                        },
+                        "expression": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The FHIRPath expression to be evaluated against the request or response message contents - HTTP headers and payload."
+                        },
+                        "headerField": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The HTTP header field name e.g. 'Location'."
+                        },
+                        "minimumId": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The ID of a fixture.  Asserts that the response contains at a minimum the fixture specified by minimumId."
+                        },
+                        "navigationLinks": {
+                            "type": "boolean",
+                            "description": "Whether or not the test execution performs validation on the bundle navigation links."
+                        },
+                        "operator": {
+                            "type": "string",
+                            "enum": [
+                                "equals",
+                                "notEquals",
+                                "in",
+                                "notIn",
+                                "greaterThan",
+                                "lessThan",
+                                "empty",
+                                "notEmpty",
+                                "contains",
+                                "notContains",
+                                "eval"
+                            ],
+                            "description": "The operator type defines the conditional behavior of the assert. If not defined, the default is equals."
+                        },
+                        "path": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The XPath or JSONPath expression to be evaluated against the fixture representing the response received from server."
+                        },
+                        "requestMethod": {
+                            "type": "string",
+                            "enum": [
+                                "delete",
+                                "get",
+                                "options",
+                                "patch",
+                                "post",
+                                "put",
+                                "head"
+                            ],
+                            "description": "The request method or HTTP operation code to compare against that used by the client system under test."
+                        },
+                        "requestURL": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The value to use in a comparison against the request URL path string."
+                        },
+                        "resource": {
+                            "type": "string",
+                            "enum": [
+                                "Address",
+                                "Age",
+                                "Annotation",
+                                "Attachment",
+                                "BackboneElement",
+                                "CodeableConcept",
+                                "Coding",
+                                "ContactDetail",
+                                "ContactPoint",
+                                "Contributor",
+                                "Count",
+                                "DataRequirement",
+                                "Distance",
+                                "Dosage",
+                                "Duration",
+                                "Element",
+                                "ElementDefinition",
+                                "Expression",
+                                "Extension",
+                                "HumanName",
+                                "Identifier",
+                                "MarketingStatus",
+                                "Meta",
+                                "Money",
+                                "MoneyQuantity",
+                                "Narrative",
+                                "ParameterDefinition",
+                                "Period",
+                                "Population",
+                                "ProdCharacteristic",
+                                "ProductShelfLife",
+                                "Quantity",
+                                "Range",
+                                "Ratio",
+                                "Reference",
+                                "RelatedArtifact",
+                                "SampledData",
+                                "Signature",
+                                "SimpleQuantity",
+                                "SubstanceAmount",
+                                "Timing",
+                                "TriggerDefinition",
+                                "UsageContext",
+                                "base64Binary",
+                                "boolean",
+                                "canonical",
+                                "code",
+                                "date",
+                                "dateTime",
+                                "decimal",
+                                "id",
+                                "instant",
+                                "integer",
+                                "markdown",
+                                "oid",
+                                "positiveInt",
+                                "string",
+                                "time",
+                                "unsignedInt",
+                                "uri",
+                                "url",
+                                "uuid",
+                                "xhtml",
+                                "Account",
+                                "ActivityDefinition",
+                                "AdverseEvent",
+                                "AllergyIntolerance",
+                                "Appointment",
+                                "AppointmentResponse",
+                                "AuditEvent",
+                                "Basic",
+                                "Binary",
+                                "BiologicallyDerivedProduct",
+                                "BodyStructure",
+                                "Bundle",
+                                "CapabilityStatement",
+                                "CarePlan",
+                                "CareTeam",
+                                "CatalogEntry",
+                                "ChargeItem",
+                                "ChargeItemDefinition",
+                                "Claim",
+                                "ClaimResponse",
+                                "ClinicalImpression",
+                                "CodeSystem",
+                                "Communication",
+                                "CommunicationRequest",
+                                "CompartmentDefinition",
+                                "Composition",
+                                "ConceptMap",
+                                "Condition",
+                                "Consent",
+                                "Contract",
+                                "Coverage",
+                                "CoverageEligibilityRequest",
+                                "CoverageEligibilityResponse",
+                                "DetectedIssue",
+                                "Device",
+                                "DeviceDefinition",
+                                "DeviceMetric",
+                                "DeviceRequest",
+                                "DeviceUseStatement",
+                                "DiagnosticReport",
+                                "DocumentManifest",
+                                "DocumentReference",
+                                "DomainResource",
+                                "EffectEvidenceSynthesis",
+                                "Encounter",
+                                "Endpoint",
+                                "EnrollmentRequest",
+                                "EnrollmentResponse",
+                                "EpisodeOfCare",
+                                "EventDefinition",
+                                "Evidence",
+                                "EvidenceVariable",
+                                "ExampleScenario",
+                                "ExplanationOfBenefit",
+                                "FamilyMemberHistory",
+                                "Flag",
+                                "Goal",
+                                "GraphDefinition",
+                                "Group",
+                                "GuidanceResponse",
+                                "HealthcareService",
+                                "ImagingStudy",
+                                "Immunization",
+                                "ImmunizationEvaluation",
+                                "ImmunizationRecommendation",
+                                "ImplementationGuide",
+                                "InsurancePlan",
+                                "Invoice",
+                                "Library",
+                                "Linkage",
+                                "List",
+                                "Location",
+                                "Measure",
+                                "MeasureReport",
+                                "Media",
+                                "Medication",
+                                "MedicationAdministration",
+                                "MedicationDispense",
+                                "MedicationKnowledge",
+                                "MedicationRequest",
+                                "MedicationStatement",
+                                "MedicinalProduct",
+                                "MedicinalProductAuthorization",
+                                "MedicinalProductContraindication",
+                                "MedicinalProductIndication",
+                                "MedicinalProductIngredient",
+                                "MedicinalProductInteraction",
+                                "MedicinalProductManufactured",
+                                "MedicinalProductPackaged",
+                                "MedicinalProductPharmaceutical",
+                                "MedicinalProductUndesirableEffect",
+                                "MessageDefinition",
+                                "MessageHeader",
+                                "MolecularSequence",
+                                "NamingSystem",
+                                "NutritionOrder",
+                                "Observation",
+                                "ObservationDefinition",
+                                "OperationDefinition",
+                                "OperationOutcome",
+                                "Organization",
+                                "OrganizationAffiliation",
+                                "Parameters",
+                                "Patient",
+                                "PaymentNotice",
+                                "PaymentReconciliation",
+                                "Person",
+                                "PlanDefinition",
+                                "Practitioner",
+                                "PractitionerRole",
+                                "Procedure",
+                                "Provenance",
+                                "Questionnaire",
+                                "QuestionnaireResponse",
+                                "RelatedPerson",
+                                "RequestGroup",
+                                "ResearchDefinition",
+                                "ResearchElementDefinition",
+                                "ResearchStudy",
+                                "ResearchSubject",
+                                "Resource",
+                                "RiskAssessment",
+                                "RiskEvidenceSynthesis",
+                                "Schedule",
+                                "SearchParameter",
+                                "ServiceRequest",
+                                "Slot",
+                                "Specimen",
+                                "SpecimenDefinition",
+                                "StructureDefinition",
+                                "StructureMap",
+                                "Subscription",
+                                "Substance",
+                                "SubstanceNucleicAcid",
+                                "SubstancePolymer",
+                                "SubstanceProtein",
+                                "SubstanceReferenceInformation",
+                                "SubstanceSourceMaterial",
+                                "SubstanceSpecification",
+                                "SupplyDelivery",
+                                "SupplyRequest",
+                                "Task",
+                                "TerminologyCapabilities",
+                                "TestReport",
+                                "TestScript",
+                                "ValueSet",
+                                "VerificationResult",
+                                "VisionPrescription"
+                            ],
+                            "description": "The type of the resource.  See http://build.fhir.org/resourcelist.html."
+                        },
+                        "response": {
+                            "type": "string",
+                            "enum": [
+                                "okay",
+                                "created",
+                                "noContent",
+                                "notModified",
+                                "bad",
+                                "forbidden",
+                                "notFound",
+                                "methodNotAllowed",
+                                "conflict",
+                                "gone",
+                                "preconditionFailed",
+                                "unprocessable"
+                            ],
+                            "description": "okay | created | noContent | notModified | bad | forbidden | notFound | methodNotAllowed | conflict | gone | preconditionFailed | unprocessable."
+                        },
+                        "responseCode": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The value of the HTTP response code to be tested."
+                        },
+                        "sourceId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "Fixture to evaluate the XPath/JSONPath expression or the headerField  against."
+                        },
+                        "validateProfileId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "The ID of the Profile to validate against."
+                        },
+                        "value": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The value to compare to."
+                        },
+                        "warningOnly": {
+                            "type": "boolean",
+                            "description": "Whether or not the test execution will produce a warning only on error for this assert."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "warningOnly"
+            ]
+        },
+        "TestScript_Setup_Action_Operation": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/Coding",
+                            "description": "Server interaction or operation type."
+                        },
+                        "resource": {
+                            "type": "string",
+                            "enum": [
+                                "Address",
+                                "Age",
+                                "Annotation",
+                                "Attachment",
+                                "BackboneElement",
+                                "CodeableConcept",
+                                "Coding",
+                                "ContactDetail",
+                                "ContactPoint",
+                                "Contributor",
+                                "Count",
+                                "DataRequirement",
+                                "Distance",
+                                "Dosage",
+                                "Duration",
+                                "Element",
+                                "ElementDefinition",
+                                "Expression",
+                                "Extension",
+                                "HumanName",
+                                "Identifier",
+                                "MarketingStatus",
+                                "Meta",
+                                "Money",
+                                "MoneyQuantity",
+                                "Narrative",
+                                "ParameterDefinition",
+                                "Period",
+                                "Population",
+                                "ProdCharacteristic",
+                                "ProductShelfLife",
+                                "Quantity",
+                                "Range",
+                                "Ratio",
+                                "Reference",
+                                "RelatedArtifact",
+                                "SampledData",
+                                "Signature",
+                                "SimpleQuantity",
+                                "SubstanceAmount",
+                                "Timing",
+                                "TriggerDefinition",
+                                "UsageContext",
+                                "base64Binary",
+                                "boolean",
+                                "canonical",
+                                "code",
+                                "date",
+                                "dateTime",
+                                "decimal",
+                                "id",
+                                "instant",
+                                "integer",
+                                "markdown",
+                                "oid",
+                                "positiveInt",
+                                "string",
+                                "time",
+                                "unsignedInt",
+                                "uri",
+                                "url",
+                                "uuid",
+                                "xhtml",
+                                "Account",
+                                "ActivityDefinition",
+                                "AdverseEvent",
+                                "AllergyIntolerance",
+                                "Appointment",
+                                "AppointmentResponse",
+                                "AuditEvent",
+                                "Basic",
+                                "Binary",
+                                "BiologicallyDerivedProduct",
+                                "BodyStructure",
+                                "Bundle",
+                                "CapabilityStatement",
+                                "CarePlan",
+                                "CareTeam",
+                                "CatalogEntry",
+                                "ChargeItem",
+                                "ChargeItemDefinition",
+                                "Claim",
+                                "ClaimResponse",
+                                "ClinicalImpression",
+                                "CodeSystem",
+                                "Communication",
+                                "CommunicationRequest",
+                                "CompartmentDefinition",
+                                "Composition",
+                                "ConceptMap",
+                                "Condition",
+                                "Consent",
+                                "Contract",
+                                "Coverage",
+                                "CoverageEligibilityRequest",
+                                "CoverageEligibilityResponse",
+                                "DetectedIssue",
+                                "Device",
+                                "DeviceDefinition",
+                                "DeviceMetric",
+                                "DeviceRequest",
+                                "DeviceUseStatement",
+                                "DiagnosticReport",
+                                "DocumentManifest",
+                                "DocumentReference",
+                                "DomainResource",
+                                "EffectEvidenceSynthesis",
+                                "Encounter",
+                                "Endpoint",
+                                "EnrollmentRequest",
+                                "EnrollmentResponse",
+                                "EpisodeOfCare",
+                                "EventDefinition",
+                                "Evidence",
+                                "EvidenceVariable",
+                                "ExampleScenario",
+                                "ExplanationOfBenefit",
+                                "FamilyMemberHistory",
+                                "Flag",
+                                "Goal",
+                                "GraphDefinition",
+                                "Group",
+                                "GuidanceResponse",
+                                "HealthcareService",
+                                "ImagingStudy",
+                                "Immunization",
+                                "ImmunizationEvaluation",
+                                "ImmunizationRecommendation",
+                                "ImplementationGuide",
+                                "InsurancePlan",
+                                "Invoice",
+                                "Library",
+                                "Linkage",
+                                "List",
+                                "Location",
+                                "Measure",
+                                "MeasureReport",
+                                "Media",
+                                "Medication",
+                                "MedicationAdministration",
+                                "MedicationDispense",
+                                "MedicationKnowledge",
+                                "MedicationRequest",
+                                "MedicationStatement",
+                                "MedicinalProduct",
+                                "MedicinalProductAuthorization",
+                                "MedicinalProductContraindication",
+                                "MedicinalProductIndication",
+                                "MedicinalProductIngredient",
+                                "MedicinalProductInteraction",
+                                "MedicinalProductManufactured",
+                                "MedicinalProductPackaged",
+                                "MedicinalProductPharmaceutical",
+                                "MedicinalProductUndesirableEffect",
+                                "MessageDefinition",
+                                "MessageHeader",
+                                "MolecularSequence",
+                                "NamingSystem",
+                                "NutritionOrder",
+                                "Observation",
+                                "ObservationDefinition",
+                                "OperationDefinition",
+                                "OperationOutcome",
+                                "Organization",
+                                "OrganizationAffiliation",
+                                "Parameters",
+                                "Patient",
+                                "PaymentNotice",
+                                "PaymentReconciliation",
+                                "Person",
+                                "PlanDefinition",
+                                "Practitioner",
+                                "PractitionerRole",
+                                "Procedure",
+                                "Provenance",
+                                "Questionnaire",
+                                "QuestionnaireResponse",
+                                "RelatedPerson",
+                                "RequestGroup",
+                                "ResearchDefinition",
+                                "ResearchElementDefinition",
+                                "ResearchStudy",
+                                "ResearchSubject",
+                                "Resource",
+                                "RiskAssessment",
+                                "RiskEvidenceSynthesis",
+                                "Schedule",
+                                "SearchParameter",
+                                "ServiceRequest",
+                                "Slot",
+                                "Specimen",
+                                "SpecimenDefinition",
+                                "StructureDefinition",
+                                "StructureMap",
+                                "Subscription",
+                                "Substance",
+                                "SubstanceNucleicAcid",
+                                "SubstancePolymer",
+                                "SubstanceProtein",
+                                "SubstanceReferenceInformation",
+                                "SubstanceSourceMaterial",
+                                "SubstanceSpecification",
+                                "SupplyDelivery",
+                                "SupplyRequest",
+                                "Task",
+                                "TerminologyCapabilities",
+                                "TestReport",
+                                "TestScript",
+                                "ValueSet",
+                                "VerificationResult",
+                                "VisionPrescription"
+                            ],
+                            "description": "The type of the resource.  See http://build.fhir.org/resourcelist.html."
+                        },
+                        "label": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The label would be used for tracking/logging purposes by test engines."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The description would be used by test engines for tracking and reporting purposes."
+                        },
+                        "accept": {
+                            "type": "string",
+                            "pattern": "[^\\s]+(\\s[^\\s]+)*",
+                            "description": "The mime-type to use for RESTful operation in the 'Accept' header."
+                        },
+                        "contentType": {
+                            "type": "string",
+                            "pattern": "[^\\s]+(\\s[^\\s]+)*",
+                            "description": "The mime-type to use for RESTful operation in the 'Content-Type' header."
+                        },
+                        "destination": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The server where the request message is destined for.  Must be one of the server numbers listed in TestScript.destination section."
+                        },
+                        "encodeRequestUrl": {
+                            "type": "boolean",
+                            "description": "Whether or not to implicitly send the request url in encoded format. The default is true to match the standard RESTful client behavior. Set to false when communicating with a server that does not support encoded url paths."
+                        },
+                        "method": {
+                            "type": "string",
+                            "enum": [
+                                "delete",
+                                "get",
+                                "options",
+                                "patch",
+                                "post",
+                                "put",
+                                "head"
+                            ],
+                            "description": "The HTTP method the test engine MUST use for this operation regardless of any other operation details."
+                        },
+                        "origin": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The server where the request message originates from.  Must be one of the server numbers listed in TestScript.origin section."
+                        },
+                        "params": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Path plus parameters after [type].  Used to set parts of the request URL explicitly."
+                        },
+                        "requestHeader": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Setup_Action_Operation_RequestHeader",
+                                "description": "Header elements would be used to set HTTP headers."
+                            }
+                        },
+                        "requestId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "The fixture id (maybe new) to map to the request."
+                        },
+                        "responseId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "The fixture id (maybe new) to map to the response."
+                        },
+                        "sourceId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "The id of the fixture used as the body of a PUT or POST request."
+                        },
+                        "targetId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "Id of fixture used for extracting the [id],  [type], and [vid] for GET requests."
+                        },
+                        "url": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Complete request URL."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "encodeRequestUrl"
+            ]
+        },
+        "TestScript_Setup_Action_Operation_RequestHeader": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "field": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The HTTP header field e.g. \"Accept\"."
+                        },
+                        "value": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The value of the header e.g. \"application/fhir+xml\"."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "field",
+                "value"
+            ]
+        },
+        "TestScript_Variable": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Descriptive name for this variable."
+                        },
+                        "defaultValue": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A default, hard-coded, or user-defined value for this variable."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A free text natural language description of the variable and its purpose."
+                        },
+                        "expression": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The FHIRPath expression to evaluate against the fixture body. When variables are defined, only one of either expression, headerField or path must be specified."
+                        },
+                        "headerField": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Will be used to grab the HTTP header field value from the headers that sourceId is pointing to."
+                        },
+                        "hint": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Displayable text string with hint help information to the user when entering a default value."
+                        },
+                        "path": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "XPath or JSONPath to evaluate against the fixture body.  When variables are defined, only one of either expression, headerField or path must be specified."
+                        },
+                        "sourceId": {
+                            "type": "string",
+                            "pattern": "[A-Za-z0-9\\-\\.]{1,64}",
+                            "description": "Fixture to evaluate the XPath/JSONPath expression or the headerField  against within this variable."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "name"
+            ]
+        },
+        "TestScript_Fixture": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "autocreate": {
+                            "type": "boolean",
+                            "description": "Whether or not to implicitly create the fixture during setup. If true, the fixture is automatically created on each server being tested during setup, therefore no create operation is required for this fixture in the TestScript.setup section."
+                        },
+                        "autodelete": {
+                            "type": "boolean",
+                            "description": "Whether or not to implicitly delete the fixture during teardown. If true, the fixture is automatically deleted on each server being tested during teardown, therefore no delete operation is required for this fixture in the TestScript.teardown section."
+                        },
+                        "resource": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Reference to the resource (containing the contents of the resource needed for operations)."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "autocreate",
+                "autodelete"
+            ]
+        },
+        "TestScript_Metadata": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "link": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Metadata_Link",
+                                "description": "A link to the FHIR specification that this test is covering."
+                            }
+                        },
+                        "capability": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TestScript_Metadata_Capability",
+                                "description": "Capabilities that must exist and are assumed to function correctly on the FHIR server being tested."
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "capability"
+            ]
+        },
+        "TestScript_Metadata_Capability": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "required": {
+                            "type": "boolean",
+                            "description": "Whether or not the test execution will require the given capabilities of the server in order for this test script to execute."
+                        },
+                        "validated": {
+                            "type": "boolean",
+                            "description": "Whether or not the test execution will validate the given capabilities of the server in order for this test script to execute."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Description of the capabilities that this test script is requiring the server to support."
+                        },
+                        "origin": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "Which origin server these requirements apply to."
+                            }
+                        },
+                        "destination": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Which server these requirements apply to."
+                        },
+                        "link": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "\\S*",
+                                "description": "Links to the FHIR specification that describes this interaction and the resources involved in more detail."
+                            }
+                        },
+                        "capabilities": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "Minimum capabilities required of server for test script to execute successfully.   If server does not meet at a minimum the referenced capability statement, then all tests in this script are skipped."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "required",
+                "validated",
+                "capabilities"
+            ]
+        },
+        "TestScript_Metadata_Link": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "pattern": "\\S*",
+                            "description": "URL to a particular requirement or feature within the FHIR specification."
+                        },
+                        "description": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Short description of the link."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "url"
+            ]
+        },
+        "TestScript_Destination": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "index": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Abstract name given to a destination server in this test script.  The name is provided as a number starting at 1."
+                        },
+                        "profile": {
+                            "$ref": "#/definitions/Coding",
+                            "description": "The type of destination profile the test system supports."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "index",
+                "profile"
+            ]
+        },
+        "TestScript_Origin": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "index": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Abstract name given to an origin server in this test script.  The name is provided as a number starting at 1."
+                        },
+                        "profile": {
+                            "$ref": "#/definitions/Coding",
+                            "description": "The type of origin profile the test system supports."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "index",
+                "profile"
             ]
         },
         "Element": {

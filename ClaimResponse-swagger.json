@@ -2,8 +2,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Claim API",
-        "description": "A simplified version of the HL7 FHIR API for Claim resources.",
+        "title": "ClaimResponse API",
+        "description": "A simplified version of the HL7 FHIR API for ClaimResponse resources.",
         "version": "4.0.1"
     },
     "basePath": "/fhir-server/api/v4",
@@ -65,17 +65,17 @@
     },
     "tags": [
         {
-            "name": "Claim"
+            "name": "ClaimResponse"
         }
     ],
     "paths": {
-        "/Claim": {
+        "/ClaimResponse": {
             "post": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Create a Claim resource",
-                "operationId": "createClaim",
+                "summary": "Create a ClaimResponse resource",
+                "operationId": "createClaimResponse",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -85,141 +85,99 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Claim"
+                            "$ref": "#/definitions/ClaimResponse"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Create Claim operation successful"
+                        "description": "Create ClaimResponse operation successful"
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Search for Claim resources",
-                "operationId": "searchClaim",
+                "summary": "Search for ClaimResponse resources",
+                "operationId": "searchClaimResponse",
                 "produces": [
                     "application/fhir+json"
                 ],
                 "parameters": [
                     {
-                        "name": "care-team",
-                        "description": "Member of the CareTeam",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
                         "name": "created",
-                        "description": "The creation date for the Claim",
+                        "description": "The creation date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "detail-udi",
-                        "description": "UDI associated with a line item, detail product or service",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "encounter",
-                        "description": "Encounters associated with a billed line item",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "enterer",
-                        "description": "The party responsible for the entry of the Claim",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "facility",
-                        "description": "Facility where the products or services have been or will be provided",
+                        "name": "disposition",
+                        "description": "The contents of the disposition message",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "identifier",
-                        "description": "The primary identifier of the financial resource",
+                        "description": "The identity of the ClaimResponse",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "insurer",
-                        "description": "The target payor/insurer for the Claim",
+                        "description": "The organization which generated this resource",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "item-udi",
-                        "description": "UDI associated with a line item product or service",
+                        "name": "outcome",
+                        "description": "The processing outcome",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "patient",
-                        "description": "Patient receiving the products or services",
+                        "description": "The subject of care",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "payee",
-                        "description": "The party receiving any payment for the Claim",
+                        "name": "payment-date",
+                        "description": "The expected payment date",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "priority",
-                        "description": "Processing priority requested",
+                        "name": "request",
+                        "description": "The claim reference",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
-                        "name": "procedure-udi",
-                        "description": "UDI associated with a procedure",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "provider",
-                        "description": "Provider responsible for the Claim",
+                        "name": "requestor",
+                        "description": "The Provider of the claim",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "status",
-                        "description": "The status of the Claim instance.",
-                        "in": "query",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "subdetail-udi",
-                        "description": "UDI associated with a line item, detail, subdetail product or service",
+                        "description": "The status of the ClaimResponse",
                         "in": "query",
                         "type": "string",
                         "required": false
                     },
                     {
                         "name": "use",
-                        "description": "The kind of financial resource",
+                        "description": "The type of claim",
                         "in": "query",
                         "type": "string",
                         "required": false
@@ -245,7 +203,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Search Claim operation successful",
+                        "description": "Search ClaimResponse operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -253,13 +211,13 @@
                 }
             }
         },
-        "/Claim/{id}/_history/{vid}": {
+        "/ClaimResponse/{id}/_history/{vid}": {
             "get": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Read specific version of a Claim resource",
-                "operationId": "vreadClaim",
+                "summary": "Read specific version of a ClaimResponse resource",
+                "operationId": "vreadClaimResponse",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -273,21 +231,21 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Versioned read Claim operation successful",
+                        "description": "Versioned read ClaimResponse operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Claim"
+                            "$ref": "#/definitions/ClaimResponse"
                         }
                     }
                 }
             }
         },
-        "/Claim/{id}": {
+        "/ClaimResponse/{id}": {
             "get": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Read a Claim resource",
-                "operationId": "readClaim",
+                "summary": "Read a ClaimResponse resource",
+                "operationId": "readClaimResponse",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -298,19 +256,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Read Claim operation successful",
+                        "description": "Read ClaimResponse operation successful",
                         "schema": {
-                            "$ref": "#/definitions/Claim"
+                            "$ref": "#/definitions/ClaimResponse"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Update an existing Claim resource",
-                "operationId": "updateClaim",
+                "summary": "Update an existing ClaimResponse resource",
+                "operationId": "updateClaimResponse",
                 "consumes": [
                     "application/fhir+json"
                 ],
@@ -323,25 +281,25 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Claim"
+                            "$ref": "#/definitions/ClaimResponse"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Update Claim operation successful"
+                        "description": "Update ClaimResponse operation successful"
                     },
                     "201": {
-                        "description": "Create Claim operation successful (requires 'updateCreateEnabled' configuration option)"
+                        "description": "Create ClaimResponse operation successful (requires 'updateCreateEnabled' configuration option)"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Delete a Claim resource",
-                "operationId": "deleteClaim",
+                "summary": "Delete a ClaimResponse resource",
+                "operationId": "deleteClaimResponse",
                 "parameters": [
                     {
                         "$ref": "#/parameters/idParam"
@@ -349,18 +307,18 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Delete Claim operation successful"
+                        "description": "Delete ClaimResponse operation successful"
                     }
                 }
             }
         },
-        "/Claim/{id}/_history": {
+        "/ClaimResponse/{id}/_history": {
             "get": {
                 "tags": [
-                    "Claim"
+                    "ClaimResponse"
                 ],
-                "summary": "Return the history of a Claim resource",
-                "operationId": "historyClaim",
+                "summary": "Return the history of a ClaimResponse resource",
+                "operationId": "historyClaimResponse",
                 "produces": [
                     "application/fhir+json"
                 ],
@@ -371,7 +329,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "History Claim operation successful",
+                        "description": "History ClaimResponse operation successful",
                         "schema": {
                             "$ref": "#/definitions/Bundle"
                         }
@@ -657,7 +615,7 @@
                 }
             ]
         },
-        "Claim": {
+        "ClaimResponse": {
             "allOf": [
                 {
                     "$ref": "#/definitions/DomainResource"
@@ -669,7 +627,7 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/Identifier",
-                                "description": "A unique identifier assigned to this claim."
+                                "description": "A unique identifier assigned to this claim response."
                             }
                         },
                         "status": {
@@ -684,7 +642,7 @@
                         },
                         "type": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The category of claim, e.g. oral, pharmacy, vision, institutional, professional."
+                            "description": "A finer grained suite of claim type codes which may convey additional information such as Inpatient vs Outpatient and/or a specialty service."
                         },
                         "subType": {
                             "$ref": "#/definitions/CodeableConcept",
@@ -701,113 +659,124 @@
                         },
                         "patient": {
                             "$ref": "#/definitions/Reference",
-                            "description": "The party to whom the professional services and/or products have been supplied or are being considered and for whom actual or forecast reimbursement is sought."
-                        },
-                        "billablePeriod": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The period for which charges are being submitted."
+                            "description": "The party to whom the professional services and/or products have been supplied or are being considered and for whom actual for facast reimbursement is sought."
                         },
                         "created": {
                             "type": "string",
                             "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
                             "description": "The date this resource was created."
                         },
-                        "enterer": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Individual who created the claim, predetermination or preauthorization."
-                        },
                         "insurer": {
                             "$ref": "#/definitions/Reference",
-                            "description": "The Insurer who is target of the request."
+                            "description": "The party responsible for authorization, adjudication and reimbursement."
                         },
-                        "provider": {
+                        "requestor": {
                             "$ref": "#/definitions/Reference",
                             "description": "The provider which is responsible for the claim, predetermination or preauthorization."
                         },
-                        "priority": {
+                        "request": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Original request resource reference."
+                        },
+                        "outcome": {
+                            "type": "string",
+                            "enum": [
+                                "queued",
+                                "complete",
+                                "error",
+                                "partial"
+                            ],
+                            "description": "The outcome of the claim, predetermination, or preauthorization processing."
+                        },
+                        "disposition": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A human readable description of the status of the adjudication."
+                        },
+                        "preAuthRef": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "Reference from the Insurer which is used in later communications which refers to this adjudication."
+                        },
+                        "preAuthPeriod": {
+                            "$ref": "#/definitions/Period",
+                            "description": "The time frame during which this authorization is effective."
+                        },
+                        "payeeType": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The provider-required urgency of processing the request. Typical values include: stat, routine deferred."
+                            "description": "Type of Party to be reimbursed: subscriber, provider, other."
+                        },
+                        "item": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item",
+                                "description": "A claim line. Either a simple (a product or service) or a 'group' of details which can also be a simple items or groups of sub-details."
+                            }
+                        },
+                        "addItem": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_AddItem",
+                                "description": "The first-tier service adjudications for payor added product or service lines."
+                            }
+                        },
+                        "adjudication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "If this item is a group then the values here are a summary of the adjudication of the detail items. If this item is a simple product or service then this is the result of the adjudication of this item."
+                            }
+                        },
+                        "total": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Total",
+                                "description": "Categorized monetary totals for the adjudication."
+                            }
+                        },
+                        "payment": {
+                            "$ref": "#/definitions/ClaimResponse_Payment",
+                            "description": "Payment details for the adjudication of the claim."
                         },
                         "fundsReserve": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "A code to indicate whether and for whom funds are to be reserved for future claims."
+                            "description": "A code, used only on a response to a preauthorization, to indicate whether the benefits payable have been reserved and for whom."
                         },
-                        "related": {
+                        "formCode": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "A code for the form to be used for printing the content."
+                        },
+                        "form": {
+                            "$ref": "#/definitions/Attachment",
+                            "description": "The actual form, by reference or inclusion, for printing the content or an EOB."
+                        },
+                        "processNote": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Claim_Related",
-                                "description": "Other claims which are related to this claim such as prior submissions or claims for related services or for the same event."
+                                "$ref": "#/definitions/ClaimResponse_ProcessNote",
+                                "description": "A note that describes or explains adjudication results in a human readable form."
                             }
                         },
-                        "prescription": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Prescription to support the dispensing of pharmacy, device or vision products."
-                        },
-                        "originalPrescription": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Original prescription which has been superseded by this prescription to support the dispensing of pharmacy services, medications or products."
-                        },
-                        "payee": {
-                            "$ref": "#/definitions/Claim_Payee",
-                            "description": "The party to be reimbursed for cost of the products and services according to the terms of the policy."
-                        },
-                        "referral": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "A reference to a referral resource."
-                        },
-                        "facility": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Facility where the services were provided."
-                        },
-                        "careTeam": {
+                        "communicationRequest": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Claim_CareTeam",
-                                "description": "The members of the team who provided the products and services."
-                            }
-                        },
-                        "supportingInfo": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Claim_SupportingInfo",
-                                "description": "Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues."
-                            }
-                        },
-                        "diagnosis": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Claim_Diagnosis",
-                                "description": "Information about diagnoses relevant to the claim items."
-                            }
-                        },
-                        "procedure": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Claim_Procedure",
-                                "description": "Procedures performed on the patient relevant to the billing items with the claim."
+                                "$ref": "#/definitions/Reference",
+                                "description": "Request for additional supporting or authorizing information."
                             }
                         },
                         "insurance": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Claim_Insurance",
+                                "$ref": "#/definitions/ClaimResponse_Insurance",
                                 "description": "Financial instruments for reimbursement for the health care products and services specified on the claim."
                             }
                         },
-                        "accident": {
-                            "$ref": "#/definitions/Claim_Accident",
-                            "description": "Details of an accident which resulted in injuries which required the products and services listed in the claim."
-                        },
-                        "item": {
+                        "error": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Claim_Item",
-                                "description": "A claim line. Either a simple  product or service or a 'group' of details which can each be a simple items or groups of sub-details."
+                                "$ref": "#/definitions/ClaimResponse_Error",
+                                "description": "Errors encountered during the processing of the adjudication."
                             }
-                        },
-                        "total": {
-                            "$ref": "#/definitions/Money",
-                            "description": "The total value of the all the items in the claim."
                         }
                     }
                 }
@@ -818,34 +787,33 @@
                 "use",
                 "patient",
                 "created",
-                "provider",
-                "priority",
-                "insurance"
+                "insurer",
+                "outcome"
             ],
             "example": {
-                "resourceType": "Claim",
+                "resourceType": "ClaimResponse",
                 "meta": {
-                    "versionId": "zI6Nzn42BB",
-                    "lastUpdated": "2020-03-12T00:11:48.245-04:00",
-                    "source": "zVjRz_eTuH",
+                    "versionId": "0ed5eZtsF2",
+                    "lastUpdated": "2020-03-12T00:11:48.918-04:00",
+                    "source": "y_WEPJpFdw",
                     "profile": [
-                        "HgxN_XnygD"
+                        "w6z9hneADb"
                     ],
                     "security": [
                         {
-                            "system": "RMikYtS0Jz",
-                            "version": "jXiwWj4CCz",
-                            "code": "KMIYIHCpDu",
-                            "display": "1085B0r6JP",
+                            "system": "cO5zysl5vS",
+                            "version": "TPyRv_E2Ji",
+                            "code": "UbiApIeUTF",
+                            "display": "GHXBMD4bYz",
                             "userSelected": true
                         }
                     ],
                     "tag": [
                         {
-                            "system": "9oP8UvhNoS",
-                            "version": "nzIyh7r03s",
-                            "code": "LwAKsfIegQ",
-                            "display": "xghOfp3rQY",
+                            "system": "Mx3i8dYnOP",
+                            "version": "8W0XqiamJm",
+                            "code": "lUFwq6LONg",
+                            "display": "g7wl9i2fhO",
                             "userSelected": true
                         },
                         {
@@ -853,1137 +821,300 @@
                         }
                     ]
                 },
-                "implicitRules": "TXeIXcUtb6",
-                "language": "CDBll7MHfJ",
+                "implicitRules": "Qd4lad4lWf",
+                "language": "vo2WfJ5mWw",
                 "text": {
-                    "status": "extensions",
+                    "status": "generated",
                     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>"
                 },
                 "identifier": [
                     {
-                        "use": "official",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "qJa1uJcFUu",
-                                    "version": "tFNtp1DLR1",
-                                    "code": "4wTbUaDGWF",
-                                    "display": "nw1ZDG_Kky",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "vT9SvmcnXX"
-                        },
-                        "system": "Y9BBrY35FQ",
-                        "value": "N0SuoeTAqa",
-                        "period": {
-                            "start": "2020-03-12T00:11:48.271-04:00",
-                            "end": "2020-03-12T00:11:48.271-04:00"
-                        }
-                    }
-                ],
-                "status": "cancelled",
-                "type": {
-                    "coding": [
-                        {
-                            "system": "hLZkb1D1u4",
-                            "version": "MHHYTYhyv5",
-                            "code": "KgQ3YqnjWc",
-                            "display": "ZcQsIk8U1k",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "l0yHHjSWOE"
-                },
-                "subType": {
-                    "coding": [
-                        {
-                            "system": "34dnzaQYYw",
-                            "version": "mAgP5HgU9V",
-                            "code": "MjntBBCcYf",
-                            "display": "NZeLdFae3m",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "47BmzcLLuH"
-                },
-                "use": "claim",
-                "patient": {
-                    "reference": "Patient/AWNeDYAVs4",
-                    "type": "Patient",
-                    "identifier": {
                         "use": "old",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "nVws8rj_KC",
-                                    "version": "x_LWzcrAvR",
-                                    "code": "j5YDwS6H7h",
-                                    "display": "dluZ1Y__MI",
+                                    "system": "D88YJi4AVa",
+                                    "version": "7gQwyH69nS",
+                                    "code": "bCCj12Djtn",
+                                    "display": "STIqP4H4qj",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "OEUpnPJ8pG"
+                            "text": "1LZAG5VRNV"
                         },
-                        "system": "Bi2_vQiIU8",
-                        "value": "YNKsFdiBJJ",
+                        "system": "dGJQLx7PTp",
+                        "value": "E9FWPsq7WS",
                         "period": {
-                            "start": "2020-03-12T00:11:48.246-04:00",
-                            "end": "2020-03-12T00:11:48.246-04:00"
+                            "start": "2020-03-12T00:11:48.925-04:00",
+                            "end": "2020-03-12T00:11:48.926-04:00"
                         }
-                    },
-                    "display": "Jtfp0g9Tok"
+                    }
+                ],
+                "status": "entered-in-error",
+                "type": {
+                    "coding": [
+                        {
+                            "system": "Ja5Q3kOJ5G",
+                            "version": "hG24hucg5K",
+                            "code": "Og9W1iyKdH",
+                            "display": "2tIPFt5n6R",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "cLSg1NBDRO"
                 },
-                "billablePeriod": {
-                    "start": "2020-03-12T00:11:48.246-04:00",
-                    "end": "2020-03-12T00:11:48.247-04:00"
+                "subType": {
+                    "coding": [
+                        {
+                            "system": "Yp6hgHkeuI",
+                            "version": "vIZBV5Myof",
+                            "code": "8VoinU3RYQ",
+                            "display": "Cthy_V4HoN",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "QpsJVaeNRU"
                 },
-                "created": "2020-03-12T00:11:48.243-04:00",
-                "enterer": {
-                    "reference": "Practitioner/Z1poNtCb0a",
-                    "type": "Practitioner",
+                "use": "preauthorization",
+                "patient": {
+                    "reference": "Patient/s2jGRNwBqF",
+                    "type": "Patient",
                     "identifier": {
                         "use": "temp",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "NmDjdz6GLA",
-                                    "version": "KC69HhBteb",
-                                    "code": "ltRCf1NhC2",
-                                    "display": "r_ldBXykPO",
+                                    "system": "Q3yp2rcBit",
+                                    "version": "69vaGjapJl",
+                                    "code": "9e0ingmyGM",
+                                    "display": "kooozZ7zu6",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "EIB6YMB4Go"
+                            "text": "jtYHLRd9di"
                         },
-                        "system": "yClSjrFZXV",
-                        "value": "VtPa4lk8lr",
+                        "system": "i5OjvM2g1l",
+                        "value": "W3eD4SLoJ6",
                         "period": {
-                            "start": "2020-03-12T00:11:48.244-04:00",
-                            "end": "2020-03-12T00:11:48.244-04:00"
+                            "start": "2020-03-12T00:11:48.919-04:00",
+                            "end": "2020-03-12T00:11:48.919-04:00"
                         }
                     },
-                    "display": "watf7llQw9"
+                    "display": "9MvrRK1rWa"
                 },
+                "created": "2020-03-12T00:11:48.779-04:00",
                 "insurer": {
-                    "reference": "Organization/6XLZ1HcPGa",
+                    "reference": "Organization/_3ND0UwVI8",
                     "type": "Organization",
                     "identifier": {
-                        "use": "official",
+                        "use": "old",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "TIPIU2KFea",
-                                    "version": "iE6EMCUkPC",
-                                    "code": "qIYl33fxlT",
-                                    "display": "oIK8Yn1nzk",
+                                    "system": "97pR1SBJwy",
+                                    "version": "rRCS8X5N0I",
+                                    "code": "h7wmkNWxBZ",
+                                    "display": "zRTzr4SI5f",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "8eoF1Y9DNa"
+                            "text": "5FNs5KAtuK"
                         },
-                        "system": "DIOOBZhIWl",
-                        "value": "6Ie85Iuzsv",
+                        "system": "NWI2A4DEl8",
+                        "value": "r_dR4eavpO",
                         "period": {
-                            "start": "2020-03-12T00:11:48.247-04:00",
-                            "end": "2020-03-12T00:11:48.247-04:00"
+                            "start": "2020-03-12T00:11:48.92-04:00",
+                            "end": "2020-03-12T00:11:48.921-04:00"
                         }
                     },
-                    "display": "DG32OhXFrF"
+                    "display": "nK5NXKQHiN"
                 },
-                "provider": {
-                    "reference": "Practitioner/PagRlMm7B2",
+                "requestor": {
+                    "reference": "Practitioner/8NkR3JZCh7",
                     "type": "Practitioner",
-                    "identifier": {
-                        "use": "secondary",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "Ffc7soqTEq",
-                                    "version": "rLrJjCEL62",
-                                    "code": "HWNasm7uri",
-                                    "display": "ENETyWOK96",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "3rKYYScItF"
-                        },
-                        "system": "BlI88jCElg",
-                        "value": "9iljvz4iYd",
-                        "period": {
-                            "start": "2020-03-12T00:11:48.241-04:00",
-                            "end": "2020-03-12T00:11:48.242-04:00"
-                        }
-                    },
-                    "display": "YJ04EzKbBA"
-                },
-                "priority": {
-                    "coding": [
-                        {
-                            "system": "upy_cmhSQR",
-                            "version": "hGA9wI8hDy",
-                            "code": "ZcXRyvyoIe",
-                            "display": "4W2WdetjnT",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "eHDQTXSiiG"
-                },
-                "fundsReserve": {
-                    "coding": [
-                        {
-                            "system": "66WicL3gNv",
-                            "version": "uzS05BvHgO",
-                            "code": "Q1lWxrYIT5",
-                            "display": "NXVKiu1VH1",
-                            "userSelected": true
-                        }
-                    ],
-                    "text": "KUD_i2sfjG"
-                },
-                "related": [
-                    {
-                        "claim": {
-                            "reference": "Claim/GHm0MtHdDr",
-                            "type": "Claim",
-                            "identifier": {
-                                "use": "old",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "bhXceNNdND",
-                                            "version": "vzIQ_R4dZo",
-                                            "code": "0o8EgTWUq7",
-                                            "display": "tq4fsd8V_6",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "edsl5BzwK2"
-                                },
-                                "system": "pFWPfaIIVo",
-                                "value": "_D0N52NVHz",
-                                "period": {
-                                    "start": "2020-03-12T00:11:48.25-04:00",
-                                    "end": "2020-03-12T00:11:48.25-04:00"
-                                }
-                            },
-                            "display": "sFtM2wKG1k"
-                        },
-                        "relationship": {
-                            "coding": [
-                                {
-                                    "system": "tg3azYs_I4",
-                                    "version": "yONnpz_wWt",
-                                    "code": "nVD9MhYf6T",
-                                    "display": "kl_UUnxO52",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "DZx5vu2DhO"
-                        },
-                        "reference": {
-                            "use": "old",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "AIrMoZV1Wd",
-                                        "version": "gSN8e9RHSb",
-                                        "code": "qvG8fBzoNo",
-                                        "display": "83xASJd7cj",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "SqZIOYHft8"
-                            },
-                            "system": "qsiMstdYiC",
-                            "value": "PPYOjAfREH",
-                            "period": {
-                                "start": "2020-03-12T00:11:48.249-04:00",
-                                "end": "2020-03-12T00:11:48.249-04:00"
-                            }
-                        }
-                    }
-                ],
-                "prescription": {
-                    "reference": "DeviceRequest/08MFNdEG1V",
-                    "type": "DeviceRequest",
                     "identifier": {
                         "use": "usual",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "4_2bnw1DKG",
-                                    "version": "L6VK16wToo",
-                                    "code": "oYFdAJWK3L",
-                                    "display": "Z34HOANDJb",
+                                    "system": "8BCxSFGt_B",
+                                    "version": "wpS2QdywB9",
+                                    "code": "Y9LsytSGc4",
+                                    "display": "SmAwoKeWM5",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "dPxvgILJAF"
+                            "text": "wr72ojeBoU"
                         },
-                        "system": "0cQ96zgeVm",
-                        "value": "80qeUGYlkQ",
+                        "system": "9xhwpqgNRV",
+                        "value": "TPxy6ALIOC",
                         "period": {
-                            "start": "2020-03-12T00:11:48.251-04:00",
-                            "end": "2020-03-12T00:11:48.251-04:00"
+                            "start": "2020-03-12T00:11:48.926-04:00",
+                            "end": "2020-03-12T00:11:48.926-04:00"
                         }
                     },
-                    "display": "4JHB0TxDeX"
+                    "display": "hrOPuAIWQM"
                 },
-                "originalPrescription": {
-                    "reference": "DeviceRequest/QDAI6KdObH",
-                    "type": "DeviceRequest",
+                "request": {
+                    "reference": "Claim/ZW064uXds8",
+                    "type": "Claim",
                     "identifier": {
-                        "use": "temp",
+                        "use": "usual",
                         "type": {
                             "coding": [
                                 {
-                                    "system": "64JkZKhaRP",
-                                    "version": "s6H70bzt7V",
-                                    "code": "k2AoyIzSVn",
-                                    "display": "wZUoPVUFHy",
+                                    "system": "zG0ZJ_gWE_",
+                                    "version": "16mBIXSKAj",
+                                    "code": "q7csmpE9y_",
+                                    "display": "5w6OlcrGdI",
                                     "userSelected": true
                                 }
                             ],
-                            "text": "_pGAAFnWlo"
+                            "text": "h9EqZbwGiR"
                         },
-                        "system": "eTw9Uz_U4R",
-                        "value": "zPSnRuTEHd",
+                        "system": "jwRINJcy0T",
+                        "value": "9hbU_KVF4R",
                         "period": {
-                            "start": "2020-03-12T00:11:48.252-04:00",
-                            "end": "2020-03-12T00:11:48.252-04:00"
+                            "start": "2020-03-12T00:11:48.927-04:00",
+                            "end": "2020-03-12T00:11:48.927-04:00"
                         }
                     },
-                    "display": "mMeWocgKWt"
+                    "display": "Nsl5Ht1T3t"
                 },
-                "payee": {
-                    "type": {
-                        "coding": [
-                            {
-                                "system": "o6zYP54HJH",
-                                "version": "Tm_aWnv05K",
-                                "code": "HejK6vZspq",
-                                "display": "28fFZHbuyF",
-                                "userSelected": true
-                            }
-                        ],
-                        "text": "IDKMwCyHWy"
-                    },
-                    "party": {
-                        "reference": "Practitioner/Jhrf9deToX",
-                        "type": "Practitioner",
-                        "identifier": {
-                            "use": "temp",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "0oif3IBjCY",
-                                        "version": "QoYemDraNJ",
-                                        "code": "R03Fj2Znk0",
-                                        "display": "MGCyLMAL83",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "jgpw8dcccq"
-                            },
-                            "system": "mibcDktMI6",
-                            "value": "cSZ_f3kVlZ",
-                            "period": {
-                                "start": "2020-03-12T00:11:48.255-04:00",
-                                "end": "2020-03-12T00:11:48.255-04:00"
-                            }
-                        },
-                        "display": "qGvRdUrTKJ"
-                    }
+                "outcome": "queued",
+                "disposition": "2oLOJKD8qD",
+                "preAuthRef": "ymJYChsJRE",
+                "preAuthPeriod": {
+                    "start": "2020-03-12T00:11:48.829-04:00",
+                    "end": "2020-03-12T00:11:48.829-04:00"
                 },
-                "referral": {
-                    "reference": "ServiceRequest/sfBXSMUSA5",
-                    "type": "ServiceRequest",
-                    "identifier": {
-                        "use": "temp",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "ZeTft6igRM",
-                                    "version": "5Y5jTfALZu",
-                                    "code": "5lc63pHCCv",
-                                    "display": "UGNVWWqMYh",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "N6B0Cx8AnG"
-                        },
-                        "system": "V6yh9EZjbt",
-                        "value": "r9NVVwBKba",
-                        "period": {
-                            "start": "2020-03-12T00:11:48.256-04:00",
-                            "end": "2020-03-12T00:11:48.256-04:00"
+                "payeeType": {
+                    "coding": [
+                        {
+                            "system": "vYqQ_WdLqv",
+                            "version": "9ChokvJF5X",
+                            "code": "lp6sV4nYIA",
+                            "display": "h0NT8sAsKC",
+                            "userSelected": true
                         }
-                    },
-                    "display": "nGkGtP8Qo9"
-                },
-                "facility": {
-                    "reference": "Location/I6fOtUroyN",
-                    "type": "Location",
-                    "identifier": {
-                        "use": "old",
-                        "type": {
-                            "coding": [
-                                {
-                                    "system": "3fgj1yYbL2",
-                                    "version": "NTCpeWpYNh",
-                                    "code": "a8aU_Hs2SU",
-                                    "display": "xQsX75P_xq",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "FBe_Ks6Y3j"
-                        },
-                        "system": "ZppW7fPQk2",
-                        "value": "qvEYcVfHp5",
-                        "period": {
-                            "start": "2020-03-12T00:11:48.257-04:00",
-                            "end": "2020-03-12T00:11:48.257-04:00"
-                        }
-                    },
-                    "display": "tw6ehgum2z"
-                },
-                "careTeam": [
-                    {
-                        "sequence": 1026853742,
-                        "provider": {
-                            "reference": "Practitioner/C6kyMDwqzj",
-                            "type": "Practitioner",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "nKb4e9cdhb",
-                                            "version": "LoWom1UDjk",
-                                            "code": "5cBTUq9ue8",
-                                            "display": "F2u9QCpvLv",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "gHIgG4h4Pa"
-                                },
-                                "system": "iVU22wkWxj",
-                                "value": "fiaJViCoK2",
-                                "period": {
-                                    "start": "2020-03-12T00:11:48.269-04:00",
-                                    "end": "2020-03-12T00:11:48.27-04:00"
-                                }
-                            },
-                            "display": "2mtaG_73EO"
-                        },
-                        "responsible": true,
-                        "role": {
-                            "coding": [
-                                {
-                                    "system": "_OAapQopby",
-                                    "version": "zncZy9r3X_",
-                                    "code": "DOAc2Tf4g8",
-                                    "display": "gGQzbqvCxz",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "F6cdVnfOhr"
-                        },
-                        "qualification": {
-                            "coding": [
-                                {
-                                    "system": "S9qk2J8eh4",
-                                    "version": "w9XgsQQm8m",
-                                    "code": "MvvDAj6pza",
-                                    "display": "07W_IQN2xe",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "As_tZeUPUj"
-                        }
-                    }
-                ],
-                "supportingInfo": [
-                    {
-                        "sequence": 1323033381,
-                        "category": {
-                            "coding": [
-                                {
-                                    "system": "BNPaKtlmLB",
-                                    "version": "0bXgcWlnCA",
-                                    "code": "RgZ15cHup_",
-                                    "display": "t6OPBvKihT",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "utZPRp5N2z"
-                        },
-                        "code": {
-                            "coding": [
-                                {
-                                    "system": "OsRGbcwaHw",
-                                    "version": "PSMjSVrPA_",
-                                    "code": "NSlpvffVv8",
-                                    "display": "b35z1XyzY6",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "sBwFFBWdRD"
-                        },
-                        "timingDate": "2020-03-12",
-                        "valueBoolean": true,
-                        "reason": {
-                            "coding": [
-                                {
-                                    "system": "8LAyEz5f99",
-                                    "version": "pp3S0O01LV",
-                                    "code": "7XumhWt2XJ",
-                                    "display": "yuqWe2_83X",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "MTWMyCDJht"
-                        }
-                    }
-                ],
-                "diagnosis": [
-                    {
-                        "sequence": 289744419,
-                        "diagnosisCodeableConcept": {
-                            "coding": [
-                                {
-                                    "system": "sMW3bIlnYh",
-                                    "version": "_Wttag5osb",
-                                    "code": "WlA5e0edhu",
-                                    "display": "3SDLALcV1l",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "FQQpjIQwC3"
-                        },
-                        "type": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "Nvi6otNpZF",
-                                        "version": "7PhGz3Zv0z",
-                                        "code": "1WhifPquy2",
-                                        "display": "F9wkvOd_vL",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "f8Xdcp9Ocb"
-                            }
-                        ],
-                        "onAdmission": {
-                            "coding": [
-                                {
-                                    "system": "1IjPIdxMO_",
-                                    "version": "wTfOU1DkAO",
-                                    "code": "A5aGiRJmiT",
-                                    "display": "rywgwAtsqm",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "A1PA4Ix3YY"
-                        },
-                        "packageCode": {
-                            "coding": [
-                                {
-                                    "system": "9NExNd3znf",
-                                    "version": "I3OuNcjJhI",
-                                    "code": "LLH0KJzaAf",
-                                    "display": "QSJ4ABiSIw",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "USKZCZi6zI"
-                        }
-                    }
-                ],
-                "procedure": [
-                    {
-                        "sequence": 59446696,
-                        "type": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "C2kqdoFxMB",
-                                        "version": "q9j0FNNGg5",
-                                        "code": "K1MAQtMuND",
-                                        "display": "C1jQZb_Vjv",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "UpZA0xARbP"
-                            }
-                        ],
-                        "date": "2020-03-12T00:11:48.273-04:00",
-                        "procedureCodeableConcept": {
-                            "coding": [
-                                {
-                                    "system": "t8ykqwVTjU",
-                                    "version": "hG4kmpPbIr",
-                                    "code": "SMTXhjbgib",
-                                    "display": "4oE7T9ZBGA",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "v6yHzqVqMo"
-                        },
-                        "udi": [
-                            {
-                                "reference": "9BOYa5PEo5",
-                                "type": "eGRaZgdrwG",
-                                "identifier": {
-                                    "use": "official",
-                                    "type": {
-                                        "coding": [
-                                            {
-                                                "system": "A3jLyVEiyZ",
-                                                "version": "2GONFNZEf_",
-                                                "code": "7c3qvATnGn",
-                                                "display": "KBolurO191",
-                                                "userSelected": true
-                                            }
-                                        ],
-                                        "text": "_JzAG1zLP4"
-                                    },
-                                    "system": "6_PU00c6D6",
-                                    "value": "n0JM_dgsxX",
-                                    "period": {
-                                        "start": "2020-03-12T00:11:48.273-04:00",
-                                        "end": "2020-03-12T00:11:48.273-04:00"
-                                    }
-                                },
-                                "display": "EgfnLk0DfG"
-                            }
-                        ]
-                    }
-                ],
-                "insurance": [
-                    {
-                        "sequence": 6074648,
-                        "focal": true,
-                        "identifier": {
-                            "use": "secondary",
-                            "type": {
-                                "coding": [
-                                    {
-                                        "system": "t26dDjxbwS",
-                                        "version": "OisOWKQKSU",
-                                        "code": "WeQJmfmwOI",
-                                        "display": "iauL3JZXDG",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "d8xpG2pP42"
-                            },
-                            "system": "2n716GJqsr",
-                            "value": "9K_jE9MbtA",
-                            "period": {
-                                "start": "2020-03-12T00:11:48.262-04:00",
-                                "end": "2020-03-12T00:11:48.262-04:00"
-                            }
-                        },
-                        "coverage": {
-                            "reference": "Coverage/vzHRAHT3IB",
-                            "type": "Coverage",
-                            "identifier": {
-                                "use": "temp",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "ed1XKQ7YTi",
-                                            "version": "C2wql9pzI8",
-                                            "code": "5MPCDNHDvr",
-                                            "display": "GRe7AoXZAa",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "bCF4jjGU0a"
-                                },
-                                "system": "GqhKgfFTf6",
-                                "value": "W8ht8EdO4A",
-                                "period": {
-                                    "start": "2020-03-12T00:11:48.261-04:00",
-                                    "end": "2020-03-12T00:11:48.261-04:00"
-                                }
-                            },
-                            "display": "vGGXjuuG8Y"
-                        },
-                        "businessArrangement": "Xmdcb1iXNg",
-                        "preAuthRef": [
-                            "0n0RHdMxs1"
-                        ],
-                        "claimResponse": {
-                            "reference": "ClaimResponse/7P3SgjWPd_",
-                            "type": "ClaimResponse",
-                            "identifier": {
-                                "use": "secondary",
-                                "type": {
-                                    "coding": [
-                                        {
-                                            "system": "Nu68o1rgmJ",
-                                            "version": "EOtYps8YNN",
-                                            "code": "7khAhUEX5r",
-                                            "display": "4ZvQ1ZrLxr",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "WUvZMTmZ_P"
-                                },
-                                "system": "p48rmE_iTJ",
-                                "value": "GNT1Kt23y8",
-                                "period": {
-                                    "start": "2020-03-12T00:11:48.26-04:00",
-                                    "end": "2020-03-12T00:11:48.26-04:00"
-                                }
-                            },
-                            "display": "NM2tpdo06w"
-                        }
-                    }
-                ],
-                "accident": {
-                    "date": "2020-03-12",
-                    "type": {
-                        "coding": [
-                            {
-                                "system": "AzcOnPHfTN",
-                                "version": "GG8P8AIYhZ",
-                                "code": "sAL_Wg2IvE",
-                                "display": "RiM9YcAJKs",
-                                "userSelected": true
-                            }
-                        ],
-                        "text": "tHHHfE2cFm"
-                    },
-                    "locationAddress": {
-                        "use": "old",
-                        "type": "physical",
-                        "text": "jyUHGgm5zt",
-                        "line": [
-                            "bdKfig16g4"
-                        ],
-                        "city": "xvLoXKvJpG",
-                        "district": "8HGuUDyr9n",
-                        "state": "QbJPESUGYM",
-                        "postalCode": "kXwi4msdmd",
-                        "country": "uuHV7ECKS_",
-                        "period": {
-                            "start": "2020-03-12T00:11:48.265-04:00",
-                            "end": "2020-03-12T00:11:48.266-04:00"
-                        }
-                    }
+                    ],
+                    "text": "5jxBbnrUd6"
                 },
                 "item": [
                     {
-                        "sequence": 1401269849,
-                        "careTeamSequence": [
-                            1668576591
+                        "itemSequence": 603393188,
+                        "noteNumber": [
+                            215818317
                         ],
-                        "diagnosisSequence": [
-                            1665529544
-                        ],
-                        "procedureSequence": [
-                            1886008536
-                        ],
-                        "informationSequence": [
-                            170562630
-                        ],
-                        "revenue": {
-                            "coding": [
-                                {
-                                    "system": "Cn5CTHwhcQ",
-                                    "version": "oUQ5w0fBmN",
-                                    "code": "VB4GHhPRmQ",
-                                    "display": "cWIkJVoOls",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "I41OfZi4iZ"
-                        },
-                        "category": {
-                            "coding": [
-                                {
-                                    "system": "sLZKMesMZI",
-                                    "version": "no8iyyiT9J",
-                                    "code": "FpvUR0LqP0",
-                                    "display": "ir4Z6ewdG1",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "jmFZ7jZygA"
-                        },
-                        "productOrService": {
-                            "coding": [
-                                {
-                                    "system": "5mJoeF2r8w",
-                                    "version": "UxlVyuFZkC",
-                                    "code": "JRFBeKYhpG",
-                                    "display": "XQ_ZqgwVCj",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "HtCZ4rO9gn"
-                        },
-                        "modifier": [
+                        "adjudication": [
                             {
-                                "coding": [
-                                    {
-                                        "system": "gZjzr8zVGz",
-                                        "version": "bjfKKYydCx",
-                                        "code": "aP6EC855jZ",
-                                        "display": "9wuIeZYUn9",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "KNMAycVgdF"
-                            }
-                        ],
-                        "programCode": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "JznTdjExsJ",
-                                        "version": "GeCBRudpSY",
-                                        "code": "3UrmHePxDN",
-                                        "display": "sI4feeByRS",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "4Fll5wzOhj"
-                            }
-                        ],
-                        "servicedDate": "2020-03-12",
-                        "locationCodeableConcept": {
-                            "coding": [
-                                {
-                                    "system": "TExedB89sl",
-                                    "version": "PKwx9jK1HV",
-                                    "code": "LfU0d9RcAk",
-                                    "display": "XcYEu8oNIq",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "FzhZz21wRJ"
-                        },
-                        "quantity": {
-                            "value": 133501303329,
-                            "unit": "sdw19S3box",
-                            "system": "laKQNKr77g",
-                            "code": "LA0akPSzaZ"
-                        },
-                        "unitPrice": {
-                            "value": 109042216480,
-                            "currency": "wKAd4k_XSJ"
-                        },
-                        "factor": 656289916,
-                        "net": {
-                            "value": 99608167223,
-                            "currency": "nKzFV8t82x"
-                        },
-                        "udi": [
-                            {
-                                "reference": "56acM_kcpi",
-                                "type": "RrFwncHPrB",
-                                "identifier": {
-                                    "use": "temp",
-                                    "type": {
-                                        "coding": [
-                                            {
-                                                "system": "vSS5j38PF3",
-                                                "version": "leKs8sWo8p",
-                                                "code": "zXM2PQMDmW",
-                                                "display": "1Uh2oaeeRK",
-                                                "userSelected": true
-                                            }
-                                        ],
-                                        "text": "DJsHnS8bBv"
-                                    },
-                                    "system": "itqVwp_Vrm",
-                                    "value": "e5VFkT5iXV",
-                                    "period": {
-                                        "start": "2020-03-12T00:11:48.291-04:00",
-                                        "end": "2020-03-12T00:11:48.291-04:00"
-                                    }
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "RIS0b2EPaE",
+                                            "version": "iN3_bFNOeZ",
+                                            "code": "RhEl9LcIlf",
+                                            "display": "rXurtL2WEB",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "v39fR9a0Go"
                                 },
-                                "display": "pKXgLx0vp3"
-                            }
-                        ],
-                        "bodySite": {
-                            "coding": [
-                                {
-                                    "system": "2AJVZ2WRjN",
-                                    "version": "OumXdsH_28",
-                                    "code": "4AuRUb8p0W",
-                                    "display": "hOkejEZNuO",
-                                    "userSelected": true
-                                }
-                            ],
-                            "text": "qYW7MxqLlZ"
-                        },
-                        "subSite": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "5O3rRFlJMw",
-                                        "version": "zHE2khsAgs",
-                                        "code": "ksWmldXk1m",
-                                        "display": "xedAmqMMDu",
-                                        "userSelected": true
-                                    }
-                                ],
-                                "text": "oVM6GRjkCp"
-                            }
-                        ],
-                        "encounter": [
-                            {
-                                "reference": "csNgcVdcOe",
-                                "type": "cnm8A3vJ6n",
-                                "identifier": {
-                                    "use": "usual",
-                                    "type": {
-                                        "coding": [
-                                            {
-                                                "system": "3F5zNPIHpC",
-                                                "version": "jhOakAbp_T",
-                                                "code": "RvROBcjlCl",
-                                                "display": "rWj5bd3OYx",
-                                                "userSelected": true
-                                            }
-                                        ],
-                                        "text": "uvTmnTB5x3"
-                                    },
-                                    "system": "u5eEjmXTKO",
-                                    "value": "3X5z146epK",
-                                    "period": {
-                                        "start": "2020-03-12T00:11:48.29-04:00",
-                                        "end": "2020-03-12T00:11:48.29-04:00"
-                                    }
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "O5Ml7ERqUO",
+                                            "version": "zHg9lyp16H",
+                                            "code": "8HdkVbvsLt",
+                                            "display": "LMQeS7V3ys",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "s8FPGJnCCi"
                                 },
-                                "display": "AKJJQgqNUp"
+                                "amount": {
+                                    "value": 405765259021,
+                                    "currency": "94zg_M_nnI"
+                                },
+                                "value": 490353530937
                             }
                         ],
                         "detail": [
                             {
-                                "sequence": 1225697868,
-                                "revenue": {
-                                    "coding": [
-                                        {
-                                            "system": "jQJoDYPlob",
-                                            "version": "BVXyBlK_y1",
-                                            "code": "rozhTrnL5D",
-                                            "display": "DYVlKTKzgL",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "aW29EAX3lx"
-                                },
-                                "category": {
-                                    "coding": [
-                                        {
-                                            "system": "PejRMUl2rh",
-                                            "version": "829tESP7ze",
-                                            "code": "55pNhybDeD",
-                                            "display": "VKpNfpBmlS",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "C8r4FxCsKe"
-                                },
-                                "productOrService": {
-                                    "coding": [
-                                        {
-                                            "system": "m0LkJ1FDYj",
-                                            "version": "kmoDpekDOo",
-                                            "code": "SlwBVf6Us9",
-                                            "display": "fTQOx4cHpd",
-                                            "userSelected": true
-                                        }
-                                    ],
-                                    "text": "ulgsr9sh5H"
-                                },
-                                "modifier": [
-                                    {
-                                        "coding": [
-                                            {
-                                                "system": "XwStQwQqNw",
-                                                "version": "HCoP_qvFUn",
-                                                "code": "49eoy9jrii",
-                                                "display": "2xfQxCDkma",
-                                                "userSelected": true
-                                            }
-                                        ],
-                                        "text": "kzArGuinLw"
-                                    }
+                                "detailSequence": 1734979144,
+                                "noteNumber": [
+                                    1562831841
                                 ],
-                                "programCode": [
+                                "adjudication": [
                                     {
-                                        "coding": [
-                                            {
-                                                "system": "ff60gHYqnY",
-                                                "version": "HPYg57US_5",
-                                                "code": "uYpRA6ubfp",
-                                                "display": "JT2OvH1PFE",
-                                                "userSelected": true
-                                            }
-                                        ],
-                                        "text": "9MY0aJwF5g"
-                                    }
-                                ],
-                                "quantity": {
-                                    "value": 189869997076,
-                                    "unit": "ejFPrWzEJZ",
-                                    "system": "yyfckkU2Xf",
-                                    "code": "h0hi8mU6xt"
-                                },
-                                "unitPrice": {
-                                    "value": 426830008665,
-                                    "currency": "iYJIC9EJSx"
-                                },
-                                "factor": 130461075048,
-                                "net": {
-                                    "value": 64682752569,
-                                    "currency": "MIgI_IT0EX"
-                                },
-                                "udi": [
-                                    {
-                                        "reference": "2QCAbtmQmY",
-                                        "type": "8RKJM_h5hg",
-                                        "identifier": {
-                                            "use": "old",
-                                            "type": {
-                                                "coding": [
-                                                    {
-                                                        "system": "mszIYv97vI",
-                                                        "version": "QcOtsL0cqw",
-                                                        "code": "OcQVhb2JKD",
-                                                        "display": "5JQiEtFW8J",
-                                                        "userSelected": true
-                                                    }
-                                                ],
-                                                "text": "TMrv2wRBt0"
-                                            },
-                                            "system": "0Rr7upax4i",
-                                            "value": "71KgLfgHEJ",
-                                            "period": {
-                                                "start": "2020-03-12T00:11:48.286-04:00",
-                                                "end": "2020-03-12T00:11:48.286-04:00"
-                                            }
+                                        "category": {
+                                            "coding": [
+                                                {
+                                                    "system": "EdEgHhL5U0",
+                                                    "version": "xQVA54l8lw",
+                                                    "code": "EXeq_17Q_v",
+                                                    "display": "HEzVQJnxA5",
+                                                    "userSelected": true
+                                                }
+                                            ],
+                                            "text": "us1D7kZ0Bu"
                                         },
-                                        "display": "A7OZd7epBy"
+                                        "reason": {
+                                            "coding": [
+                                                {
+                                                    "system": "AhuhbvtGcz",
+                                                    "version": "ag4PVxYGOY",
+                                                    "code": "peyAWBN2EZ",
+                                                    "display": "J6mwLZZ90E",
+                                                    "userSelected": true
+                                                }
+                                            ],
+                                            "text": "t4zvdqMpMX"
+                                        },
+                                        "amount": {
+                                            "value": 126454547052,
+                                            "currency": "FIM3_4huqB"
+                                        },
+                                        "value": 104408251949
                                     }
                                 ],
                                 "subDetail": [
                                     {
-                                        "sequence": 104865272,
-                                        "revenue": {
-                                            "coding": [
-                                                {
-                                                    "system": "8rlQNrgA40",
-                                                    "version": "ib8Rm0hqJ9",
-                                                    "code": "I_zzCsKgpk",
-                                                    "display": "ct1yyjqoVo",
-                                                    "userSelected": true
-                                                }
-                                            ],
-                                            "text": "REmOr9WLpG"
-                                        },
-                                        "category": {
-                                            "coding": [
-                                                {
-                                                    "system": "nAwygqFUxm",
-                                                    "version": "QCN4uXwb90",
-                                                    "code": "eXgb3znfkn",
-                                                    "display": "FDtH62A3H7",
-                                                    "userSelected": true
-                                                }
-                                            ],
-                                            "text": "0Y2vYUtHgg"
-                                        },
-                                        "productOrService": {
-                                            "coding": [
-                                                {
-                                                    "system": "Pz4pqp91fQ",
-                                                    "version": "QuL0Ch3XqG",
-                                                    "code": "_6zSIhe9ha",
-                                                    "display": "ItqCQM3N8M",
-                                                    "userSelected": true
-                                                }
-                                            ],
-                                            "text": "G25PPYzjVc"
-                                        },
-                                        "modifier": [
-                                            {
-                                                "coding": [
-                                                    {
-                                                        "system": "cibLQBBN2w",
-                                                        "version": "1OGjUrAZXa",
-                                                        "code": "OWG51hlVdG",
-                                                        "display": "MHaOtl1bkd",
-                                                        "userSelected": true
-                                                    }
-                                                ],
-                                                "text": "0649FSnDDr"
-                                            }
+                                        "subDetailSequence": 2132027684,
+                                        "noteNumber": [
+                                            1127081677
                                         ],
-                                        "programCode": [
+                                        "adjudication": [
                                             {
-                                                "coding": [
-                                                    {
-                                                        "system": "5DhKAZDTq0",
-                                                        "version": "se64wJiXlJ",
-                                                        "code": "RTehAFoykx",
-                                                        "display": "oiNlcMfoLY",
-                                                        "userSelected": true
-                                                    }
-                                                ],
-                                                "text": "DL4r4fwcsx"
-                                            }
-                                        ],
-                                        "quantity": {
-                                            "value": 103617743202,
-                                            "unit": "rdrA0xIJh8",
-                                            "system": "x8vvDUdNu2",
-                                            "code": "nk52bgn40E"
-                                        },
-                                        "unitPrice": {
-                                            "value": 142642122812,
-                                            "currency": "1j76NliN_O"
-                                        },
-                                        "factor": 244955488563,
-                                        "net": {
-                                            "value": 13895825709,
-                                            "currency": "d1doJn2SlD"
-                                        },
-                                        "udi": [
-                                            {
-                                                "reference": "37n5Om3jI3",
-                                                "type": "OtE1MSZk14",
-                                                "identifier": {
-                                                    "use": "old",
-                                                    "type": {
-                                                        "coding": [
-                                                            {
-                                                                "system": "g_GhG73UOa",
-                                                                "version": "vzjQ1UlwMF",
-                                                                "code": "Df3XL_pLqc",
-                                                                "display": "HE2TTVVcRt",
-                                                                "userSelected": true
-                                                            }
-                                                        ],
-                                                        "text": "qX5CQO8f2D"
-                                                    },
-                                                    "system": "a2j5pHxpiU",
-                                                    "value": "P8p8u91cJd",
-                                                    "period": {
-                                                        "start": "2020-03-12T00:11:48.282-04:00",
-                                                        "end": "2020-03-12T00:11:48.282-04:00"
-                                                    }
+                                                "category": {
+                                                    "coding": [
+                                                        {
+                                                            "system": "pD4jnmuQVf",
+                                                            "version": "Pp4mNpvZI2",
+                                                            "code": "6m6x68UYpx",
+                                                            "display": "9Gy6AAwLmI",
+                                                            "userSelected": true
+                                                        }
+                                                    ],
+                                                    "text": "Rbzr80uYlp"
                                                 },
-                                                "display": "weZQunGzVu"
+                                                "reason": {
+                                                    "coding": [
+                                                        {
+                                                            "system": "Rhq7XtsWPu",
+                                                            "version": "WAgbV05J96",
+                                                            "code": "Cg8FlGMxoL",
+                                                            "display": "Nuk76zOLXG",
+                                                            "userSelected": true
+                                                        }
+                                                    ],
+                                                    "text": "9oXZUfcZZb"
+                                                },
+                                                "amount": {
+                                                    "value": 519714143589,
+                                                    "currency": "HAW4Livusq"
+                                                },
+                                                "value": 361770940946
                                             }
                                         ]
                                     }
@@ -1992,10 +1123,607 @@
                         ]
                     }
                 ],
-                "total": {
-                    "value": 65957134692,
-                    "currency": "GncysNdCZy"
-                }
+                "addItem": [
+                    {
+                        "itemSequence": [
+                            47705993
+                        ],
+                        "detailSequence": [
+                            896544216
+                        ],
+                        "subdetailSequence": [
+                            463148587
+                        ],
+                        "provider": [
+                            {
+                                "reference": "R0zcGQPiig",
+                                "type": "Frhn0hN1jH",
+                                "identifier": {
+                                    "use": "official",
+                                    "type": {
+                                        "coding": [
+                                            {
+                                                "system": "Ygl5OJWrF6",
+                                                "version": "BpBDK_7QHS",
+                                                "code": "FFqQ2RBZ1d",
+                                                "display": "gfsh7VTjDN",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "BRIEbRhNfL"
+                                    },
+                                    "system": "9OxPI3qqsR",
+                                    "value": "J8OVJpUgtT",
+                                    "period": {
+                                        "start": "2020-03-12T00:11:48.78-04:00",
+                                        "end": "2020-03-12T00:11:48.781-04:00"
+                                    }
+                                },
+                                "display": "7h6bizvBd3"
+                            }
+                        ],
+                        "productOrService": {
+                            "coding": [
+                                {
+                                    "system": "SBaVj2_ZeO",
+                                    "version": "VssO0WYlVn",
+                                    "code": "M4_zE3wJ0c",
+                                    "display": "3RuMT6CTUZ",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "KsKlCgFYxd"
+                        },
+                        "modifier": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "AZu9b1nQFU",
+                                        "version": "2wWzledxNR",
+                                        "code": "GF9PBnVL87",
+                                        "display": "asNcqHcac7",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "nt_5uloELK"
+                            }
+                        ],
+                        "programCode": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "UN7vSPSV_D",
+                                        "version": "lYRLWa9C_Z",
+                                        "code": "DflwGxe9fe",
+                                        "display": "4zUC0ROv0H",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "GdsMJHI0YR"
+                            }
+                        ],
+                        "servicedDate": "2020-03-12",
+                        "locationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "2loQzlEMOm",
+                                    "version": "qYOJOT3EFG",
+                                    "code": "mNlNndu7cy",
+                                    "display": "9q3PgQyt7m",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "DuuJXFCJyH"
+                        },
+                        "quantity": {
+                            "value": 327042618462,
+                            "unit": "TafLSCENSb",
+                            "system": "wFXMdxDNp_",
+                            "code": "PIMO6kqlaN"
+                        },
+                        "unitPrice": {
+                            "value": 139340309818,
+                            "currency": "789Sd8Gl_x"
+                        },
+                        "factor": 427334594402,
+                        "net": {
+                            "value": 173129358456,
+                            "currency": "iNrTiRYLyh"
+                        },
+                        "bodySite": {
+                            "coding": [
+                                {
+                                    "system": "wY8MT6O0xS",
+                                    "version": "fcyUtQMRBC",
+                                    "code": "crclbew1HA",
+                                    "display": "RVcihl63QG",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "fgG5ywCJKY"
+                        },
+                        "subSite": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "hzlz7v__yf",
+                                        "version": "rlHbMoQhUk",
+                                        "code": "1_bhnWwC8N",
+                                        "display": "ZUCI_b1nWi",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "3tcW9X8ZWz"
+                            }
+                        ],
+                        "noteNumber": [
+                            2025567925
+                        ],
+                        "adjudication": [
+                            {
+                                "category": {
+                                    "coding": [
+                                        {
+                                            "system": "MPgYS85Fqb",
+                                            "version": "Ef32cqO7aX",
+                                            "code": "L7YoqY2L3W",
+                                            "display": "zVC9KdD2nB",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "0EnAy5LKxi"
+                                },
+                                "reason": {
+                                    "coding": [
+                                        {
+                                            "system": "tEv6OWV2yf",
+                                            "version": "88GgVaS1La",
+                                            "code": "ObIyegHV5Y",
+                                            "display": "mpNHTKzcLm",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "fU_igttf5z"
+                                },
+                                "amount": {
+                                    "value": 190071646326,
+                                    "currency": "SGDiayWXEK"
+                                },
+                                "value": 181280993087
+                            }
+                        ],
+                        "detail": [
+                            {
+                                "productOrService": {
+                                    "coding": [
+                                        {
+                                            "system": "UX5VzL5QLG",
+                                            "version": "JINu5LPxhg",
+                                            "code": "mGBN4tvPbc",
+                                            "display": "4yGUazKNAo",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "m_5xjg_fu4"
+                                },
+                                "modifier": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "system": "0Ro1CRlmBY",
+                                                "version": "RV5d6eo2zn",
+                                                "code": "3NTqQuSpEX",
+                                                "display": "pgPwUyQjOv",
+                                                "userSelected": true
+                                            }
+                                        ],
+                                        "text": "GXbNcvHnvT"
+                                    }
+                                ],
+                                "quantity": {
+                                    "value": 81793992513,
+                                    "unit": "a5FE1p6Jm_",
+                                    "system": "hsUKfmZSCW",
+                                    "code": "C_u1UL3U41"
+                                },
+                                "unitPrice": {
+                                    "value": 348800491349,
+                                    "currency": "5BQ08FGgbU"
+                                },
+                                "factor": 399923760435,
+                                "net": {
+                                    "value": 236818407252,
+                                    "currency": "FaYnstMqCx"
+                                },
+                                "noteNumber": [
+                                    198436263
+                                ],
+                                "adjudication": [
+                                    {
+                                        "category": {
+                                            "coding": [
+                                                {
+                                                    "system": "7U9RIEJUA1",
+                                                    "version": "LhFhfZA8bP",
+                                                    "code": "KbFwstvSGB",
+                                                    "display": "iGlv96McVG",
+                                                    "userSelected": true
+                                                }
+                                            ],
+                                            "text": "zq275iu3kx"
+                                        },
+                                        "reason": {
+                                            "coding": [
+                                                {
+                                                    "system": "zpQ7J2LSM0",
+                                                    "version": "nnH2xWbX1J",
+                                                    "code": "Bgu06WuvnW",
+                                                    "display": "zZxTF0kbHm",
+                                                    "userSelected": true
+                                                }
+                                            ],
+                                            "text": "bdwyUbX0OK"
+                                        },
+                                        "amount": {
+                                            "value": 331456923914,
+                                            "currency": "hHcpD5dNLN"
+                                        },
+                                        "value": 274968234244
+                                    }
+                                ],
+                                "subDetail": [
+                                    {
+                                        "productOrService": {
+                                            "coding": [
+                                                {
+                                                    "system": "8f5mzuYRrp",
+                                                    "version": "jFf06j4eqI",
+                                                    "code": "MmZJAuyUUA",
+                                                    "display": "zAZheVZr0A",
+                                                    "userSelected": true
+                                                }
+                                            ],
+                                            "text": "zXKTTQq4hx"
+                                        },
+                                        "modifier": [
+                                            {
+                                                "coding": [
+                                                    {
+                                                        "system": "kW1clejsV6",
+                                                        "version": "ZqUuWQ_FTy",
+                                                        "code": "dj2baRacwP",
+                                                        "display": "aILkE2Xgd4",
+                                                        "userSelected": true
+                                                    }
+                                                ],
+                                                "text": "CGu0JGMK1n"
+                                            }
+                                        ],
+                                        "quantity": {
+                                            "value": 268002859054,
+                                            "unit": "fEtXp9eRwX",
+                                            "system": "D8wmVrPY3n",
+                                            "code": "2WRxfbAFF6"
+                                        },
+                                        "unitPrice": {
+                                            "value": 369473947941,
+                                            "currency": "1KUQYIJbjg"
+                                        },
+                                        "factor": 512394751771,
+                                        "net": {
+                                            "value": 435426442240,
+                                            "currency": "SKEJ0OBDS0"
+                                        },
+                                        "noteNumber": [
+                                            1266938422
+                                        ],
+                                        "adjudication": [
+                                            {
+                                                "category": {
+                                                    "coding": [
+                                                        {
+                                                            "system": "MxunKgIZAs",
+                                                            "version": "vGaJJqiK72",
+                                                            "code": "fJ5zf2Ryk3",
+                                                            "display": "VVPtmiMGng",
+                                                            "userSelected": true
+                                                        }
+                                                    ],
+                                                    "text": "3zjVmqiJKI"
+                                                },
+                                                "reason": {
+                                                    "coding": [
+                                                        {
+                                                            "system": "EU0bf0mBE2",
+                                                            "version": "wPVt8vYVVF",
+                                                            "code": "iEASR71NyR",
+                                                            "display": "i8yv3G581a",
+                                                            "userSelected": true
+                                                        }
+                                                    ],
+                                                    "text": "OIY8s39WeX"
+                                                },
+                                                "amount": {
+                                                    "value": 208275644236,
+                                                    "currency": "_zAGYtexnc"
+                                                },
+                                                "value": 448624536376
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "adjudication": [
+                    {
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "vdeurX33g9",
+                                    "version": "GiPsVHG1bl",
+                                    "code": "BTQP783Rfa",
+                                    "display": "R1_VXOpraT",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "Suv99fEyLT"
+                        },
+                        "reason": {
+                            "coding": [
+                                {
+                                    "system": "yPrt6x0q5f",
+                                    "version": "FE3kwGiRxz",
+                                    "code": "vpIXrxW2T8",
+                                    "display": "aEwCEssdTr",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "EhIhtMdQpS"
+                        },
+                        "amount": {
+                            "value": 82904427796,
+                            "currency": "qKHBzbtz0I"
+                        },
+                        "value": 520065133690
+                    }
+                ],
+                "total": [
+                    {
+                        "category": {
+                            "coding": [
+                                {
+                                    "system": "CJimaZPuTu",
+                                    "version": "P1MbmbjzkY",
+                                    "code": "T25uaOB3dr",
+                                    "display": "QWdN2jupCX",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "nNJjJJPRDx"
+                        },
+                        "amount": {
+                            "value": 185574764094,
+                            "currency": "fgpXZOxXZg"
+                        }
+                    }
+                ],
+                "payment": {
+                    "type": {
+                        "coding": [
+                            {
+                                "system": "YTOOgNBWEn",
+                                "version": "ss6ujsSPS8",
+                                "code": "i3SG097vF8",
+                                "display": "v5DNhluKa0",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "RkmjHDgY2s"
+                    },
+                    "adjustment": {
+                        "value": 409504531837,
+                        "currency": "DqMHeBikIo"
+                    },
+                    "adjustmentReason": {
+                        "coding": [
+                            {
+                                "system": "T_rpZTkPFs",
+                                "version": "dwDZe4DxMl",
+                                "code": "QNt8ya9dqN",
+                                "display": "_ZXXmf2f3j",
+                                "userSelected": true
+                            }
+                        ],
+                        "text": "QvYvOhgE2y"
+                    },
+                    "date": "2020-03-12",
+                    "amount": {
+                        "value": 228659377510,
+                        "currency": "KlqS1kgHa8"
+                    },
+                    "identifier": {
+                        "use": "secondary",
+                        "type": {
+                            "coding": [
+                                {
+                                    "system": "ln1S1Q5S1R",
+                                    "version": "2tMLMImh5B",
+                                    "code": "SaLJyUnng9",
+                                    "display": "56K3DUSHS3",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "vSmq8XrK9s"
+                        },
+                        "system": "hV9ez9oKkt",
+                        "value": "MH3V6aGbCS",
+                        "period": {
+                            "start": "2020-03-12T00:11:48.833-04:00",
+                            "end": "2020-03-12T00:11:48.833-04:00"
+                        }
+                    }
+                },
+                "fundsReserve": {
+                    "coding": [
+                        {
+                            "system": "Z7sHIpflUO",
+                            "version": "mTPe2CBc7U",
+                            "code": "MfjhVyURYV",
+                            "display": "acE5ARMbQV",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "iSwTRMCAFs"
+                },
+                "formCode": {
+                    "coding": [
+                        {
+                            "system": "gm_emAVjGN",
+                            "version": "h2jloCfSDT",
+                            "code": "ifJsBk9Ca2",
+                            "display": "C_6GwcjgS9",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "psUXqH3B0L"
+                },
+                "form": {
+                    "contentType": "sNo497uWIw",
+                    "language": "UF2cLbEFIT",
+                    "data": "ZER8Ggo=",
+                    "url": "YdwTq6S4q5",
+                    "size": 1025714879,
+                    "hash": "NzAxTgY=",
+                    "title": "RtBzNUroZj",
+                    "creation": "2020-03-12T00:11:48.776-04:00"
+                },
+                "processNote": [
+                    {
+                        "number": 176772129,
+                        "type": "display",
+                        "text": "JnEfA18dhS",
+                        "language": {
+                            "coding": [
+                                {
+                                    "system": "IXRmL4vWod",
+                                    "version": "WmfDiEtCc1",
+                                    "code": "sApwpbfAzG",
+                                    "display": "Q_bf_8Fc2r",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "4ID9c2m94v"
+                        }
+                    }
+                ],
+                "communicationRequest": [
+                    {
+                        "reference": "4uby_zJGDq",
+                        "type": "MfXmGGJRIn",
+                        "identifier": {
+                            "use": "official",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "lqPQmUhF_t",
+                                        "version": "F613_U5hoz",
+                                        "code": "rztWAYTkxl",
+                                        "display": "eDUYL5nI28",
+                                        "userSelected": true
+                                    }
+                                ],
+                                "text": "rAAbfiWDH9"
+                            },
+                            "system": "qBwhgs1oIG",
+                            "value": "74FKmgJXNt",
+                            "period": {
+                                "start": "2020-03-12T00:11:48.925-04:00",
+                                "end": "2020-03-12T00:11:48.925-04:00"
+                            }
+                        },
+                        "display": "FBFR5cEWR0"
+                    }
+                ],
+                "insurance": [
+                    {
+                        "sequence": 1397953685,
+                        "focal": true,
+                        "coverage": {
+                            "reference": "Coverage/OXjMi7FMpZ",
+                            "type": "Coverage",
+                            "identifier": {
+                                "use": "usual",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "S7x14fNBjR",
+                                            "version": "16IumWmXef",
+                                            "code": "CCdKypicLN",
+                                            "display": "zvKSAeS5Az",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "SAzrF5oVgY"
+                                },
+                                "system": "TSBrXGgnwm",
+                                "value": "oazoObgATS",
+                                "period": {
+                                    "start": "2020-03-12T00:11:48.923-04:00",
+                                    "end": "2020-03-12T00:11:48.923-04:00"
+                                }
+                            },
+                            "display": "kyPfSXL6X6"
+                        },
+                        "businessArrangement": "sDp4X1pRMf",
+                        "claimResponse": {
+                            "reference": "ClaimResponse/g6dxg33MVb",
+                            "type": "ClaimResponse",
+                            "identifier": {
+                                "use": "usual",
+                                "type": {
+                                    "coding": [
+                                        {
+                                            "system": "2l_gnUDFHM",
+                                            "version": "6SXzx7eCko",
+                                            "code": "BT14psXW1l",
+                                            "display": "af57feY_QG",
+                                            "userSelected": true
+                                        }
+                                    ],
+                                    "text": "USun8_aTS7"
+                                },
+                                "system": "q_RPWiG_k3",
+                                "value": "vYaWrEOPT4",
+                                "period": {
+                                    "start": "2020-03-12T00:11:48.922-04:00",
+                                    "end": "2020-03-12T00:11:48.922-04:00"
+                                }
+                            },
+                            "display": "EwUrEmk6ny"
+                        }
+                    }
+                ],
+                "error": [
+                    {
+                        "itemSequence": 2022331299,
+                        "detailSequence": 359008735,
+                        "subDetailSequence": 458421307,
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "Gu4iMoW68x",
+                                    "version": "JVGdxLo1kg",
+                                    "code": "8vaeGu73ni",
+                                    "display": "mzZQNfEsxn",
+                                    "userSelected": true
+                                }
+                            ],
+                            "text": "q7DDznsDmg"
+                        }
+                    }
+                ]
             }
         },
         "Bundle": {
@@ -2488,7 +2216,41 @@
                 "url"
             ]
         },
-        "Claim_Item": {
+        "ClaimResponse_Error": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "itemSequence": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The sequence number of the line item submitted which contains the error. This value is omitted when the error occurs outside of the item structure."
+                        },
+                        "detailSequence": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The sequence number of the detail within the line item submitted which contains the error. This value is omitted when the error occurs outside of the item structure."
+                        },
+                        "subDetailSequence": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The sequence number of the sub-detail within the detail within the line item submitted which contains the error. This value is omitted when the error occurs outside of the item structure."
+                        },
+                        "code": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "An error code, from a specified code system, which details why the claim could not be adjudicated."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "code"
+            ]
+        },
+        "ClaimResponse_Insurance": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2499,47 +2261,175 @@
                         "sequence": {
                             "type": "integer",
                             "format": "int32",
-                            "description": "A number to uniquely identify item entries."
+                            "description": "A number to uniquely identify insurance entries and provide a sequence of coverages to convey coordination of benefit order."
                         },
-                        "careTeamSequence": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer",
-                                "format": "int32",
-                                "description": "CareTeam members related to this service or product."
-                            }
+                        "focal": {
+                            "type": "boolean",
+                            "description": "A flag to indicate that this Coverage is to be used for adjudication of this claim when set to true."
                         },
-                        "diagnosisSequence": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer",
-                                "format": "int32",
-                                "description": "Diagnosis applicable for this service or product."
-                            }
+                        "coverage": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "Reference to the insurance card level information contained in the Coverage resource. The coverage issuing insurer will use these details to locate the patient's actual coverage within the insurer's information system."
                         },
-                        "procedureSequence": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer",
-                                "format": "int32",
-                                "description": "Procedures applicable for this service or product."
-                            }
+                        "businessArrangement": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "A business agreement number established between the provider and the insurer for special business processing purposes."
                         },
-                        "informationSequence": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer",
-                                "format": "int32",
-                                "description": "Exceptions, special conditions and supporting information applicable for this service or product."
-                            }
+                        "claimResponse": {
+                            "$ref": "#/definitions/Reference",
+                            "description": "The result of the adjudication of the line items for the Coverage specified in this insurance."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "sequence",
+                "focal",
+                "coverage"
+            ]
+        },
+        "ClaimResponse_ProcessNote": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "number": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "A number to uniquely identify a note entry."
                         },
-                        "revenue": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "display",
+                                "print",
+                                "printoper"
+                            ],
+                            "description": "The business purpose of the note text."
+                        },
+                        "text": {
+                            "type": "string",
+                            "pattern": "[ \\r\\n\\t\\S]+",
+                            "description": "The explanation or description associated with the processing."
+                        },
+                        "language": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The type of revenue or cost center providing the product and/or service."
+                            "description": "A code to define the language used in the text of the note."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "text"
+            ]
+        },
+        "ClaimResponse_Payment": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Whether this represents partial or complete payment of the benefits payable."
                         },
+                        "adjustment": {
+                            "$ref": "#/definitions/Money",
+                            "description": "Total amount of all adjustments to this payment included in this transaction which are not related to this claim's adjudication."
+                        },
+                        "adjustmentReason": {
+                            "$ref": "#/definitions/CodeableConcept",
+                            "description": "Reason for the payment adjustment."
+                        },
+                        "date": {
+                            "type": "string",
+                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
+                            "description": "Estimated date the payment will be issued or the actual issue date of payment."
+                        },
+                        "amount": {
+                            "$ref": "#/definitions/Money",
+                            "description": "Benefits payable less any payment adjustment."
+                        },
+                        "identifier": {
+                            "$ref": "#/definitions/Identifier",
+                            "description": "Issuer's unique identifier for the payment instrument."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type",
+                "amount"
+            ]
+        },
+        "ClaimResponse_Total": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
                         "category": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "Code to identify the general type of benefits under which products and services are provided."
+                            "description": "A code to indicate the information type of this adjudication record. Information types may include: the value submitted, maximum values or percentages allowed or payable under the plan, amounts that the patient is responsible for in aggregate or pertaining to this item, amounts paid by other coverages, and the benefit payable for this item."
+                        },
+                        "amount": {
+                            "$ref": "#/definitions/Money",
+                            "description": "Monetary total amount associated with the category."
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "category",
+                "amount"
+            ]
+        },
+        "ClaimResponse_AddItem": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BackboneElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "itemSequence": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "Claim items which this service line is intended to replace."
+                            }
+                        },
+                        "detailSequence": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The sequence number of the details within the claim item which this line is intended to replace."
+                            }
+                        },
+                        "subdetailSequence": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The sequence number of the sub-details within the details within the claim item which this line is intended to replace."
+                            }
+                        },
+                        "provider": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reference",
+                                "description": "The providers who are authorized for the services rendered to the patient."
+                            }
                         },
                         "productOrService": {
                             "$ref": "#/definitions/CodeableConcept",
@@ -2596,13 +2486,6 @@
                             "$ref": "#/definitions/Money",
                             "description": "The quantity times the unit price for an additional service or product or charge."
                         },
-                        "udi": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Unique Device Identifiers associated with this line item."
-                            }
-                        },
                         "bodySite": {
                             "$ref": "#/definitions/CodeableConcept",
                             "description": "Physical service site on the patient (limb, tooth, etc.)."
@@ -2614,29 +2497,37 @@
                                 "description": "A region or surface of the bodySite, e.g. limb region or tooth surface(s)."
                             }
                         },
-                        "encounter": {
+                        "noteNumber": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "The Encounters during which this Claim was created or to which the creation of this record is tightly associated."
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The numbers associated with notes below which apply to the adjudication of this item."
+                            }
+                        },
+                        "adjudication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "The adjudication results."
                             }
                         },
                         "detail": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Claim_Item_Detail",
-                                "description": "A claim detail line. Either a simple (a product or service) or a 'group' of sub-details which are simple items."
+                                "$ref": "#/definitions/ClaimResponse_AddItem_Detail",
+                                "description": "The second-tier service adjudications for payor added services."
                             }
                         }
                     }
                 }
             ],
             "required": [
-                "sequence",
-                "productOrService"
+                "productOrService",
+                "adjudication"
             ]
         },
-        "Claim_Item_Detail": {
+        "ClaimResponse_AddItem_Detail": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2644,19 +2535,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "sequence": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "A number to uniquely identify item entries."
-                        },
-                        "revenue": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The type of revenue or cost center providing the product and/or service."
-                        },
-                        "category": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "Code to identify the general type of benefits under which products and services are provided."
-                        },
                         "productOrService": {
                             "$ref": "#/definitions/CodeableConcept",
                             "description": "When the value is a group code then this item collects a set of related claim details, otherwise this contains the product, service, drug or other billing code for the item."
@@ -2666,13 +2544,6 @@
                             "items": {
                                 "$ref": "#/definitions/CodeableConcept",
                                 "description": "Item typification or modifiers codes to convey additional context for the product or service."
-                            }
-                        },
-                        "programCode": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "Identifies the program under which this may be recovered."
                             }
                         },
                         "quantity": {
@@ -2691,29 +2562,37 @@
                             "$ref": "#/definitions/Money",
                             "description": "The quantity times the unit price for an additional service or product or charge."
                         },
-                        "udi": {
+                        "noteNumber": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Unique Device Identifiers associated with this line item."
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The numbers associated with notes below which apply to the adjudication of this item."
+                            }
+                        },
+                        "adjudication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "The adjudication results."
                             }
                         },
                         "subDetail": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Claim_Item_Detail_SubDetail",
-                                "description": "A claim detail line. Either a simple (a product or service) or a 'group' of sub-details which are simple items."
+                                "$ref": "#/definitions/ClaimResponse_AddItem_Detail_SubDetail",
+                                "description": "A sub-detail adjudication of a simple product or service."
                             }
                         }
                     }
                 }
             ],
             "required": [
-                "sequence",
-                "productOrService"
+                "productOrService",
+                "adjudication"
             ]
         },
-        "Claim_Item_Detail_SubDetail": {
+        "ClaimResponse_AddItem_Detail_SubDetail": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2721,19 +2600,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "sequence": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "A number to uniquely identify item entries."
-                        },
-                        "revenue": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The type of revenue or cost center providing the product and/or service."
-                        },
-                        "category": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "Code to identify the general type of benefits under which products and services are provided."
-                        },
                         "productOrService": {
                             "$ref": "#/definitions/CodeableConcept",
                             "description": "When the value is a group code then this item collects a set of related claim details, otherwise this contains the product, service, drug or other billing code for the item."
@@ -2743,13 +2609,6 @@
                             "items": {
                                 "$ref": "#/definitions/CodeableConcept",
                                 "description": "Item typification or modifiers codes to convey additional context for the product or service."
-                            }
-                        },
-                        "programCode": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "Identifies the program under which this may be recovered."
                             }
                         },
                         "quantity": {
@@ -2768,22 +2627,30 @@
                             "$ref": "#/definitions/Money",
                             "description": "The quantity times the unit price for an additional service or product or charge."
                         },
-                        "udi": {
+                        "noteNumber": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Unique Device Identifiers associated with this line item."
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The numbers associated with notes below which apply to the adjudication of this item."
+                            }
+                        },
+                        "adjudication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "The adjudication results."
                             }
                         }
                     }
                 }
             ],
             "required": [
-                "sequence",
-                "productOrService"
+                "productOrService",
+                "adjudication"
             ]
         },
-        "Claim_Accident": {
+        "ClaimResponse_Item": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2791,82 +2658,42 @@
                 {
                     "type": "object",
                     "properties": {
-                        "date": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "Date of an accident event  related to the products and services contained in the claim."
-                        },
-                        "type": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The type or context of the accident event for the purposes of selection of potential insurance coverages and determination of coordination between insurers."
-                        },
-                        "locationAddress": {
-                            "$ref": "#/definitions/Address",
-                            "description": "The physical location of the accident event."
-                        },
-                        "locationReference": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The physical location of the accident event."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "date"
-            ]
-        },
-        "Claim_Insurance": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "sequence": {
+                        "itemSequence": {
                             "type": "integer",
                             "format": "int32",
-                            "description": "A number to uniquely identify insurance entries and provide a sequence of coverages to convey coordination of benefit order."
+                            "description": "A number to uniquely reference the claim item entries."
                         },
-                        "focal": {
-                            "type": "boolean",
-                            "description": "A flag to indicate that this Coverage is to be used for adjudication of this claim when set to true."
-                        },
-                        "identifier": {
-                            "$ref": "#/definitions/Identifier",
-                            "description": "The business identifier to be used when the claim is sent for adjudication against this insurance policy."
-                        },
-                        "coverage": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Reference to the insurance card level information contained in the Coverage resource. The coverage issuing insurer will use these details to locate the patient's actual coverage within the insurer's information system."
-                        },
-                        "businessArrangement": {
-                            "type": "string",
-                            "pattern": "[ \\r\\n\\t\\S]+",
-                            "description": "A business agreement number established between the provider and the insurer for special business processing purposes."
-                        },
-                        "preAuthRef": {
+                        "noteNumber": {
                             "type": "array",
                             "items": {
-                                "type": "string",
-                                "pattern": "[ \\r\\n\\t\\S]+",
-                                "description": "Reference numbers previously provided by the insurer to the provider to be quoted on subsequent claims containing services or products related to the prior authorization."
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The numbers associated with notes below which apply to the adjudication of this item."
                             }
                         },
-                        "claimResponse": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The result of the adjudication of the line items for the Coverage specified in this insurance."
+                        "adjudication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "If this item is a group then the values here are a summary of the adjudication of the detail items. If this item is a simple product or service then this is the result of the adjudication of this item."
+                            }
+                        },
+                        "detail": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Detail",
+                                "description": "A claim detail. Either a simple (a product or service) or a 'group' of sub-details which are simple items."
+                            }
                         }
                     }
                 }
             ],
             "required": [
-                "sequence",
-                "focal",
-                "coverage"
+                "itemSequence",
+                "adjudication"
             ]
         },
-        "Claim_Procedure": {
+        "ClaimResponse_Item_Detail": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2874,46 +2701,42 @@
                 {
                     "type": "object",
                     "properties": {
-                        "sequence": {
+                        "detailSequence": {
                             "type": "integer",
                             "format": "int32",
-                            "description": "A number to uniquely identify procedure entries."
+                            "description": "A number to uniquely reference the claim detail entry."
                         },
-                        "type": {
+                        "noteNumber": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "When the condition was observed or the relative ranking."
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The numbers associated with notes below which apply to the adjudication of this item."
                             }
                         },
-                        "date": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?",
-                            "description": "Date and optionally time the procedure was performed."
-                        },
-                        "procedureCodeableConcept": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The code or reference to a Procedure resource which identifies the clinical intervention performed."
-                        },
-                        "procedureReference": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The code or reference to a Procedure resource which identifies the clinical intervention performed."
-                        },
-                        "udi": {
+                        "adjudication": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Reference",
-                                "description": "Unique Device Identifiers associated with this line item."
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "The adjudication results."
+                            }
+                        },
+                        "subDetail": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Detail_SubDetail",
+                                "description": "A sub-detail adjudication of a simple product or service."
                             }
                         }
                     }
                 }
             ],
             "required": [
-                "sequence"
+                "detailSequence",
+                "adjudication"
             ]
         },
-        "Claim_Diagnosis": {
+        "ClaimResponse_Item_Detail_SubDetail": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2921,42 +2744,34 @@
                 {
                     "type": "object",
                     "properties": {
-                        "sequence": {
+                        "subDetailSequence": {
                             "type": "integer",
                             "format": "int32",
-                            "description": "A number to uniquely identify diagnosis entries."
+                            "description": "A number to uniquely reference the claim sub-detail entry."
                         },
-                        "diagnosisCodeableConcept": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The nature of illness or problem in a coded form or as a reference to an external defined Condition."
-                        },
-                        "diagnosisReference": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "The nature of illness or problem in a coded form or as a reference to an external defined Condition."
-                        },
-                        "type": {
+                        "noteNumber": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CodeableConcept",
-                                "description": "When the condition was observed or the relative ranking."
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The numbers associated with notes below which apply to the adjudication of this item."
                             }
                         },
-                        "onAdmission": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "Indication of whether the diagnosis was present on admission to a facility."
-                        },
-                        "packageCode": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "A package billing code or bundle code used to group products and services to a particular health condition (such as heart attack) which is based on a predetermined grouping code system."
+                        "adjudication": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimResponse_Item_Adjudication",
+                                "description": "The adjudication results."
+                            }
                         }
                     }
                 }
             ],
             "required": [
-                "sequence"
+                "subDetailSequence"
             ]
         },
-        "Claim_SupportingInfo": {
+        "ClaimResponse_Item_Adjudication": {
             "allOf": [
                 {
                     "$ref": "#/definitions/BackboneElement"
@@ -2964,143 +2779,27 @@
                 {
                     "type": "object",
                     "properties": {
-                        "sequence": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "A number to uniquely identify supporting information entries."
-                        },
                         "category": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "The general class of the information supplied: information; exception; accident, employment; onset, etc."
-                        },
-                        "code": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "System and code pertaining to the specific information regarding special conditions relating to the setting, treatment or patient  for which care is sought."
-                        },
-                        "timingDate": {
-                            "type": "string",
-                            "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?",
-                            "description": "The date when or period to which this information refers."
-                        },
-                        "timingPeriod": {
-                            "$ref": "#/definitions/Period",
-                            "description": "The date when or period to which this information refers."
-                        },
-                        "valueBoolean": {
-                            "type": "boolean",
-                            "description": "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-                        },
-                        "valueString": {
-                            "type": "string",
-                            "pattern": "[ \\r\\n\\t\\S]+",
-                            "description": "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-                        },
-                        "valueQuantity": {
-                            "$ref": "#/definitions/Quantity",
-                            "description": "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-                        },
-                        "valueAttachment": {
-                            "$ref": "#/definitions/Attachment",
-                            "description": "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
-                        },
-                        "valueReference": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data."
+                            "description": "A code to indicate the information type of this adjudication record. Information types may include the value submitted, maximum values or percentages allowed or payable under the plan, amounts that: the patient is responsible for in aggregate or pertaining to this item; amounts paid by other coverages; and, the benefit payable for this item."
                         },
                         "reason": {
                             "$ref": "#/definitions/CodeableConcept",
-                            "description": "Provides the reason in the situation where a reason code is required in addition to the content."
+                            "description": "A code supporting the understanding of the adjudication result and explaining variance from expected amount."
+                        },
+                        "amount": {
+                            "$ref": "#/definitions/Money",
+                            "description": "Monetary amount associated with the category."
+                        },
+                        "value": {
+                            "type": "number",
+                            "description": "A non-monetary value associated with the category. Mutually exclusive to the amount element above."
                         }
                     }
                 }
             ],
             "required": [
-                "sequence",
                 "category"
-            ]
-        },
-        "Claim_CareTeam": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "sequence": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "A number to uniquely identify care team entries."
-                        },
-                        "provider": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Member of the team who provided the product or service."
-                        },
-                        "responsible": {
-                            "type": "boolean",
-                            "description": "The party who is billing and/or responsible for the claimed products or services."
-                        },
-                        "role": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The lead, assisting or supervising practitioner and their discipline if a multidisciplinary team."
-                        },
-                        "qualification": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "The qualification of the practitioner which is applicable for this service."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "sequence",
-                "provider"
-            ]
-        },
-        "Claim_Payee": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "Type of Party to be reimbursed: subscriber, provider, other."
-                        },
-                        "party": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Reference to the individual or organization to whom any payment will be made."
-                        }
-                    }
-                }
-            ],
-            "required": [
-                "type"
-            ]
-        },
-        "Claim_Related": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BackboneElement"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "claim": {
-                            "$ref": "#/definitions/Reference",
-                            "description": "Reference to a related claim."
-                        },
-                        "relationship": {
-                            "$ref": "#/definitions/CodeableConcept",
-                            "description": "A code to convey how the claims are related."
-                        },
-                        "reference": {
-                            "$ref": "#/definitions/Identifier",
-                            "description": "An alternate organizational reference to the case or file to which this particular claim pertains."
-                        }
-                    }
-                }
             ]
         },
         "OperationOutcome_Issue": {
